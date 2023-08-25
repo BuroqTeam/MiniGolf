@@ -15,10 +15,5 @@ namespace Golf_LineRenderer
             line.SetUpLine(points);
         }
 
-
-        void Update()
-        {
-
-        }
     }
 }
