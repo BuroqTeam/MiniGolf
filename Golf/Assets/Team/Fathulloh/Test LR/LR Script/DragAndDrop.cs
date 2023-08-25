@@ -4,11 +4,16 @@ using UnityEngine;
 
 namespace Golf_LineRenderer
 {
+    /// <summary>
+    /// Interfeyssiz drag and drop.
+    /// </summary>
     public class DragAndDrop : MonoBehaviour
     {
         Vector3 mousePosition;
 
-        [Header("Hozirgi pozitsiya")]
+        //[Header("Hozirgi pozitsiya")]
+        //public Vector3 CurPos;
+
         Vector3 currentPosition;
 
         void Awake()
