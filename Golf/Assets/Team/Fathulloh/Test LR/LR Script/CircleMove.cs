@@ -2,18 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Golf_LineRenderer
+namespace Golf_LineRenderer2
 {
-    /// <summary>
-    /// Interfeyssiz drag and drop.
-    /// </summary>
-    public class DragAndDrop : MonoBehaviour
+    //Sichqoncha harakatiga ko'ra blue circleni qaytadan harakatga keltiruvchi script.
+    public class CircleMove : MonoBehaviour
     {
         Vector3 mousePosition;
-
-        //[Header("Hozirgi pozitsiya")]
-        //public Vector3 CurPos;
-
         Vector3 currentPosition;
 
         void Awake()
@@ -21,26 +15,35 @@ namespace Golf_LineRenderer
             RetakePosition();
         }
 
+
         private Vector3 GetMousePos()
         {
             return Camera.main.WorldToScreenPoint(transform.position);
         }
+
 
         private void OnMouseDown()
         {
             mousePosition = Input.mousePosition - GetMousePos();
         }
 
+
         private void OnMouseDrag()
         {
             Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition - mousePosition);
             transform.position = new Vector3(newPos.x, currentPosition.y, newPos.z);
+
+            //gameObject.transform.position = new Vector3(newPos.x, currentPosition.y, newPos.z);
+            Debug.Log(gameObject.transform.position);
         }
 
+
+        /// <summary>
+        /// gameObyekt pozitsiyasini qaytadan olish.
+        /// </summary>
         void RetakePosition()
         {
             currentPosition = gameObject.transform.position;
         }
-
     }
 }
