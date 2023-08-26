@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Team/Kayumiy/Map_2 new 1.unity
+    guid: e5f5b68f349ae024aac2e059b2ee4df3
   m_configObjects: {}
