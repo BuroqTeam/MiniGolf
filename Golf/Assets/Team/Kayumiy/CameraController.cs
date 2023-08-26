@@ -17,6 +17,9 @@ public class CameraController : MonoBehaviour
         _mainCamera = GetComponent<Camera>();
         _offset = transform.position - Ball.transform.position;
 
+        transform.position = Ball.position;
+        transform.Translate(_offset);
+
 
     }
 
@@ -43,7 +46,7 @@ public class CameraController : MonoBehaviour
             // Rotate in Vertical Axis
             transform.Rotate(Vector3.right, direction.y * 180);
             float verticalAngle = transform.rotation.eulerAngles.x;
-            verticalAngle = Mathf.Clamp(verticalAngle, 20, 40);
+            verticalAngle = Mathf.Clamp(verticalAngle, 5, 40);
 
 
 
@@ -55,7 +58,7 @@ public class CameraController : MonoBehaviour
           
 
             // Move to near Ball
-            transform.Translate(new Vector3(0, 0, -0.5f));
+            transform.Translate(_offset);
             _previousPosition = _mainCamera.ScreenToViewportPoint(Input.mousePosition);
         }
 
