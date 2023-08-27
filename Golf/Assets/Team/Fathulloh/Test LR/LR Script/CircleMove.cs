@@ -7,8 +7,9 @@ namespace Golf_LineRenderer2
     //Sichqoncha harakatiga ko'ra blue circleni qaytadan harakatga keltiruvchi script.
     public class CircleMove : MonoBehaviour
     {
-        Vector3 mousePosition;
-        Vector3 currentPosition;
+        public InputManager Inputmanager;
+        [HideInInspector] public Vector3 mousePos;
+        Vector3 currentPos;
 
         void Awake()
         {
@@ -24,17 +25,19 @@ namespace Golf_LineRenderer2
 
         private void OnMouseDown()
         {
-            mousePosition = Input.mousePosition - GetMousePos();
+            mousePos = Input.mousePosition - GetMousePos();
+
+            Debug.Log(gameObject.transform.position);
         }
 
 
         private void OnMouseDrag()
         {
-            Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition - mousePosition);
-            transform.position = new Vector3(newPos.x, currentPosition.y, newPos.z);
+            //Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition - mousePos);
+            //transform.position = new Vector3(newPos.x, currentPos.y, newPos.z);
 
-            //gameObject.transform.position = new Vector3(newPos.x, currentPosition.y, newPos.z);
             Debug.Log(gameObject.transform.position);
+            Inputmanager.ShowTrajectoryLine();
         }
 
 
@@ -43,7 +46,7 @@ namespace Golf_LineRenderer2
         /// </summary>
         void RetakePosition()
         {
-            currentPosition = gameObject.transform.position;
+            currentPos = gameObject.transform.position;
         }
     }
 }

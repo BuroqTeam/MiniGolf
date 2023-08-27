@@ -9,7 +9,7 @@ namespace Golf_LineRenderer
     /// </summary>
     public class DragAndDrop : MonoBehaviour
     {
-        Vector3 mousePosition;
+        Vector3 mousePosition2;
 
         //[Header("Hozirgi pozitsiya")]
         //public Vector3 CurPos;
@@ -24,20 +24,21 @@ namespace Golf_LineRenderer
         private Vector3 GetMousePos()
         {
             return Camera.main.WorldToScreenPoint(transform.position);
-            Debug.Log("ishlayabdi  222");
+            //Debug.Log("ishlayabdi  222");
         }
 
         private void OnMouseDown()
         {
-            mousePosition = Input.mousePosition - GetMousePos();
-            Debug.Log("111 111 111");
+            mousePosition2 = Input.mousePosition - GetMousePos();
+            Debug.Log("mousePosition" + mousePosition2);
         }
 
         private void OnMouseDrag()
         {
-            Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition - mousePosition);
+            Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition - mousePosition2);
             transform.position = new Vector3(newPos.x, currentPosition.y, newPos.z);
             Debug.Log("33 33 33 33 33");
+            Debug.Log(transform.position + "  //  " + newPos);
         }
 
         void RetakePosition()
