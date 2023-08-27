@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.36291596, g: 0.56616455, b: 0.8437096, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -658,7 +658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &107220767
 Transform:
   m_ObjectHideFlags: 0
@@ -1897,7 +1897,7 @@ MonoBehaviour:
   points:
   - {fileID: 1858518241}
   - {fileID: 1821714109}
-  line: {fileID: 1538277623}
+  line: {fileID: 0}
 --- !u!1 &299524104
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,7 +6004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &664816707
 Transform:
   m_ObjectHideFlags: 0
@@ -6018,6 +6018,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1261207128}
   - {fileID: 368064220}
   - {fileID: 35773671}
   - {fileID: 1742429666}
@@ -14842,14 +14843,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261207127}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1550084066}
   - {fileID: 1383547181}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 664816707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1362866926
 Mesh:
@@ -15619,7 +15620,6 @@ GameObject:
   - component: {fileID: 1538277626}
   - component: {fileID: 1538277624}
   - component: {fileID: 1538277627}
-  - component: {fileID: 1538277623}
   - component: {fileID: 1538277625}
   m_Layer: 0
   m_Name: LineController
@@ -15628,19 +15628,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1538277623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538277622}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d08dcc994c0454ca11fc33c0c0f806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Lrenderer: {fileID: 1538277624}
 --- !u!120 &1538277624
 LineRenderer:
   serializedVersion: 2
@@ -15685,7 +15672,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 1, z: 0}
-  - {x: 0, y: 1, z: -2}
+  - {x: 0, y: 1, z: -0.2}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -15753,7 +15740,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538277622}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 01db3331ededdfa4bb7542d13e2ae0f9, type: 2}
   m_CullingMode: 0
@@ -15795,6 +15782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainBall: {fileID: 1821714108}
   _trajectoryLine: {fileID: 1538277624}
+  CircleObj: {fileID: 1858518240}
 --- !u!43 &1543998355
 Mesh:
   m_ObjectHideFlags: 0
@@ -17747,6 +17735,7 @@ MonoBehaviour:
   MousePos: {x: 0, y: 0, z: 0}
   CircleForMouse: {fileID: 0}
   MyLineRenderer: {fileID: 0}
+  Inputmanager: {fileID: 0}
 --- !u!58 &1742429668
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18138,6 +18127,7 @@ MonoBehaviour:
   MousePos: {x: 0, y: 0, z: 0}
   CircleForMouse: {fileID: 1858518240}
   MyLineRenderer: {fileID: 1538277624}
+  Inputmanager: {fileID: 1538277627}
 --- !u!1 &1833736897
 GameObject:
   m_ObjectHideFlags: 0
@@ -21227,7 +21217,6 @@ GameObject:
   - component: {fileID: 1858518241}
   - component: {fileID: 1858518243}
   - component: {fileID: 1858518245}
-  - component: {fileID: 1858518244}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -21302,18 +21291,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1858518244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858518240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 276120385f039714ab217fc349c1a86a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &1858518245
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24347,6 +24324,5 @@ SceneRoots:
   - {fileID: 1413698671}
   - {fileID: 1925502548}
   - {fileID: 664816707}
-  - {fileID: 1261207128}
   - {fileID: 1667952658}
   - {fileID: 107220767}
