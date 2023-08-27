@@ -11,17 +11,17 @@ namespace Golf_LineRenderer2
     public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         public Vector3 MousePos;
-        //public Vector3 CurrentPos;
         
         public GameObject CircleForMouse;
         public LineRenderer MyLineRenderer;
+        public LineRenderer WhiteArrowWay;
 
         public InputManager Inputmanager;
 
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log("+");
+            //Debug.Log("+");
             CirclePositionSet();
             ActivateMouseLine(true);
         }
@@ -29,10 +29,13 @@ namespace Golf_LineRenderer2
 
         public void OnDrag(PointerEventData eventData)
         {
-            //Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition /*- mousePosition*/);
-            //transform.position = new Vector3(pos.x, pos.y, pos.z);\
             Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition - MousePos);
-            CircleForMouse.transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
+
+            float distanceObj = Vector3.Distance(gameObject.transform.position, new Vector3(newPos.x, transform.position.y, newPos.z)); //F++
+            if (distanceObj < Inputmanager.redLineLength)
+            {
+                CircleForMouse.transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
+            }
 
             Inputmanager.ShowTrajectoryLine();
             //Debug.Log("=");
@@ -43,7 +46,7 @@ namespace Golf_LineRenderer2
         {
             //mousePosition = Input.mousePosition - GetMousePos();
             ActivateMouseLine(false);
-            Debug.Log("-" + CircleForMouse.transform.position);
+            //Debug.Log("-" /*+ CircleForMouse.transform.position*/);
             StartCoroutine(CirclePositionSet());
         }
 
@@ -56,6 +59,7 @@ namespace Golf_LineRenderer2
         {
             CircleForMouse.SetActive(_isTrue);
             MyLineRenderer.enabled = _isTrue;
+            WhiteArrowWay.enabled = _isTrue;
         }
 
 
@@ -81,8 +85,6 @@ namespace Golf_LineRenderer2
             Inputmanager.ShowTrajectoryLine();
         }
 
-
-        //IEnumerator
 
         //private void OnMouseDrag()
         //{
