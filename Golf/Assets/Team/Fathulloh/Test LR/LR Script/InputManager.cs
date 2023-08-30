@@ -34,17 +34,18 @@ namespace Golf_LineRenderer2
                 if (lineLength < redLineLength)
                 {
                     if (lineLength < greenLineLength)                    {
-                        DrawWhiteArrowWay(CircleObj.transform.position, mainBallPos, greenColor);
+                        DrawArrowWay(CircleObj.transform.position, mainBallPos, greenColor);
                     }
                     else if (lineLength < yellowLineLength)                    {
-                        DrawWhiteArrowWay(CircleObj.transform.position, mainBallPos, yellowColor);
+                        DrawArrowWay(CircleObj.transform.position, mainBallPos, yellowColor);
                     }
                     else if (lineLength < redLineLength)                    {
-                        DrawWhiteArrowWay(CircleObj.transform.position, mainBallPos, redColor);
+                        DrawArrowWay(CircleObj.transform.position, mainBallPos, redColor);
                     }
 
-                    _trajectoryLine.SetPosition(0, NewPosForCircle(CircleObj.transform.position, mainBallPos));
                     //_trajectoryLine.SetPosition(0, CircleObj.transform.position);
+                    //_trajectoryLine.SetPosition(0, NewPosForCircle(CircleObj.transform.position, mainBallPos));
+                    _trajectoryLine.SetPosition(0, SetDistanceWithDots(CircleObj.transform.GetChild(1).gameObject));
                     _trajectoryLine.SetPosition(1, mainBallPos);
                 }
                 
@@ -53,7 +54,7 @@ namespace Golf_LineRenderer2
         
 
 
-        void DrawWhiteArrowWay(Vector3 vec1, Vector3 vec2, Color newColor)
+        void DrawArrowWay(Vector3 vec1, Vector3 vec2, Color newColor)
         {
             WhiteArrowWay.SetColors(newColor, newColor);
 
@@ -64,8 +65,9 @@ namespace Golf_LineRenderer2
             CircleObj.GetComponent<SpriteRenderer>().color = newColor;
 
             WhiteArrowWay.positionCount = 2;
-            WhiteArrowWay.SetPosition(0, NewPosForCircle(vec1, vec2));
             //WhiteArrowWay.SetPosition(0, vec1);
+            //WhiteArrowWay.SetPosition(0, NewPosForCircle(vec1, vec2));
+            WhiteArrowWay.SetPosition(0, SetDistanceWithDots(CircleObj.transform.GetChild(0).gameObject));
             WhiteArrowWay.SetPosition(1, vec2);            
         }
 
@@ -78,85 +80,82 @@ namespace Golf_LineRenderer2
         /// <returns></returns>
         Vector3 NewPosForCircle(Vector3 vecCircle, Vector3 vecBall)
         {
-            return SetNewDistance();   // F++
+            float moveX = 0.64f;
+            float moveZ = 0.64f;
 
-            //float moveX = 0.64f;
-            //float moveZ = 0.64f;
-
-            //if ((vecCircle.x > vecBall.x) && (vecCircle.z == vecBall.z))
-            //{
-            //    Debug.Log("1");
-            //    return new Vector3(vecCircle.x - moveX, vecCircle.y, vecCircle.z);
-            //}
-            //else if ((vecCircle.x < vecBall.x) && (vecCircle.z == vecBall.z))
-            //{
-            //    Debug.Log("2");
-            //    return new Vector3(vecCircle.x + moveX, vecCircle.y, vecCircle.z);
-            //}
-            //else if ((vecCircle.z > vecBall.z) && (vecCircle.x == vecBall.x))
-            //{
-            //    Debug.Log("3");
-            //    return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z - moveZ);
-            //}
-            //else if ((vecCircle.z < vecBall.z) && (vecCircle.x == vecBall.x))
-            //{
-            //    Debug.Log("4");
-            //    return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z + moveZ);
-            //}
-            //else if ((vecCircle.x > vecBall.x) && (vecCircle.z > vecBall.z))
-            //{
-            //    Debug.Log("5");
-            //    return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
-            //}
-            //else if ((vecCircle.x < vecBall.x) && (vecCircle.z > vecBall.z))
-            //{
-            //    Debug.Log("6");
-            //    return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
-            //}
-            //else if ((vecCircle.x < vecBall.x) && (vecCircle.z < vecBall.z))
-            //{
-            //    Debug.Log("7");
-            //    return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
-            //}
-            //else if ((vecCircle.x > vecBall.x) && (vecCircle.z < vecBall.z))
-            //{
-            //    Debug.Log("8");
-            //    return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
-            //}
-            //else
-            //{
-            //    return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z);
-            //}
+            if ((vecCircle.x > vecBall.x) && (vecCircle.z == vecBall.z))
+            {
+                Debug.Log("1");
+                return new Vector3(vecCircle.x - moveX, vecCircle.y, vecCircle.z);
+            }
+            else if ((vecCircle.x < vecBall.x) && (vecCircle.z == vecBall.z))
+            {
+                Debug.Log("2");
+                return new Vector3(vecCircle.x + moveX, vecCircle.y, vecCircle.z);
+            }
+            else if ((vecCircle.z > vecBall.z) && (vecCircle.x == vecBall.x))
+            {
+                Debug.Log("3");
+                return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z - moveZ);
+            }
+            else if ((vecCircle.z < vecBall.z) && (vecCircle.x == vecBall.x))
+            {
+                Debug.Log("4");
+                return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z + moveZ);
+            }
+            else if ((vecCircle.x > vecBall.x) && (vecCircle.z > vecBall.z))
+            {
+                Debug.Log("5");
+                return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
+            }
+            else if ((vecCircle.x < vecBall.x) && (vecCircle.z > vecBall.z))
+            {
+                Debug.Log("6");
+                return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
+            }
+            else if ((vecCircle.x < vecBall.x) && (vecCircle.z < vecBall.z))
+            {
+                Debug.Log("7");
+                return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
+            }
+            else if ((vecCircle.x > vecBall.x) && (vecCircle.z < vecBall.z))
+            {
+                Debug.Log("8");
+                return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
+            }
+            else
+                return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z);
         }
 
 
-        public List<float> distances;
+        [HideInInspector] public List<float> Distances;
+        [HideInInspector] public List<float> DistancesForArrow;
 
-        Vector3 SetNewDistance()
+        Vector3 SetDistanceWithDots(GameObject parenObj)
         {
-            for (int i = 0; i < CircleObj.transform.childCount; i++)
+            for (int i = 0; i < parenObj.transform.childCount; i++)
             {
-                GameObject newObj = CircleObj.transform.GetChild(i).gameObject;
+                GameObject newObj = parenObj.transform.GetChild(i).gameObject;
                 float dis = Vector3.Distance(MainBall.transform.position, newObj.transform.position);
-                distances.Add(dis);
+                Distances.Add(dis);
             }
 
-            float minValue = distances[0];
+            float minValue = Distances[0];
             int minIndex = 0;
 
-            for (int i = 0; i < distances.Count; i++)
+            for (int i = 0; i < Distances.Count; i++)
             {
-                if (distances[i] < minValue)
+                if (Distances[i] < minValue)
                 {
-                    minValue = distances[i];
+                    minValue = Distances[i];
                     minIndex = i;
                 }
             }
-            Debug.Log(" minIndex = " + minIndex);
 
+            //Debug.Log(" minIndex = " + minIndex);
             //Debug.Log( CircleObj.transform.GetChild(minIndex).name);
-            distances.Clear(); // F+
-            return CircleObj.transform.GetChild(minIndex).transform.position;
+            Distances.Clear(); // F+
+            return parenObj.transform.GetChild(minIndex).transform.position;
         }
         
     }
