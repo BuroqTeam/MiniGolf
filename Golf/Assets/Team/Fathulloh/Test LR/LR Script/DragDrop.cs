@@ -18,11 +18,15 @@ namespace Golf_LineRenderer2
 
         public InputManager Inputmanager;
 
+        private void Awake()
+        {
+            CircleForMouse.transform.position = gameObject.transform.position;
+        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            //Debug.Log("+");
-            CirclePositionSet();
+            //Debug.Log(" + " + gameObject.transform.position);
+            StartCoroutine(CirclePositionSet());
             ActivateMouseLine(true);
         }
 
@@ -46,7 +50,7 @@ namespace Golf_LineRenderer2
         {
             //mousePosition = Input.mousePosition - GetMousePos();
             ActivateMouseLine(false);
-            //Debug.Log("-" /*+ CircleForMouse.transform.position*/);
+            //Debug.Log("-");
             StartCoroutine(CirclePositionSet());
         }
 
@@ -81,6 +85,7 @@ namespace Golf_LineRenderer2
         IEnumerator CirclePositionSet()
         {
             CircleForMouse.transform.position = gameObject.transform.position;
+            //Debug.Log("Ishladi IE");
             yield return new WaitForSeconds(0.25f);
             Inputmanager.ShowTrajectoryLine();
         }
