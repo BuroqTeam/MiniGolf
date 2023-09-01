@@ -6,17 +6,20 @@ using UnityEngine.EventSystems;
 namespace Golf_LineRenderer2
 {
     /// <summary>
+    /// SpheraMain obyektiga qo‘shilgan script. Bu orqali circle ni harakatga keltirish mumkin.
     /// Drag  Drop qilish uchun buyerda interfacelardan foydalanilgan.
     /// </summary>
     public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
-        public Vector3 MousePos;
+        [HideInInspector] public Vector3 MousePos;
         
         public GameObject CircleForMouse;
         public LineRenderer MyLineRenderer;
         public LineRenderer WhiteArrowWay;
 
         public InputManager Inputmanager;
+        public GameObject FrontArrow;
+
 
         private void Awake()
         {
@@ -40,7 +43,13 @@ namespace Golf_LineRenderer2
             {
                 CircleForMouse.transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
             }
+            //else
+            //{   // Agar sichqoncha juda uzoqda bo‘lsa CIrcleni sichqonchaga eng yaqin bo‘lgan nuqtaga joylashtiradi.
+            //    Vector3 newPosForCircle = FindPointOnLine(gameObject.transform.position, new Vector3(newPos.x, transform.position.y, newPos.z), Inputmanager.redLineLength);
+            //    CircleForMouse.transform.position = newPosForCircle;
+            //}
 
+            FrontArrow.GetComponent<WhiteArrowPointer>().ArrowPointer();
             Inputmanager.ShowTrajectoryLine();
             //Debug.Log("=");
         }
@@ -64,17 +73,20 @@ namespace Golf_LineRenderer2
             CircleForMouse.SetActive(_isTrue);
             MyLineRenderer.enabled = _isTrue;
             WhiteArrowWay.enabled = _isTrue;
+            FrontArrow.SetActive(_isTrue);
         }
 
 
-        private void OnMouseDown()
+        private void OnMouseDown() // Sichqonchaning mos pozitsiyasini olib beradi.
         {
+            Debug.Log("OnMouseDown() ");
             MousePos = Input.mousePosition - GetMousePos();
         }
 
 
-        private Vector3 GetMousePos()
+        private Vector3 GetMousePos() // Amalni bajaradi va Vector3 tipli qiymat qaytaradi.
         {
+            Debug.Log("GetMousePos() ");
             return Camera.main.WorldToScreenPoint(CircleForMouse.transform.position);
         }
 
@@ -88,6 +100,26 @@ namespace Golf_LineRenderer2
             //Debug.Log("Ishladi IE");
             yield return new WaitForSeconds(0.25f);
             Inputmanager.ShowTrajectoryLine();
+        }
+
+
+        /// <summary>
+        /// Ikkita nuqta berilgan. Birinchi va ikkinchi nuqtalar orasida joylashgan va birinchi nuqtadan x masofada joylashgan uchinchi nuqtani topish.
+        /// </summary>
+        /// <param name="point1">Birinchi nuqtaning kordinatasi</param>
+        /// <param name="point2">Ikkinchi nuqtaning kordinatasi</param>
+        /// <param name="distance">Birinchi nuqtadan maksimal masofa</param>
+        /// <returns></returns>
+        Vector3 FindPointOnLine(Vector3 point1, Vector3 point2, float distance)
+        {
+            float totalDistance = Vector3.Distance(point1, point2);
+            float ratio = distance / totalDistance;
+
+            float newX = point1.x + ratio * (point2.x - point1.x);
+            float newY = point1.y + ratio * (point2.y - point1.y);
+            float newZ = point1.z + ratio * (point2.z - point1.z);
+
+            return new Vector3(newX, newY, newZ);
         }
 
 

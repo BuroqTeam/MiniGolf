@@ -8,9 +8,10 @@ namespace Golf_LineRenderer2
     {
         public GameObject MainBall;
         public GameObject CircleObj;  //F+
+        public GameObject FrontArrow; 
+
         [SerializeField] private LineRenderer _trajectoryLine;
         public LineRenderer WhiteArrowWay;
-
 
         Color greenColor = new(0.27f, 0.85f, 0.2f);
         Color yellowColor = new(1, 1, 0);
@@ -23,33 +24,40 @@ namespace Golf_LineRenderer2
 
         public void ShowTrajectoryLine()
         {
-            if (Input.GetMouseButton(0))
-            {                
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition - MainBall.GetComponent<DragDrop>().MousePos);
-                Vector3 mainBallPos = MainBall.transform.position;
-                _trajectoryLine.enabled = true;
-                _trajectoryLine.positionCount = 2;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition - MainBall.GetComponent<DragDrop>().MousePos);
+            Vector3 mainBallPos = MainBall.transform.position;
+            _trajectoryLine.enabled = true;
+            _trajectoryLine.positionCount = 2;
 
-                float lineLength = Vector3.Distance(CircleObj.transform.position, mainBallPos);   //F+
-                if (lineLength < redLineLength)
+            float lineLength = Vector3.Distance(CircleObj.transform.position, mainBallPos);   //F+
+            if (lineLength < redLineLength)
+            {
+                if (lineLength < greenLineLength)
                 {
-                    if (lineLength < greenLineLength)                    {
-                        DrawArrowWay(CircleObj.transform.position, mainBallPos, greenColor);
-                    }
-                    else if (lineLength < yellowLineLength)                    {
-                        DrawArrowWay(CircleObj.transform.position, mainBallPos, yellowColor);
-                    }
-                    else if (lineLength < redLineLength)                    {
-                        DrawArrowWay(CircleObj.transform.position, mainBallPos, redColor);
-                    }
-
-                    //_trajectoryLine.SetPosition(0, CircleObj.transform.position);
-                    //_trajectoryLine.SetPosition(0, NewPosForCircle(CircleObj.transform.position, mainBallPos));
-                    _trajectoryLine.SetPosition(0, SetDistanceWithDots(CircleObj.transform.GetChild(1).gameObject));
-                    _trajectoryLine.SetPosition(1, mainBallPos);
+                    DrawArrowWay(CircleObj.transform.position, mainBallPos, greenColor);
+                    FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(2);
                 }
-                
+                else if (lineLength < yellowLineLength)
+                {
+                    DrawArrowWay(CircleObj.transform.position, mainBallPos, yellowColor);
+                    FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(4);
+                }
+                else if (lineLength < redLineLength)
+                {
+                    DrawArrowWay(CircleObj.transform.position, mainBallPos, redColor);
+                    FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(6);
+                }
+
+                //_trajectoryLine.SetPosition(0, CircleObj.transform.position);
+                //_trajectoryLine.SetPosition(0, NewPosForCircle(CircleObj.transform.position, mainBallPos));
+                _trajectoryLine.SetPosition(0, SetDistanceWithDots(CircleObj.transform.GetChild(1).gameObject));
+                _trajectoryLine.SetPosition(1, mainBallPos);
             }
+
+            //if (Input.GetMouseButton(0))
+            //{               
+                
+            //}
         }
         
 
@@ -78,59 +86,64 @@ namespace Golf_LineRenderer2
         /// <param name="vecCircle">Aylananing pozitsiyasi</param>
         /// <param name="vecBall">Golf koptogining pozitsiyasi</param>
         /// <returns></returns>
-        Vector3 NewPosForCircle(Vector3 vecCircle, Vector3 vecBall)
-        {
-            float moveX = 0.64f;
-            float moveZ = 0.64f;
+        //Vector3 NewPosForCircle(Vector3 vecCircle, Vector3 vecBall)
+        //{
+        //    float moveX = 0.64f;
+        //    float moveZ = 0.64f;
 
-            if ((vecCircle.x > vecBall.x) && (vecCircle.z == vecBall.z))
-            {
-                Debug.Log("1");
-                return new Vector3(vecCircle.x - moveX, vecCircle.y, vecCircle.z);
-            }
-            else if ((vecCircle.x < vecBall.x) && (vecCircle.z == vecBall.z))
-            {
-                Debug.Log("2");
-                return new Vector3(vecCircle.x + moveX, vecCircle.y, vecCircle.z);
-            }
-            else if ((vecCircle.z > vecBall.z) && (vecCircle.x == vecBall.x))
-            {
-                Debug.Log("3");
-                return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z - moveZ);
-            }
-            else if ((vecCircle.z < vecBall.z) && (vecCircle.x == vecBall.x))
-            {
-                Debug.Log("4");
-                return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z + moveZ);
-            }
-            else if ((vecCircle.x > vecBall.x) && (vecCircle.z > vecBall.z))
-            {
-                Debug.Log("5");
-                return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
-            }
-            else if ((vecCircle.x < vecBall.x) && (vecCircle.z > vecBall.z))
-            {
-                Debug.Log("6");
-                return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
-            }
-            else if ((vecCircle.x < vecBall.x) && (vecCircle.z < vecBall.z))
-            {
-                Debug.Log("7");
-                return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
-            }
-            else if ((vecCircle.x > vecBall.x) && (vecCircle.z < vecBall.z))
-            {
-                Debug.Log("8");
-                return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
-            }
-            else
-                return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z);
-        }
+        //    if ((vecCircle.x > vecBall.x) && (vecCircle.z == vecBall.z))
+        //    {
+        //        Debug.Log("1");
+        //        return new Vector3(vecCircle.x - moveX, vecCircle.y, vecCircle.z);
+        //    }
+        //    else if ((vecCircle.x < vecBall.x) && (vecCircle.z == vecBall.z))
+        //    {
+        //        Debug.Log("2");
+        //        return new Vector3(vecCircle.x + moveX, vecCircle.y, vecCircle.z);
+        //    }
+        //    else if ((vecCircle.z > vecBall.z) && (vecCircle.x == vecBall.x))
+        //    {
+        //        Debug.Log("3");
+        //        return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z - moveZ);
+        //    }
+        //    else if ((vecCircle.z < vecBall.z) && (vecCircle.x == vecBall.x))
+        //    {
+        //        Debug.Log("4");
+        //        return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z + moveZ);
+        //    }
+        //    else if ((vecCircle.x > vecBall.x) && (vecCircle.z > vecBall.z))
+        //    {
+        //        Debug.Log("5");
+        //        return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
+        //    }
+        //    else if ((vecCircle.x < vecBall.x) && (vecCircle.z > vecBall.z))
+        //    {
+        //        Debug.Log("6");
+        //        return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
+        //    }
+        //    else if ((vecCircle.x < vecBall.x) && (vecCircle.z < vecBall.z))
+        //    {
+        //        Debug.Log("7");
+        //        return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
+        //    }
+        //    else if ((vecCircle.x > vecBall.x) && (vecCircle.z < vecBall.z))
+        //    {
+        //        Debug.Log("8");
+        //        return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
+        //    }
+        //    else
+        //        return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z);
+        //}
 
 
         [HideInInspector] public List<float> Distances;
         [HideInInspector] public List<float> DistancesForArrow;
 
+        /// <summary>
+        /// MainSpherani Circleni ichidagi eng yaqin childi bilan bog‘lab beruvchi funksiya.
+        /// </summary>
+        /// <param name="parenObj"></param>
+        /// <returns></returns>
         Vector3 SetDistanceWithDots(GameObject parenObj)
         {
             for (int i = 0; i < parenObj.transform.childCount; i++)
@@ -153,7 +166,6 @@ namespace Golf_LineRenderer2
             }
 
             //Debug.Log(" minIndex = " + minIndex);
-            //Debug.Log( CircleObj.transform.GetChild(minIndex).name);
             Distances.Clear(); // F+
             return parenObj.transform.GetChild(minIndex).transform.position;
         }
