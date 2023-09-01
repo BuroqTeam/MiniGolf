@@ -79,14 +79,14 @@ namespace Golf_LineRenderer2
 
         private void OnMouseDown() // Sichqonchaning mos pozitsiyasini olib beradi.
         {
-            Debug.Log("OnMouseDown() ");
+            //Debug.Log("OnMouseDown() ");
             MousePos = Input.mousePosition - GetMousePos();
         }
 
 
         private Vector3 GetMousePos() // Amalni bajaradi va Vector3 tipli qiymat qaytaradi.
         {
-            Debug.Log("GetMousePos() ");
+            //Debug.Log("GetMousePos() ");
             return Camera.main.WorldToScreenPoint(CircleForMouse.transform.position);
         }
 

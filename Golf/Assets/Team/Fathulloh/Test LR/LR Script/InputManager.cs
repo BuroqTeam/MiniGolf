@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Golf_LineRenderer2
 {
+    /// <summary>
+    /// LineRendererlarga positionlarni kirituvchi asosiy script. 
+    /// </summary>
     public class InputManager : MonoBehaviour
     {
         public GameObject MainBall;
@@ -21,10 +22,13 @@ namespace Golf_LineRenderer2
         readonly float yellowLineLength = 7.0f;
         [HideInInspector] public readonly float redLineLength = 10.0f;
 
+        readonly float distanceArrowLine = 0.6f;
+        readonly float distanceColoredLine = 0.34f;
+
 
         public void ShowTrajectoryLine()
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition - MainBall.GetComponent<DragDrop>().MousePos);
+            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition - MainBall.GetComponent<DragDrop>().MousePos);
             Vector3 mainBallPos = MainBall.transform.position;
             _trajectoryLine.enabled = true;
             _trajectoryLine.positionCount = 2;
@@ -32,34 +36,29 @@ namespace Golf_LineRenderer2
             float lineLength = Vector3.Distance(CircleObj.transform.position, mainBallPos);   //F+
             if (lineLength < redLineLength)
             {
+                Vector3 currentCirclePos = CircleObj.transform.position;
                 if (lineLength < greenLineLength)
                 {
-                    DrawArrowWay(CircleObj.transform.position, mainBallPos, greenColor);
+                    DrawArrowWay(currentCirclePos, mainBallPos, greenColor);
                     FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(2);
                 }
                 else if (lineLength < yellowLineLength)
                 {
-                    DrawArrowWay(CircleObj.transform.position, mainBallPos, yellowColor);
+                    DrawArrowWay(currentCirclePos, mainBallPos, yellowColor);
                     FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(4);
                 }
                 else if (lineLength < redLineLength)
                 {
-                    DrawArrowWay(CircleObj.transform.position, mainBallPos, redColor);
+                    DrawArrowWay(currentCirclePos, mainBallPos, redColor);
                     FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(6);
                 }
 
                 //_trajectoryLine.SetPosition(0, CircleObj.transform.position);
-                //_trajectoryLine.SetPosition(0, NewPosForCircle(CircleObj.transform.position, mainBallPos));
-                _trajectoryLine.SetPosition(0, SetDistanceWithDots(CircleObj.transform.GetChild(1).gameObject));
+                _trajectoryLine.SetPosition(0, FindPointOnLine(currentCirclePos, mainBallPos, distanceArrowLine)/*SetDistanceWithDots(CircleObj.transform.GetChild(1).gameObject)*/);
                 _trajectoryLine.SetPosition(1, mainBallPos);
             }
-
-            //if (Input.GetMouseButton(0))
-            //{               
-                
-            //}
-        }
-        
+            
+        }        
 
 
         void DrawArrowWay(Vector3 vec1, Vector3 vec2, Color newColor)
@@ -71,104 +70,68 @@ namespace Golf_LineRenderer2
             //WhiteArrowWay.material = newMat;
 
             CircleObj.GetComponent<SpriteRenderer>().color = newColor;
-
             WhiteArrowWay.positionCount = 2;
+
             //WhiteArrowWay.SetPosition(0, vec1);
-            //WhiteArrowWay.SetPosition(0, NewPosForCircle(vec1, vec2));
-            WhiteArrowWay.SetPosition(0, SetDistanceWithDots(CircleObj.transform.GetChild(0).gameObject));
+            WhiteArrowWay.SetPosition(0, FindPointOnLine(vec1, vec2, distanceColoredLine)/*SetDistanceWithDots(CircleObj.transform.GetChild(0).gameObject)*/);
             WhiteArrowWay.SetPosition(1, vec2);            
         }
 
 
         /// <summary>
-        /// Circle uchun yangi pozitsiyani belgilab beruvchi metod.
+        /// Ikkita nuqta berilgan. Birinchi va ikkinchi nuqtalar orasida joylashgan va birinchi nuqtadan x masofada joylashgan uchinchi nuqtani topish.
         /// </summary>
-        /// <param name="vecCircle">Aylananing pozitsiyasi</param>
-        /// <param name="vecBall">Golf koptogining pozitsiyasi</param>
+        /// <param name="point1">Birinchi nuqtaning kordinatasi</param>
+        /// <param name="point2">Ikkinchi nuqtaning kordinatasi</param>
+        /// <param name="distance">Birinchi nuqtadan maksimal masofa</param>
         /// <returns></returns>
-        //Vector3 NewPosForCircle(Vector3 vecCircle, Vector3 vecBall)
-        //{
-        //    float moveX = 0.64f;
-        //    float moveZ = 0.64f;
+        Vector3 FindPointOnLine(Vector3 point1, Vector3 point2, float distance)
+        {
+            float totalDistance = Vector3.Distance(point1, point2);
+            float ratio = distance / totalDistance;
 
-        //    if ((vecCircle.x > vecBall.x) && (vecCircle.z == vecBall.z))
-        //    {
-        //        Debug.Log("1");
-        //        return new Vector3(vecCircle.x - moveX, vecCircle.y, vecCircle.z);
-        //    }
-        //    else if ((vecCircle.x < vecBall.x) && (vecCircle.z == vecBall.z))
-        //    {
-        //        Debug.Log("2");
-        //        return new Vector3(vecCircle.x + moveX, vecCircle.y, vecCircle.z);
-        //    }
-        //    else if ((vecCircle.z > vecBall.z) && (vecCircle.x == vecBall.x))
-        //    {
-        //        Debug.Log("3");
-        //        return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z - moveZ);
-        //    }
-        //    else if ((vecCircle.z < vecBall.z) && (vecCircle.x == vecBall.x))
-        //    {
-        //        Debug.Log("4");
-        //        return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z + moveZ);
-        //    }
-        //    else if ((vecCircle.x > vecBall.x) && (vecCircle.z > vecBall.z))
-        //    {
-        //        Debug.Log("5");
-        //        return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
-        //    }
-        //    else if ((vecCircle.x < vecBall.x) && (vecCircle.z > vecBall.z))
-        //    {
-        //        Debug.Log("6");
-        //        return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z - moveZ / 3);
-        //    }
-        //    else if ((vecCircle.x < vecBall.x) && (vecCircle.z < vecBall.z))
-        //    {
-        //        Debug.Log("7");
-        //        return new Vector3(vecCircle.x + moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
-        //    }
-        //    else if ((vecCircle.x > vecBall.x) && (vecCircle.z < vecBall.z))
-        //    {
-        //        Debug.Log("8");
-        //        return new Vector3(vecCircle.x - moveX / 3, vecCircle.y, vecCircle.z + moveZ / 3);
-        //    }
-        //    else
-        //        return new Vector3(vecCircle.x, vecCircle.y, vecCircle.z);
-        //}
+            float newX = point1.x + ratio * (point2.x - point1.x);
+            float newY = point1.y + ratio * (point2.y - point1.y);
+            float newZ = point1.z + ratio * (point2.z - point1.z);
+
+            return new Vector3(newX, newY, newZ);
+        }
 
 
-        [HideInInspector] public List<float> Distances;
-        [HideInInspector] public List<float> DistancesForArrow;
+
+        //[HideInInspector] public List<float> Distances;
+        //[HideInInspector] public List<float> DistancesForArrow;
 
         /// <summary>
         /// MainSpherani Circleni ichidagi eng yaqin childi bilan bog‘lab beruvchi funksiya.
         /// </summary>
         /// <param name="parenObj"></param>
         /// <returns></returns>
-        Vector3 SetDistanceWithDots(GameObject parenObj)
-        {
-            for (int i = 0; i < parenObj.transform.childCount; i++)
-            {
-                GameObject newObj = parenObj.transform.GetChild(i).gameObject;
-                float dis = Vector3.Distance(MainBall.transform.position, newObj.transform.position);
-                Distances.Add(dis);
-            }
+        //Vector3 SetDistanceWithDots(GameObject parenObj)
+        //{
+        //    for (int i = 0; i < parenObj.transform.childCount; i++)
+        //    {
+        //        GameObject newObj = parenObj.transform.GetChild(i).gameObject;
+        //        float dis = Vector3.Distance(MainBall.transform.position, newObj.transform.position);
+        //        Distances.Add(dis);
+        //    }
 
-            float minValue = Distances[0];
-            int minIndex = 0;
+        //    float minValue = Distances[0];
+        //    int minIndex = 0;
 
-            for (int i = 0; i < Distances.Count; i++)
-            {
-                if (Distances[i] < minValue)
-                {
-                    minValue = Distances[i];
-                    minIndex = i;
-                }
-            }
+        //    for (int i = 0; i < Distances.Count; i++)
+        //    {
+        //        if (Distances[i] < minValue)
+        //        {
+        //            minValue = Distances[i];
+        //            minIndex = i;
+        //        }
+        //    }
 
-            //Debug.Log(" minIndex = " + minIndex);
-            Distances.Clear(); // F+
-            return parenObj.transform.GetChild(minIndex).transform.position;
-        }
-        
+        //    //Debug.Log(" minIndex = " + minIndex);
+        //    Distances.Clear(); // F+
+        //    return parenObj.transform.GetChild(minIndex).transform.position;
+        //}       
+
     }
 }
