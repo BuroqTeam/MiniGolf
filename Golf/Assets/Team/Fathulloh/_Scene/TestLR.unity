@@ -2639,7 +2639,7 @@ Transform:
   m_GameObject: {fileID: 413082670}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5717,7 +5717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517287419}
   m_Layer: 0
-  m_Name: MainManagers
+  m_Name: LineManagers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6726,7 +6726,7 @@ Transform:
   m_GameObject: {fileID: 698105036}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 5.3399997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7571,7 +7571,7 @@ Transform:
   m_GameObject: {fileID: 1002184292}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 6.3399997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15740,7 +15740,7 @@ Transform:
   m_GameObject: {fileID: 1124818197}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16181,7 +16181,7 @@ Transform:
   m_GameObject: {fileID: 1353519533}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: 1.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16994,7 +16994,7 @@ GameObject:
   - component: {fileID: 1466696287}
   - component: {fileID: 1466696288}
   m_Layer: 0
-  m_Name: FrontArrow
+  m_Name: WhiteFrontArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17009,7 +17009,7 @@ Transform:
   m_GameObject: {fileID: 1466696286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 1, z: 2.85}
+  m_LocalPosition: {x: 0.02, y: 1, z: 2.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17346,6 +17346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainBall: {fileID: 1821714108}
   CircleObj: {fileID: 1858518240}
+  FrontArrow: {fileID: 1466696286}
   _trajectoryLine: {fileID: 1538277624}
   WhiteArrowWay: {fileID: 553577982}
   Distances: []
@@ -17917,7 +17918,7 @@ Transform:
   m_GameObject: {fileID: 1601898409}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19388,6 +19389,7 @@ MonoBehaviour:
   MyLineRenderer: {fileID: 0}
   WhiteArrowWay: {fileID: 0}
   Inputmanager: {fileID: 0}
+  FrontArrow: {fileID: 0}
 --- !u!58 &1742429668
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19781,6 +19783,7 @@ MonoBehaviour:
   MyLineRenderer: {fileID: 1538277624}
   WhiteArrowWay: {fileID: 553577982}
   Inputmanager: {fileID: 1538277627}
+  FrontArrow: {fileID: 1466696286}
 --- !u!1 &1833736897
 GameObject:
   m_ObjectHideFlags: 0
