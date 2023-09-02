@@ -20,10 +20,10 @@ namespace Golf_LineRenderer2
 
         readonly float greenLineLength = 4.0f;
         readonly float yellowLineLength = 7.0f;
-        [HideInInspector] public readonly float redLineLength = 10.0f;
+        [HideInInspector] public readonly float redLineLength = 9.0f;
 
-        readonly float distanceArrowLine = 0.6f;
-        readonly float distanceColoredLine = 0.34f;
+        readonly float distanceArrowLine = 0.035f; // 0.6f
+        readonly float distanceColoredLine = 0.03f; // 0.34f
 
 
         public void ShowTrajectoryLine()
