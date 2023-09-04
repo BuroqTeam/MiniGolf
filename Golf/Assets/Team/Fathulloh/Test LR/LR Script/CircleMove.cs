@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Golf_LineRenderer2
+namespace Golf_NotUsed
 {
     //Sichqoncha harakatiga ko'ra blue circleni qaytadan harakatga keltiruvchi script.
     public class CircleMove : MonoBehaviour

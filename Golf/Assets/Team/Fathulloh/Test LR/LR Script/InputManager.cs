@@ -14,16 +14,16 @@ namespace Golf_LineRenderer2
         [SerializeField] private LineRenderer _trajectoryLine;
         public LineRenderer WhiteArrowWay;
 
-        Color greenColor = new(0.27f, 0.85f, 0.2f);
-        Color yellowColor = new(1, 1, 0);
-        Color redColor = new(0.83f, 0.16f, 0.05f);
+        Color greenColor = new(0.27f, 0.85f, 0.2f, 1);
+        Color yellowColor = new(1, 1, 0, 1);
+        Color redColor = new(0.83f, 0.16f, 0.05f, 1);
 
-        readonly float greenLineLength = 4.0f;
-        readonly float yellowLineLength = 7.0f;
-        [HideInInspector] public readonly float redLineLength = 9.0f;
+        [HideInInspector] public float greenLineLength = 0.15f;  // 4  0.28f
+        [HideInInspector] public float yellowLineLength = 0.3f; // 7  0.52f
+        [HideInInspector] public float redLineLength = 0.42f; // 9  0.72f
 
         readonly float distanceArrowLine = 0.035f; // 0.6f
-        readonly float distanceColoredLine = 0.03f; // 0.34f
+        readonly float distanceColoredLine = 0.025f; // 0.34f
 
 
         public void ShowTrajectoryLine()
@@ -40,22 +40,22 @@ namespace Golf_LineRenderer2
                 if (lineLength < greenLineLength)
                 {
                     DrawArrowWay(currentCirclePos, mainBallPos, greenColor);
-                    FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(2);
+                    //FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(2);
                 }
                 else if (lineLength < yellowLineLength)
                 {
                     DrawArrowWay(currentCirclePos, mainBallPos, yellowColor);
-                    FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(4);
                 }
                 else if (lineLength < redLineLength)
                 {
-                    DrawArrowWay(currentCirclePos, mainBallPos, redColor);
-                    FrontArrow.GetComponent<WhiteArrowPointer>().WhiteArrowSwitcher(6);
+                    DrawArrowWay(currentCirclePos, mainBallPos, redColor);;
                 }
 
+                FrontArrow.GetComponent<WhiteArrowPointer>().CheckLineColor(lineLength);
+
                 //_trajectoryLine.SetPosition(0, CircleObj.transform.position);
-                _trajectoryLine.SetPosition(0, FindPointOnLine(currentCirclePos, mainBallPos, distanceArrowLine)/*SetDistanceWithDots(CircleObj.transform.GetChild(1).gameObject)*/);
-                _trajectoryLine.SetPosition(1, mainBallPos);
+                _trajectoryLine.SetPosition(0, FindPointOnLine(currentCirclePos, mainBallPos, distanceArrowLine, true)/*SetDistanceWithDots(CircleObj.transform.GetChild(1).gameObject)*/);
+                _trajectoryLine.SetPosition(1, new Vector3(mainBallPos.x, mainBallPos.y + 0.001f, mainBallPos.z));
             }
             
         }        
@@ -63,17 +63,17 @@ namespace Golf_LineRenderer2
 
         void DrawArrowWay(Vector3 vec1, Vector3 vec2, Color newColor)
         {
-            WhiteArrowWay.SetColors(newColor, newColor);
+            //WhiteArrowWay.SetColors(newColor, newColor);
 
-            //Material newMat = new(WhiteArrowWay.material);   // materialni rangini o想gartirish ham juda yaxshi ideya edi. Biroq rangi o想garmadi. 
-            //newMat.color = newColor;
-            //WhiteArrowWay.material = newMat;
+            Material newMat = (WhiteArrowWay.material);   // materialni rangini o想gartirish ham juda yaxshi ideya edi. Biroq rangi o想garmadi. 
+            newMat.color = newColor;
+            WhiteArrowWay.material = newMat;
 
             CircleObj.GetComponent<SpriteRenderer>().color = newColor;
             WhiteArrowWay.positionCount = 2;
 
             //WhiteArrowWay.SetPosition(0, vec1);
-            WhiteArrowWay.SetPosition(0, FindPointOnLine(vec1, vec2, distanceColoredLine)/*SetDistanceWithDots(CircleObj.transform.GetChild(0).gameObject)*/);
+            WhiteArrowWay.SetPosition(0, FindPointOnLine(vec1, vec2, distanceColoredLine, false)/*SetDistanceWithDots(CircleObj.transform.GetChild(0).gameObject)*/);
             WhiteArrowWay.SetPosition(1, vec2);            
         }
 
@@ -85,7 +85,7 @@ namespace Golf_LineRenderer2
         /// <param name="point2">Ikkinchi nuqtaning kordinatasi</param>
         /// <param name="distance">Birinchi nuqtadan maksimal masofa</param>
         /// <returns></returns>
-        Vector3 FindPointOnLine(Vector3 point1, Vector3 point2, float distance)
+        Vector3 FindPointOnLine(Vector3 point1, Vector3 point2, float distance, bool _isArrowTrue)
         {
             float totalDistance = Vector3.Distance(point1, point2);
             float ratio = distance / totalDistance;
@@ -94,7 +94,15 @@ namespace Golf_LineRenderer2
             float newY = point1.y + ratio * (point2.y - point1.y);
             float newZ = point1.z + ratio * (point2.z - point1.z);
 
-            return new Vector3(newX, newY, newZ);
+            if (_isArrowTrue)
+            {
+                return new Vector3(newX, newY + 0.001f, newZ);
+            }
+            else
+            {
+                return new Vector3(newX, newY, newZ);
+            }
+            
         }
 
 
