@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Circle : MonoBehaviour
 {
@@ -15,32 +16,15 @@ public class Circle : MonoBehaviour
 
 
     private void Awake()
-    {
-        transform.position =  Vector3.Lerp(_camera.transform.position, _ball.transform.position, 0.8f);
+    {        
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-
+   
 
     private void Update()
     {
-        transform.Rotate(_rotation * -Time.deltaTime);
-
-        //
-        //if (_lineForce.IsIdle)
-        //{
-        //    _spriteRenderer.enabled = true;
-        //}
-        //else
-        //{
-        //    _spriteRenderer.enabled = false;
-        //}
-
-        
-
-        
-
-
+        transform.Rotate(_rotation * Time.deltaTime);
 
     }
 
