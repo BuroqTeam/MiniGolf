@@ -9,15 +9,28 @@ namespace Golf_LineRenderer2
     /// </summary>
     public class WhiteArrowPointer : MonoBehaviour
     {
+        public InputManager Inputmanager;
         public GameObject MainBall;
         public GameObject CircleObj; 
-        public Vector3 pointA;
-        public Vector3 pointB;
+        [HideInInspector] public Vector3 pointA;
+        [HideInInspector] public Vector3 pointB;
 
+        public float greenLength;
+        public float yellowLength;
+        public float redLength;
 
         void Start()
         {
+            GetData();
             //MakeVectorWithTwoDot();
+        }
+
+
+        void GetData()
+        {
+            greenLength = Inputmanager.greenLineLength;
+            yellowLength = Inputmanager.yellowLineLength;
+            redLength = Inputmanager.redLineLength;
         }
 
 
@@ -39,14 +52,50 @@ namespace Golf_LineRenderer2
         }
 
 
-        public void WhiteArrowSwitcher(float floNumber)
+        public void CheckLineColor(float lineLength)
+        {
+            //Debug.Log("(float)yellowLength / 2 = " + (float)yellowLength / 2 + " (float)redLength / 2 = " + (float)redLength / 2);
+            if (lineLength < (float)greenLength / 2)
+            {
+                //Debug.Log("green little = " + (float)greenLength / 2);
+                WhiteArrowSwitcher(1);
+            }
+            else if (lineLength < greenLength)
+            {
+                //Debug.Log("Big green");
+                WhiteArrowSwitcher(2);
+            }
+            else if (lineLength < yellowLength - (float)(yellowLength - greenLength) / 2)
+            {
+                //Debug.Log("yellow little = " + (float)yellowLength / 2);
+                WhiteArrowSwitcher(3);
+            }
+            else if (lineLength < yellowLength)
+            {
+                //Debug.Log("Big yellow");
+                WhiteArrowSwitcher(4);
+            }
+            else if (lineLength < redLength - (float)(redLength - yellowLength) / 2)
+            {
+                //Debug.Log("red little = " + (float)redLength / 2);
+                WhiteArrowSwitcher(5);
+            }
+            else
+            {
+                //Debug.Log("Big red");
+                WhiteArrowSwitcher(6);
+            }
+        }
+
+
+        public void WhiteArrowSwitcher(int intNumber)
         {
             for (int i = 0; i < gameObject.transform.childCount; i++)
             {
                 gameObject.transform.GetChild(i).gameObject.SetActive(false);
             }
 
-            for (int i = 0; i < floNumber; i++)
+            for (int i = 0; i < intNumber; i++)
             {
                 gameObject.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -77,11 +126,9 @@ namespace Golf_LineRenderer2
         //Vector3 CalculateRotationAngle(Vector3 vector)
         //{
         //    Vector3 angles = new Vector3();
-
         //    angles.x = Mathf.Atan2(vector.y, vector.z) * Mathf.Rad2Deg;
         //    angles.y = Mathf.Atan2(vector.x, vector.z) * Mathf.Rad2Deg;
         //    angles.z = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
-
         //    return angles;
         //}        
 
