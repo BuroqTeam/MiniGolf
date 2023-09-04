@@ -14,31 +14,25 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        _mainCamera = GetComponent<Camera>();
-       
-
-
+        _mainCamera = GetComponent<Camera>();       
     }
 
     private void Start()
     {
+        SetCamerePosition();
         _offset = transform.position - Ball.transform.position;
-        transform.position = _offset;
-
-        transform.position = Ball.position;
-        transform.Translate(new Vector3(0, 0.15f, -0.55f));
+        transform.GetChild(0).transform.position = Vector3.Lerp(transform.position, Ball.position, 0.8f);
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        SetCamerePosition();
 
         if (Input.GetMouseButtonDown(0))
         {
-            _previousPosition = _mainCamera.ScreenToViewportPoint(Input.mousePosition);
-            
-
+            _previousPosition = _mainCamera.ScreenToViewportPoint(Input.mousePosition);            
         }
 
         if (Input.GetMouseButton(0))
@@ -49,13 +43,10 @@ public class CameraController : MonoBehaviour
 
                 transform.position = Ball.position;
 
-
-
                 // Rotate in Vertical Axis
                 transform.Rotate(Vector3.right, direction.y * 180);
                 float verticalAngle = transform.rotation.eulerAngles.x;
                 verticalAngle = Mathf.Clamp(verticalAngle, 5, 30);
-
 
                 // Rotate in Horizontal Axis
                 transform.Rotate(Vector3.up, direction.x * -180, Space.World);
@@ -64,22 +55,21 @@ public class CameraController : MonoBehaviour
                 //transform.eulerAngles = new Vector3(verticalAngle, horizontalAngle, 0);
                 transform.rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
 
-
-
                 // Move to near Ball
-
-                transform.Translate(new Vector3(0, 0.15f, -0.55f));
-
-
-
+                SetCamerePosition();
                 _previousPosition = _mainCamera.ScreenToViewportPoint(Input.mousePosition);
 
-            }
-            
-
-            
+            }             
         }
 
+
+        
+    }
+
+    void SetCamerePosition()
+    {
+        transform.position = Ball.position;
+        transform.Translate(new Vector3(0, 0.15f, -0.85f));
     }
 
 

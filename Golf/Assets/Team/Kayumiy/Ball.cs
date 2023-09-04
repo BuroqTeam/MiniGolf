@@ -8,18 +8,24 @@ public class Ball : MonoBehaviour
 {
     public Camera MainCamera;
     public bool IsBallClicked;
+    public bool IsBallMoving;
+
 
     float _initialFieldView;
-   
-
+    Rigidbody _rigidBody;   
     Vector3 _previousClickPosition = new Vector3();
+    Vector3 _forceDirection;
+
+    float movementThreshold = 0.1f;
+
 
 
     private void Awake()
     {
+        _rigidBody = GetComponent<Rigidbody>();
         _initialFieldView = MainCamera.fieldOfView;
         transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 0.5f, 0);
-
+        
     }
 
 
@@ -41,6 +47,7 @@ public class Ball : MonoBehaviour
                 if (touchedObject.name.Equals("Ball"))
                 {
                     IsBallClicked = true;
+                    _forceDirection = ray.direction * 1000;                    
                 }
             }
         }
@@ -57,9 +64,12 @@ public class Ball : MonoBehaviour
             {
                 // The hit.collider.gameObject is the GameObject that was clicked
                 GameObject clickedObject = hit.collider.gameObject;
+
+                
                 if (clickedObject.name.Equals("Ball"))
                 {
                     IsBallClicked = true;
+                    _forceDirection = ray.direction * 1000;
                     _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
                 }
                 else
@@ -88,9 +98,45 @@ public class Ball : MonoBehaviour
         {
             if (IsBallClicked)
             {
-                MainCamera.DOFieldOfView(_initialFieldView, 0.25f);
+                MainCamera.DOFieldOfView(_initialFieldView, 0.25f);                
+                _rigidBody.AddForce(_forceDirection);
                 IsBallClicked = false;
             }
         }
+
+        SetBallMove();
+
+
+
     }
+
+    void SetBallMove()
+    {
+        // Get the velocity of the GameObject
+        Vector3 velocity = _rigidBody.velocity;
+
+        // Calculate the speed by taking the magnitude of the velocity
+        float speed = velocity.magnitude;
+
+        // Check if the speed exceeds the movement threshold
+        if (speed > movementThreshold)
+        {
+            // The GameObject is considered to be moving
+            
+            IsBallMoving = true;
+        }
+        else
+        {
+            // The GameObject is not moving
+            
+            IsBallMoving = false;
+        }
+    }
+
+
+
+
+
+
+
 }
