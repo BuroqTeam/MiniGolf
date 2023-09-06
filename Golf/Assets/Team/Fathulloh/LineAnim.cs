@@ -2,22 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineDrawer : MonoBehaviour
+/// <summary>
+/// Bollni oldidagi Arrow va animatsiyali Arrow uchun Line Scripti.
+/// </summary>
+public class LineAnim : MonoBehaviour
 {
     public Camera MainCamera;
 
-    private LineRenderer _lineRenderer;    
+    private LineRenderer _lineRenderer;
     private bool _isDrawingLine = false;
 
     Ball _ball;
-    
+
+    public Vector3 CurrentPos;
+    public enum LineType 
+    { 
+        FrontArrow, 
+        AnimationArrow 
+    }
+
+    public LineType CurrentLine;
 
 
     void Start()
     {
         _ball = transform.parent.GetComponent<Ball>();
         _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.SetPosition(0, transform.position);        
+        _lineRenderer.SetPosition(0, transform.position);
         _lineRenderer.enabled = false;
     }
 
@@ -30,11 +41,12 @@ public class LineDrawer : MonoBehaviour
             {
                 Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-
+                
                 if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.name.Equals("Ball"))
                 {
+                    CurrentPos = transform.position;//F++
                     _isDrawingLine = true;
-                    _lineRenderer.SetPosition(0, transform.position);
+                    _lineRenderer.SetPosition(0, new Vector3(CurrentPos.x, CurrentPos.y + 0.0025f, CurrentPos.z));
                     _lineRenderer.enabled = false;
                 }
             }
@@ -48,9 +60,18 @@ public class LineDrawer : MonoBehaviour
                 if (Physics.Raycast(ray, out hit))
                 {
                     Vector3 currentMousePosition = hit.point;
-                    
-                    currentMousePosition.y = transform.position.y; // 0
-                    _lineRenderer.SetPosition(1, currentMousePosition);
+
+                    currentMousePosition.y = CurrentPos.y + 0.0025f;
+                    if (CurrentLine == LineType.AnimationArrow)
+                    {
+                        _lineRenderer.SetPosition(1, currentMousePosition);
+                    }
+                    else if (CurrentLine == LineType.FrontArrow)
+                    {
+                        //Debug.Log("-currentMousePosition = " + (-currentMousePosition) + "   currentMousePosition = " + currentMousePosition);
+                        _lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z));
+                    }
+                   
                     _lineRenderer.enabled = true;
                 }
             }
@@ -74,15 +95,14 @@ public class LineDrawer : MonoBehaviour
 
         }
 
-        
+
     }
 
-    
+
     public void ChangeLineColor(Color newColor)// for color change
     {
-        Material newMat = (_lineRenderer.material);    
+        Material newMat = (_lineRenderer.material);
         newMat.color = newColor;
         _lineRenderer.material = newMat;
     }
-
 }
