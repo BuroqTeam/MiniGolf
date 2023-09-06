@@ -18,9 +18,9 @@ namespace Golf_LineRenderer2
         Color yellowColor = new(1, 1, 0, 1);
         Color redColor = new(0.83f, 0.16f, 0.05f, 1);
 
-        [HideInInspector] public float greenLineLength = 0.15f;  // 4  0.28f
-        [HideInInspector] public float yellowLineLength = 0.3f; // 7  0.52f
-        [HideInInspector] public float redLineLength = 0.42f; // 9  0.72f
+        [HideInInspector] public float greenLineLength = 0.11f;  // 4  0.28f
+        [HideInInspector] public float yellowLineLength = 0.22f; // 7  0.52f
+        [HideInInspector] public float redLineLength = 0.33f; // 9  0.72f
 
         readonly float distanceArrowLine = 0.035f; // 0.6f
         readonly float distanceColoredLine = 0.025f; // 0.34f

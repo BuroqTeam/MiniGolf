@@ -12,8 +12,8 @@ namespace Golf_LineRenderer2
         public InputManager Inputmanager;
         public GameObject MainBall;
         public GameObject CircleObj; 
-        [HideInInspector] public Vector3 pointA;
-        [HideInInspector] public Vector3 pointB;
+        /*[HideInInspector]*/ public Vector3 pointA;
+        /*[HideInInspector]*/ public Vector3 pointB;
 
         public float greenLength;
         public float yellowLength;
