@@ -24,7 +24,17 @@ public class Circle : MonoBehaviour
 
     private void Update()
     {
+        
         transform.Rotate(_rotation * Time.deltaTime);
+
+        if (!_ball.GetComponent<Ball>().IsBallMoving && !_ball.GetComponent<Ball>().IsBallClicked)
+        {
+            _spriteRenderer.enabled = true;
+        }
+        else
+        {
+            _spriteRenderer.enabled = false;
+        }
 
     }
 

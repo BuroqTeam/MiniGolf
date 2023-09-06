@@ -10,22 +10,22 @@ public class Ball : MonoBehaviour
     public bool IsBallClicked;
     public bool IsBallMoving;
 
-
-    float _initialFieldView;
-    Rigidbody _rigidBody;   
+    Rigidbody _rigidBody;
+    float _initialFieldView;    
     Vector3 _previousClickPosition = new Vector3();
-    Vector3 _forceDirection;
+    
 
-    float movementThreshold = 0.1f;
+    float movementThreshold = 0.01f;
 
+
+    
 
 
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();
         _initialFieldView = MainCamera.fieldOfView;
-        transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 0.5f, 0);
-        
+        transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 0.5f, 0);        
     }
 
 
@@ -46,8 +46,7 @@ public class Ball : MonoBehaviour
                 
                 if (touchedObject.name.Equals("Ball"))
                 {
-                    IsBallClicked = true;
-                    _forceDirection = ray.direction * 1000;                    
+                    IsBallClicked = true;                                        
                 }
             }
         }
@@ -66,10 +65,9 @@ public class Ball : MonoBehaviour
                 GameObject clickedObject = hit.collider.gameObject;
 
                 
-                if (clickedObject.name.Equals("Ball"))
+                if (clickedObject.name.Equals("Ball") && !IsBallMoving)
                 {
-                    IsBallClicked = true;
-                    _forceDirection = ray.direction * 1000;
+                    IsBallClicked = true;                    
                     _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
                 }
                 else
@@ -81,7 +79,7 @@ public class Ball : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if (IsBallClicked)
+            if (IsBallClicked && ! IsBallMoving)
             {
                 float distance = Vector3.Distance(_previousClickPosition, MainCamera.ScreenToViewportPoint(Input.mousePosition));
                 distance = distance * 100;
@@ -96,19 +94,15 @@ public class Ball : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (IsBallClicked)
+            if (IsBallClicked && !IsBallMoving)
             {
-                MainCamera.DOFieldOfView(_initialFieldView, 0.25f);                
-                _rigidBody.AddForce(_forceDirection);
+                MainCamera.DOFieldOfView(_initialFieldView, 0.25f);                                
                 IsBallClicked = false;
             }
         }
-
         SetBallMove();
-
-
-
     }
+
 
     void SetBallMove()
     {
@@ -135,7 +129,7 @@ public class Ball : MonoBehaviour
 
 
 
-
+    
 
 
 
