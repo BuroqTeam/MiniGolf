@@ -18,11 +18,14 @@ public class Ball : MonoBehaviour
     float movementThreshold = 0.01f;
 
 
-    
-
+    Color greenColor = new(0.27f, 0.85f, 0.2f, 1); // f++
+    Color yellowColor = new(1, 1, 0, 1);
+    Color redColor = new(0.83f, 0.16f, 0.05f, 1);
+    LineDrawer _colorfulLine;
 
     private void Awake()
     {
+        _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
         _rigidBody = GetComponent<Rigidbody>();
         _initialFieldView = MainCamera.fieldOfView;
         transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 0.5f, 0);        
@@ -83,10 +86,27 @@ public class Ball : MonoBehaviour
             {
                 float distance = Vector3.Distance(_previousClickPosition, MainCamera.ScreenToViewportPoint(Input.mousePosition));
                 distance = distance * 100;
+
+                // shu yerga arrow color change yoziladi
+
+                if (distance < 8)
+                {
+                    _colorfulLine.ChangeLineColor(greenColor);                    
+                }
+                else if (distance < 17)
+                {
+                    _colorfulLine.ChangeLineColor(yellowColor);
+                }
+                else if (distance < 23)
+                {
+                    _colorfulLine.ChangeLineColor(redColor);
+                }
+
                 if (distance > 23)
                 {
                     distance = 23;                    
                 }
+
                 MainCamera.fieldOfView = Mathf.MoveTowards(MainCamera.fieldOfView, _initialFieldView + distance, 20 * Time.deltaTime);
 
             }

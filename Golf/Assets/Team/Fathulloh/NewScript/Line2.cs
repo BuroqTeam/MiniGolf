@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace BallLine_Fathulloh
 {
+    /// <summary>
+    /// Kutilganidek ishlamadi.
+    /// </summary>
     public class Line2 : MonoBehaviour
     {
         public Camera MainCamera;
