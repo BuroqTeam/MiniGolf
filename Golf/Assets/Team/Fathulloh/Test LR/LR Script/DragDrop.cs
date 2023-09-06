@@ -37,11 +37,20 @@ namespace Golf_LineRenderer2
         public void OnDrag(PointerEventData eventData)
         {
             Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition - MousePos);
-            //Debug.Log(newPos);
-            float distanceObj = Vector3.Distance(gameObject.transform.position, new Vector3(newPos.x, transform.position.y, newPos.y)); //F++
+            Vector3 mainBallPos = gameObject.transform.position;
+            float distanceObj = Vector3.Distance(mainBallPos, new Vector3(newPos.x, mainBallPos.y, newPos.y)); //F++
+            
+            //Debug.Log("newPos = " + newPos + " mainBallPos = " + mainBallPos);            
             if (distanceObj < Inputmanager.redLineLength)
             {
-                CircleForMouse.transform.position = new Vector3(newPos.x, transform.position.y, newPos.y/*newPos.z*/);
+                CircleForMouse.transform.position = new Vector3(newPos.x, mainBallPos.y, newPos.y/*newPos.z*/);
+                //Debug.Log("CircleForMouse.transform.position = " + CircleForMouse.transform.position);
+            }
+            else if (Vector3.Distance(mainBallPos, new Vector3(newPos.x + mainBallPos.x, mainBallPos.y, newPos.y + mainBallPos.z)) < Inputmanager.redLineLength)
+            {
+                //Debug.Log(new Vector3(newPos.x, mainBallPos.y, newPos.y));
+                CircleForMouse.transform.position = new Vector3(mainBallPos.x + newPos.x, mainBallPos.y, mainBallPos.z + newPos.y);
+                //Debug.Log(new Vector3(newPos.x, newPos.y, newPos.z) + "   CircleForMouse.transform.position = " + CircleForMouse.transform.position);
             }
             //else
             //{   // Agar sichqoncha juda uzoqda bo‘lsa CIrcleni sichqonchaga eng yaqin bo‘lgan nuqtaga joylashtiradi.
@@ -51,20 +60,18 @@ namespace Golf_LineRenderer2
 
             FrontArrow.GetComponent<WhiteArrowPointer>().ArrowPointer();
             Inputmanager.ShowTrajectoryLine();
-
             //SomeDebugs();
             //Debug.Log("=");
         }
 
 
-        void SomeDebugs()
-        {
-            Debug.Log(" Input.mousePosition = " + Input.mousePosition);
-            Debug.Log(" Camera.main.ScreenToWorldPoint(Input.mousePosition) = " + Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            //Debug.Log(" newPos = " + newPos + " Input.mousePosition - MousePos = " + (Input.mousePosition - MousePos));
-            //Debug.Log(" MousePos = " + MousePos + " Camera.main.WorldToScreenPoint(CircleForMouse.transform.position) = " + Camera.main.WorldToScreenPoint(CircleForMouse.transform.position));
-
-        }
+        //void SomeDebugs()
+        //{
+        //    Debug.Log(" Input.mousePosition = " + Input.mousePosition);
+        //    Debug.Log(" Camera.main.ScreenToWorldPoint(Input.mousePosition) = " + Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //    //Debug.Log(" newPos = " + newPos + " Input.mousePosition - MousePos = " + (Input.mousePosition - MousePos));
+        //    //Debug.Log(" MousePos = " + MousePos + " Camera.main.WorldToScreenPoint(CircleForMouse.transform.position) = " + Camera.main.WorldToScreenPoint(CircleForMouse.transform.position));
+        //}
 
 
         public void OnEndDrag(PointerEventData eventData)
