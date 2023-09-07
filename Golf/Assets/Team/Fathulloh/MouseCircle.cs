@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,25 +9,38 @@ public class MouseCircle : MonoBehaviour
     public Ball GolfBall;
     private SpriteRenderer _spriteRenderer;
 
+    LineRenderer _lineRenderer;
+    bool _isDrawingLine;
 
     void Start()
     {
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        _lineRenderer = GolfBall.transform.GetChild(0).gameObject.GetComponent<LineRenderer>();
+        //Debug.Log("Color = " + _lineRenderer.material.color);
+        //Debug.Log(_lineRenderer.Get);
     }
 
     
     void Update()
     {
-        if (GolfBall.IsBallClicked)
+        if (!GolfBall.IsBallMoving)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //transform.position = 
-                //Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
-                
+                Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.name.Equals("Ball"))
+                {
+                    _isDrawingLine = true;
+                    _spriteRenderer.enabled = false;
+                    transform.position = GolfBall.transform.position;
+                    //_lineRenderer.enabled = false;
+                }
             }
 
-            if (Input.GetMouseButton(0))
+
+            if (Input.GetMouseButton(0) && _isDrawingLine)
             {
                 Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -41,11 +52,17 @@ public class MouseCircle : MonoBehaviour
                     currentMousePosition.y = GolfBall.transform.position.y;
                     transform.position = currentMousePosition;
                     //_lineRenderer.SetPosition(1, currentMousePosition);
-                    //_lineRenderer.enabled = true;
+                    _spriteRenderer.enabled = true;
+                    _spriteRenderer.color = _lineRenderer.material.color;
                 }
             }
 
 
+            if (Input.GetMouseButtonUp(0) && _isDrawingLine)
+            {
+                _isDrawingLine = false;
+                _spriteRenderer.enabled = false;
+            }
 
         }
     }

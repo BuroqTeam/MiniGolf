@@ -13,8 +13,10 @@ public class LineAnim : MonoBehaviour
     private bool _isDrawingLine = false;
 
     Ball _ball;
+    float distance = 0.025f;
+    private Vector3 CurrentPos;
+    Vector3 Point0;
 
-    public Vector3 CurrentPos;
     public enum LineType 
     { 
         FrontArrow, 
@@ -46,7 +48,8 @@ public class LineAnim : MonoBehaviour
                 {
                     CurrentPos = transform.position;//F++
                     _isDrawingLine = true;
-                    _lineRenderer.SetPosition(0, new Vector3(CurrentPos.x, CurrentPos.y + 0.0025f, CurrentPos.z));
+                    Point0 = new Vector3(CurrentPos.x, CurrentPos.y + 0.0025f, CurrentPos.z);
+                    _lineRenderer.SetPosition(0, Point0);
                     _lineRenderer.enabled = false;
                 }
             }
@@ -64,7 +67,7 @@ public class LineAnim : MonoBehaviour
                     currentMousePosition.y = CurrentPos.y + 0.0025f;
                     if (CurrentLine == LineType.AnimationArrow)
                     {
-                        _lineRenderer.SetPosition(1, currentMousePosition);
+                        _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));
                     }
                     else if (CurrentLine == LineType.FrontArrow)
                     {
@@ -94,15 +97,33 @@ public class LineAnim : MonoBehaviour
             }
 
         }
-
-
     }
 
 
-    public void ChangeLineColor(Color newColor)// for color change
+    /// <summary>
+    /// Ikkita nuqta berilgan. Birinchi va ikkinchi nuqtalar orasida joylashgan va birinchi nuqtadan x masofada joylashgan uchinchi nuqtani topish.
+    /// </summary>
+    /// <param name="point1">Birinchi nuqtaning kordinatasi</param>
+    /// <param name="point2">Ikkinchi nuqtaning kordinatasi</param>
+    /// <param name="distance">Birinchi nuqtadan maksimal masofa</param>
+    /// <returns></returns>
+    Vector3 FindPointOnLine(Vector3 point1, Vector3 point2, float distance)
     {
-        Material newMat = (_lineRenderer.material);
-        newMat.color = newColor;
-        _lineRenderer.material = newMat;
+        float totalDistance = Vector3.Distance(point1, point2);
+        float ratio = distance / totalDistance;
+
+        float newX = point1.x + ratio * (point2.x - point1.x);
+        float newY = point1.y /*+ ratio * (point2.y - point1.y)*/;
+        float newZ = point1.z + ratio * (point2.z - point1.z);
+
+        return new Vector3(newX, newY, newZ);
     }
+
+
+    //public void ChangeLineColor(Color newColor)// for color change
+    //{
+    //    Material newMat = (_lineRenderer.material);
+    //    newMat.color = newColor;
+    //    _lineRenderer.material = newMat;
+    //}
 }
