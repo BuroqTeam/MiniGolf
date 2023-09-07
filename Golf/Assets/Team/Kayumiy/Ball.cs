@@ -18,9 +18,9 @@ public class Ball : MonoBehaviour
     float movementThreshold = 0.01f;
 
 
-    Color greenColor = new(0.27f, 0.85f, 0.2f, 1); // f++
-    Color yellowColor = new(1, 1, 0, 1);
-    Color redColor = new(0.83f, 0.16f, 0.05f, 1);
+    public Color GreenColor;
+    public Color YellowColor;
+    public Color RedColor;
     LineDrawer _colorfulLine;
 
     private void Awake()
@@ -91,15 +91,15 @@ public class Ball : MonoBehaviour
 
                 if (distance < 8)
                 {
-                    _colorfulLine.ChangeLineColor(greenColor);                    
+                    _colorfulLine.ChangeLineColor(GreenColor);                    
                 }
                 else if (distance < 17)
                 {
-                    _colorfulLine.ChangeLineColor(yellowColor);
+                    _colorfulLine.ChangeLineColor(YellowColor);
                 }
                 else if (distance < 23)
                 {
-                    _colorfulLine.ChangeLineColor(redColor);
+                    _colorfulLine.ChangeLineColor(RedColor);
                 }
 
                 if (distance > 23)

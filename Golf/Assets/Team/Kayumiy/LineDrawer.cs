@@ -69,6 +69,7 @@ public class LineDrawer : MonoBehaviour
 
                 // Normalize the direction vector if you want a unit vector.
                 direction.Normalize();
+                GetComponent<AudioSource>().Play();
                 _ball.gameObject.GetComponent<Rigidbody>().AddForce(direction * 1000);
             }
 
