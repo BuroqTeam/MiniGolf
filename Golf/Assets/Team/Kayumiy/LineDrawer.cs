@@ -10,7 +10,7 @@ public class LineDrawer : MonoBehaviour
     private bool _isDrawingLine = false;
 
     Ball _ball;
-    
+    private readonly float distance = 0.013f;
 
 
     void Start()
@@ -51,6 +51,7 @@ public class LineDrawer : MonoBehaviour
                     
                     currentMousePosition.y = transform.position.y; // 0
                     _lineRenderer.SetPosition(1, currentMousePosition);
+                    _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, _lineRenderer.GetPosition(0), distance));
                     _lineRenderer.enabled = true;
                 }
             }
@@ -85,5 +86,19 @@ public class LineDrawer : MonoBehaviour
         newMat.color = newColor;
         _lineRenderer.material = newMat;
     }
+
+
+    Vector3 FindPointOnLine(Vector3 point1, Vector3 point2, float distance)
+    {
+        float totalDistance = Vector3.Distance(point1, point2);
+        float ratio = distance / totalDistance;
+
+        float newX = point1.x + ratio * (point2.x - point1.x);
+        float newY = point1.y;
+        float newZ = point1.z + ratio * (point2.z - point1.z);
+
+        return new Vector3(newX, newY, newZ);
+    }
+
 
 }
