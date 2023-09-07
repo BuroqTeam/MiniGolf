@@ -12,10 +12,12 @@ public class LineAnim : MonoBehaviour
     private LineRenderer _lineRenderer;
     private bool _isDrawingLine = false;
 
-    Ball _ball;
-    float distance = 0.025f;
+    Ball _ball;    
     private Vector3 CurrentPos;
     Vector3 Point0;
+    readonly float distance = 0.025f;
+    float maxLengOfLine;
+
 
     public enum LineType 
     { 
@@ -28,6 +30,7 @@ public class LineAnim : MonoBehaviour
 
     void Start()
     {
+        maxLengOfLine = gameObject.transform.parent.transform.GetChild(0).GetComponent<LineDrawer>().maxLengthOfLine;
         _ball = transform.parent.GetComponent<Ball>();
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.SetPosition(0, transform.position);
@@ -67,12 +70,21 @@ public class LineAnim : MonoBehaviour
                     currentMousePosition.y = CurrentPos.y + 0.0025f;
                     if (CurrentLine == LineType.AnimationArrow)
                     {
-                        _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));
+                        //float dist = Vector3.Distance(Point0, FindPointOnLine(currentMousePosition, Point0, distance));                        
+                        //if (dist * 100 <= maxLengOfLine * 100)
+                        //{
+                        //    _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));
+                        //}
+                        _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));//o‘chiriladi.
                     }
                     else if (CurrentLine == LineType.FrontArrow)
                     {
-                        //Debug.Log("-currentMousePosition = " + (-currentMousePosition) + "   currentMousePosition = " + currentMousePosition);
-                        _lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z));
+                        //float dist = Vector3.Distance(Point0, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z));
+                        //if (dist * 100 <= maxLengOfLine * 100)
+                        //{
+                        //    _lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z));
+                        //}
+                        _lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z)); //o‘chiriladi.
                     }
                    
                     _lineRenderer.enabled = true;

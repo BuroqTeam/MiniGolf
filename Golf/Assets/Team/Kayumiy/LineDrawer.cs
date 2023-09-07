@@ -11,6 +11,7 @@ public class LineDrawer : MonoBehaviour
 
     Ball _ball;
     private readonly float distance = 0.013f;
+    [HideInInspector] public readonly float maxLengthOfLine = 0.4f;
 
 
     void Start()
@@ -50,7 +51,11 @@ public class LineDrawer : MonoBehaviour
                     Vector3 currentMousePosition = hit.point;
                     
                     currentMousePosition.y = transform.position.y; // 0
-                    _lineRenderer.SetPosition(1, currentMousePosition);
+                    //float dist = Vector3.Distance(_lineRenderer.GetPosition(0), FindPointOnLine(currentMousePosition, _lineRenderer.GetPosition(0), distance));
+                    //if (dist<= maxLengthOfLine)
+                    //{
+                    //    _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, _lineRenderer.GetPosition(0), distance));
+                    //}
                     _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, _lineRenderer.GetPosition(0), distance));
                     _lineRenderer.enabled = true;
                 }
