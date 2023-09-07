@@ -11,13 +11,18 @@ public class MouseCircle : MonoBehaviour
 
     LineRenderer _lineRenderer;
     bool _isDrawingLine;
+    float maxLengthOfLine;
+    float colorfulLineDistance = 0.0145f;
+
 
     void Start()
-    {
+    {        
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _lineRenderer = GolfBall.transform.GetChild(0).gameObject.GetComponent<LineRenderer>();
+
+        maxLengthOfLine = GolfBall.transform.GetChild(0).gameObject.GetComponent<LineDrawer>().maxLengthOfLine;
+        //colorfulLineDistance = 0.013f;
         //Debug.Log("Color = " + _lineRenderer.material.color);
-        //Debug.Log(_lineRenderer.Get);
     }
 
     
@@ -48,11 +53,16 @@ public class MouseCircle : MonoBehaviour
                 if (Physics.Raycast(ray, out hit))
                 {
                     Vector3 currentMousePosition = hit.point;
-
                     currentMousePosition.y = GolfBall.transform.position.y;
-                    transform.position = currentMousePosition;
-                    //_lineRenderer.SetPosition(1, currentMousePosition);
                     _spriteRenderer.enabled = true;
+
+                    //float dist = Vector3.Distance(GolfBall.transform.position, currentMousePosition);
+                    //if (dist <= maxLengthOfLine + colorfulLineDistance)
+                    //{
+                    //    transform.position = currentMousePosition;
+                    //}
+
+                    transform.position = currentMousePosition;//o'chiriladi
                     _spriteRenderer.color = _lineRenderer.material.color;
                 }
             }
