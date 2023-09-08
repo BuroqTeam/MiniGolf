@@ -9,20 +9,15 @@ public class MouseCircle : MonoBehaviour
     public Ball GolfBall;
     private SpriteRenderer _spriteRenderer;
 
-    LineRenderer _lineRenderer;
+    private LineRenderer _lineRenderer;
     bool _isDrawingLine;
-    float maxLengthOfLine;
-    float colorfulLineDistance = 0.0145f;
+    //float colorfulLineDistance = 0.0145f;
 
 
     void Start()
     {        
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _lineRenderer = GolfBall.transform.GetChild(0).gameObject.GetComponent<LineRenderer>();
-
-        maxLengthOfLine = GolfBall.transform.GetChild(0).gameObject.GetComponent<LineDrawer>().maxLengthOfLine;
-        //colorfulLineDistance = 0.013f;
-        //Debug.Log("Color = " + _lineRenderer.material.color);
     }
 
     
@@ -40,7 +35,6 @@ public class MouseCircle : MonoBehaviour
                     _isDrawingLine = true;
                     _spriteRenderer.enabled = false;
                     transform.position = GolfBall.transform.position;
-                    //_lineRenderer.enabled = false;
                 }
             }
 
@@ -55,14 +49,19 @@ public class MouseCircle : MonoBehaviour
                     Vector3 currentMousePosition = hit.point;
                     currentMousePosition.y = GolfBall.transform.position.y;
                     _spriteRenderer.enabled = true;
+                    //transform.position = currentMousePosition;//o'chiriladi
 
-                    //float dist = Vector3.Distance(GolfBall.transform.position, currentMousePosition);
-                    //if (dist <= maxLengthOfLine + colorfulLineDistance)
-                    //{
-                    //    transform.position = currentMousePosition;
-                    //}
+                    float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));
 
-                    transform.position = currentMousePosition;//o'chiriladi
+                    if (lengthLine >= 0.40f)
+                    {
+                        transform.position = FindPointOnLine(GolfBall.transform.position, currentMousePosition, 0.40f);                       
+                    }
+                    else
+                    {
+                        transform.position = currentMousePosition;
+                    }
+                    
                     _spriteRenderer.color = _lineRenderer.material.color;
                 }
             }
@@ -76,4 +75,25 @@ public class MouseCircle : MonoBehaviour
 
         }
     }
+
+
+    /// <summary>
+    /// Ikkita nuqta berilgan. Birinchi va ikkinchi nuqtalar orasida joylashgan va birinchi nuqtadan x masofada joylashgan uchinchi nuqtani topish.
+    /// </summary>
+    /// <param name="point1">Birinchi nuqtaning kordinatasi</param>
+    /// <param name="point2">Ikkinchi nuqtaning kordinatasi</param>
+    /// <param name="distance">Birinchi nuqtadan maksimal masofa</param>
+    /// <returns></returns>
+    Vector3 FindPointOnLine(Vector3 point1, Vector3 point2, float distance)
+    {
+        float totalDistance = Vector3.Distance(point1, point2);
+        float ratio = distance / totalDistance;
+
+        float newX = point1.x + ratio * (point2.x - point1.x);
+        float newY = point1.y /*+ ratio * (point2.y - point1.y)*/;
+        float newZ = point1.z + ratio * (point2.z - point1.z);
+
+        return new Vector3(newX, newY, newZ);
+    }
+
 }
