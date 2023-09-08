@@ -68,10 +68,9 @@ public class LineAnim : MonoBehaviour
                     if (CurrentLine == LineType.AnimationArrow)
                     {                        
                         //_lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));//o‘chiriladi.
-
                         float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));
 
-                        if (lengthLine >= 0.40f)
+                        if (lengthLine >= 0.40f) // Sichqoncha agar uzoqda bo‘lsa eng yaqin distansiyadagi nuqtani olib beradi.
                         {
                             _lineRenderer.SetPosition(1, FindPointOnLine(_lineRenderer.GetPosition(0), currentMousePosition, 0.40f - distance));
                             _lineRenderer.enabled = true;
@@ -84,8 +83,7 @@ public class LineAnim : MonoBehaviour
                     }
                     else if (CurrentLine == LineType.FrontArrow)
                     {                        
-                        //_lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z)); //o‘chiriladi.
-                        
+                        //_lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z)); //o‘chiriladi.                        
                         float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));
 
                         if (lengthLine >= 0.40f)
@@ -120,7 +118,7 @@ public class LineAnim : MonoBehaviour
 
                 // Normalize the direction vector if you want a unit vector.
                 direction.Normalize();
-                _ball.gameObject.GetComponent<Rigidbody>().AddForce(direction * 1000);
+                //_ball.gameObject.GetComponent<Rigidbody>().AddForce(direction * 1000);
             }
 
         }
@@ -147,10 +145,4 @@ public class LineAnim : MonoBehaviour
     }
 
 
-    //public void ChangeLineColor(Color newColor)// for color change
-    //{
-    //    Material newMat = (_lineRenderer.material);
-    //    newMat.color = newColor;
-    //    _lineRenderer.material = newMat;
-    //}
 }

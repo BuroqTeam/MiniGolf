@@ -32,9 +32,9 @@ public class MouseCircle : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.name.Equals("Ball"))
                 {
-                    _isDrawingLine = true;
-                    _spriteRenderer.enabled = false;
                     transform.position = GolfBall.transform.position;
+                    _isDrawingLine = true;
+                    _spriteRenderer.enabled = false;                    
                 }
             }
 
@@ -48,9 +48,7 @@ public class MouseCircle : MonoBehaviour
                 {
                     Vector3 currentMousePosition = hit.point;
                     currentMousePosition.y = GolfBall.transform.position.y;
-                    _spriteRenderer.enabled = true;
-                    //transform.position = currentMousePosition;//o'chiriladi
-
+                    
                     float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));
 
                     if (lengthLine >= 0.40f)
@@ -61,7 +59,9 @@ public class MouseCircle : MonoBehaviour
                     {
                         transform.position = currentMousePosition;
                     }
-                    
+
+                    _spriteRenderer.enabled = true;
+                    //transform.position = currentMousePosition;//o'chiriladi
                     _spriteRenderer.color = _lineRenderer.material.color;
                 }
             }
