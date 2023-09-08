@@ -14,10 +14,9 @@ public class LineAnim : MonoBehaviour
 
     Ball _ball;    
     private Vector3 CurrentPos;
-    Vector3 Point0;
+    public Vector3 Point0;
     readonly float distance = 0.025f;
-    float maxLengOfLine;
-
+    
 
     public enum LineType 
     { 
@@ -30,7 +29,6 @@ public class LineAnim : MonoBehaviour
 
     void Start()
     {
-        maxLengOfLine = gameObject.transform.parent.transform.GetChild(0).GetComponent<LineDrawer>().maxLengthOfLine;
         _ball = transform.parent.GetComponent<Ball>();
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.SetPosition(0, transform.position);
@@ -59,7 +57,6 @@ public class LineAnim : MonoBehaviour
 
             if (Input.GetMouseButton(0) && _isDrawingLine)
             {
-
                 Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
@@ -69,22 +66,40 @@ public class LineAnim : MonoBehaviour
 
                     currentMousePosition.y = CurrentPos.y + 0.0025f;
                     if (CurrentLine == LineType.AnimationArrow)
-                    {
-                        //float dist = Vector3.Distance(Point0, FindPointOnLine(currentMousePosition, Point0, distance));                        
-                        //if (dist * 100 <= maxLengOfLine * 100)
-                        //{
-                        //    _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));
-                        //}
-                        _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));//o‘chiriladi.
+                    {                        
+                        //_lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, Point0, distance));//o‘chiriladi.
+
+                        float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));
+
+                        if (lengthLine >= 0.40f)
+                        {
+                            _lineRenderer.SetPosition(1, FindPointOnLine(_lineRenderer.GetPosition(0), currentMousePosition, 0.40f - distance));
+                            _lineRenderer.enabled = true;
+                        }
+                        else
+                        {
+                            _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, _lineRenderer.GetPosition(0), distance));
+                            _lineRenderer.enabled = true;
+                        }
                     }
                     else if (CurrentLine == LineType.FrontArrow)
-                    {
-                        //float dist = Vector3.Distance(Point0, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z));
-                        //if (dist * 100 <= maxLengOfLine * 100)
-                        //{
-                        //    _lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z));
-                        //}
-                        _lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z)); //o‘chiriladi.
+                    {                        
+                        //_lineRenderer.SetPosition(1, new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z)); //o‘chiriladi.
+                        
+                        float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));
+
+                        if (lengthLine >= 0.40f)
+                        {
+                            Vector3 reverseDotPos = new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z);
+                            _lineRenderer.SetPosition(1, FindPointOnLine(_lineRenderer.GetPosition(0), reverseDotPos, 0.40f));
+                            _lineRenderer.enabled = true;
+                        }
+                        else
+                        {
+                            Vector3 reverseDotPos = new Vector3(2 * CurrentPos.x - currentMousePosition.x, currentMousePosition.y, 2 * CurrentPos.z - currentMousePosition.z);
+                            _lineRenderer.SetPosition(1, reverseDotPos);
+                            _lineRenderer.enabled = true;
+                        }
                     }
                    
                     _lineRenderer.enabled = true;

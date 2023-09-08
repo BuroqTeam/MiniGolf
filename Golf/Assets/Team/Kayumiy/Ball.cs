@@ -89,7 +89,7 @@ public class Ball : MonoBehaviour
 
                 // shu yerga arrow color change yoziladi
 
-                if (distance < 8)
+                if (distance < 9)
                 {
                     _colorfulLine.ChangeLineColor(GreenColor);                    
                 }
