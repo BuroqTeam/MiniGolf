@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Team/Kayumiy/Map_2 new 1.unity
     guid: e5f5b68f349ae024aac2e059b2ee4df3
-  - enabled: 0
-    path: Assets/Team/Fathulloh/_Scene/TestLR.unity
-    guid: 9609ba312e1e6e64883dbc936dc5e5e8
   - enabled: 1
+    path: Assets/Team/Fathulloh/Core_Game_Test 1.unity
+    guid: ac8cd6d1f4a483f488e0cc1ae9c4cb3c
+  - enabled: 0
     path: Assets/Team/Kayumiy/Core_Game.unity
     guid: 5f515f9ef00c49e4cbef481d5fc5671c
   m_configObjects: {}

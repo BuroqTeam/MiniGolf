@@ -13,7 +13,8 @@ public class LineDrawer : MonoBehaviour
     private readonly float distance = 0.013f;
     [HideInInspector] public readonly float maxLengthOfLine = 0.4f;
     private Vector3 limit = Vector3.zero;
-
+    private float maxDistance = 0.39f;
+    private int _addingForce;
 
     void Start()
     {
@@ -52,11 +53,7 @@ public class LineDrawer : MonoBehaviour
                     Vector3 currentMousePosition = hit.point;
                     
                     currentMousePosition.y = transform.position.y; // 0
-                    //float dist = Vector3.Distance(_lineRenderer.GetPosition(0), FindPointOnLine(currentMousePosition, _lineRenderer.GetPosition(0), distance));
-                    //if (dist<= maxLengthOfLine)
-                    //{
-                    //    _lineRenderer.SetPosition(1, FindPointOnLine(currentMousePosition, _lineRenderer.GetPosition(0), distance));
-                    //}
+                    
 
                     float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));                   
 
@@ -88,10 +85,14 @@ public class LineDrawer : MonoBehaviour
                 // Calculate the direction vector.
                 Vector3 direction = startPoint - endPoint;
 
+                float lineLength = Vector3.Distance(startPoint, endPoint);
+                _addingForce = (int)(lineLength / maxDistance * 1000);
+                //Debug.Log(_addingForce);
+
                 // Normalize the direction vector if you want a unit vector.
                 direction.Normalize();
                 GetComponent<AudioSource>().Play();
-                _ball.gameObject.GetComponent<Rigidbody>().AddForce(direction * 1000);
+                _ball.gameObject.GetComponent<Rigidbody>().AddForce(direction * _addingForce); // _addingForce ning o'rni 1000 turgan edi. 
             }
 
         }
@@ -104,7 +105,7 @@ public class LineDrawer : MonoBehaviour
     {
         Material newMat = (_lineRenderer.material);    
         newMat.color = newColor;
-        _lineRenderer.material = newMat;
+        _lineRenderer.material = newMat;        
     }
 
 
