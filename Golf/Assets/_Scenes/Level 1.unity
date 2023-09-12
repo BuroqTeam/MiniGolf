@@ -781,10 +781,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Land
       objectReference: {fileID: 0}
-    - target: {fileID: 3038495804802630831, guid: 3b9c739a76aa36d4f9cefae5ad2e04a3, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ea558f01773b8d742a2970a68a9dd578, type: 2}
     - target: {fileID: 4249049098834505975, guid: 3b9c739a76aa36d4f9cefae5ad2e04a3, type: 3}
       propertyPath: m_Mesh
       value: 
