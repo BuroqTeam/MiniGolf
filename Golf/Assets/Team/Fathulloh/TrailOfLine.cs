@@ -13,25 +13,35 @@ public class TrailOfLine : MonoBehaviour
     Vector3 startPoint;
     bool _isFirstTime = true;
 
-    Color _startColor = new Color(0.55f, 0.27f, 0.97f);
+    Color _startColor = new Color(0.55f, 0.56f, 0.67f, 0.55f);
     Color _endColor = new Color(0.97f, 0.97f, 0.97f, 0.60f);
 
 
     void Start()
     {        
-        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer = gameObject.GetComponent<LineRenderer>();
+
+        //_lineRenderer.startColor = _startColor;
+        //_lineRenderer.endColor = _endColor;
         //_lineRenderer.SetColors(_startColor, _endColor);
 
-        //Material newMat = (_lineRenderer.material);
-        //newMat.color = _startColor;
-        //_lineRenderer.material = newMat;
-        Debug.Log(_lineRenderer.material.color);
+        Material newMat = (_lineRenderer.material);
+        newMat.color = new Color(1, 1,  1, 1);
+        _lineRenderer.material = newMat;
     }
 
+    Vector3 oldEndPoint;
+    float distance = 0;
+    float movingLength = 0.01f;
     
     void Update()
     {
-        if (Ball.GetComponent<Ball>().IsBallMoving)
+        if (_lineRenderer.positionCount > 1)
+        {
+            distance = Vector3.Distance(_lineRenderer.GetPosition(0), _lineRenderer.GetPosition(1));
+        }
+
+        if (Ball.GetComponent<Ball>().IsBallMoving || (distance > 0))
         {
             _lineRenderer.positionCount = 2;
             Vector3 endPoint = Ball.transform.position;
@@ -44,8 +54,12 @@ public class TrailOfLine : MonoBehaviour
             }
             else
             {
-                Vector3 oldStartPos = _lineRenderer.GetPosition(0);
-                _lineRenderer.SetPosition(0, FindPointOnLine(oldStartPos, endPoint, 0.021f));
+                Vector3 newStartPos = _lineRenderer.GetPosition(0);
+                if (oldEndPoint != null)
+                    movingLength = Vector3.Distance(endPoint, oldEndPoint);
+
+                oldEndPoint = endPoint;
+                _lineRenderer.SetPosition(0, FindPointOnLine(newStartPos, endPoint, movingLength/*0.021f*/));
                 _lineRenderer.SetPosition(1, endPoint);
                 SetTrail();
             }            
@@ -65,7 +79,7 @@ public class TrailOfLine : MonoBehaviour
 
     void SetTrail()
     {
-        Debug.Log("SetTrail");
+        //Debug.Log("SetTrail");
     }
 
 
