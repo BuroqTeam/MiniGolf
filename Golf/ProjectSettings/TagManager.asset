@@ -4,14 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Land
-  - Ball
-  - Wall
-  - Coin
-  - Sand
-  - Water
-  - Object
-  - Out
+
+
   layers:
   - Default
   - TransparentFX
