@@ -11,6 +11,7 @@ TagManager:
   - Sand
   - Wall
   - Water
+  - Sth
   layers:
   - Default
   - TransparentFX
