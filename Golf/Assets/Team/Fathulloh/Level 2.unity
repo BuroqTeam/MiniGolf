@@ -840,6 +840,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 7870700568663443552, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f0a9f39b6ebb6644b8d9853de8f129bb, type: 2}
     - target: {fileID: 8110608642790017629, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
       propertyPath: MainCamera
       value: 
