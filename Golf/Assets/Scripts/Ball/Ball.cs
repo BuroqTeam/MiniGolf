@@ -148,9 +148,27 @@ namespace MiniGolf
         }
 
 
+        public void AddForceOpposite()
+        {
+            //_rigidBody.AddForce(-_rigidBody.velocity, ForceMode.Impulse);
+            StartCoroutine(SampleRoutine());
+        }
 
 
+        IEnumerator SampleRoutine()
+        {
+            float previousDrag = _rigidBody.drag;
+            Vector3 previousVel = _rigidBody.velocity;
+            _rigidBody.drag = 5000;
 
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+            //Debug.Log(" +  " + previousVel + " " + _rigidBody.angularVelocity);
+            
+            _rigidBody.drag = previousDrag;
+            _rigidBody.AddForce(previousVel, ForceMode.Impulse);
+            //_rigidBody.AddForce(-previousVel, ForceMode.Impulse);
+        }
 
 
     }
