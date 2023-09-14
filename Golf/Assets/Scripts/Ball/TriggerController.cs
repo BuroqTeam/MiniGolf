@@ -19,7 +19,7 @@ namespace MiniGolf
             //        gameEventsSO[0].Raise();
             //        break;
             //    case "Wall":
-            //        Debug.Log("Wall");
+            //        Debug.Log("Wall Trigger");
             //        gameEventsSO[3].Raise();
             //        break;
             //    case "Water":
@@ -46,7 +46,6 @@ namespace MiniGolf
             //        Debug.Log("Land");
             //        gameEventsSO[8].Raise();
             //        break;
-
             //}
         }
 
@@ -54,19 +53,56 @@ namespace MiniGolf
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Wall"))
+            if (collision.gameObject.CompareTag("Coin"))
             {
-                //Debug.Log("Wall");
-                gameEventsSO[3].Raise();
-
-                Vector3 oppositeDirection = -collision.contacts[0].normal;
-                float rotationAngle = Vector3.SignedAngle(oppositeDirection, GetComponent<Rigidbody>().velocity, Vector3.up);
-                GetComponent<Rigidbody>().velocity = Vector3.Reflect(GetComponent<Rigidbody>().velocity, oppositeDirection); // bu kodlar Ball scriptini ichida bo'lishi kerak edi.
-                //Debug.Log("Rotation Angle: " + rotationAngle + " oppositeDirection = " + oppositeDirection);
-                //Debug.Log("GetComponent<Rigidbody>().velocity = " + GetComponent<Rigidbody>().velocity);
-                //Debug.Log("Vector3.Reflect(rb.velocity, oppositeDirection) = " + Vector3.Reflect(GetComponent<Rigidbody>().velocity, oppositeDirection));
-
+                Debug.Log("Coin");
+                gameEventsSO[0].Raise();
             }
+            else if (collision.gameObject.CompareTag("Wall"))
+            {
+                Debug.Log("Wall Trigger");
+                gameEventsSO[3].Raise();
+            }
+            else if (collision.gameObject.CompareTag("Water"))
+            {
+                Debug.Log("Water");
+                gameEventsSO[5].Raise();
+            }
+            else if (collision.gameObject.CompareTag("Object"))
+            {
+                Debug.Log("Object");
+                gameEventsSO[6].Raise();
+            }
+            else if (collision.gameObject.CompareTag("Sand"))
+            {
+                Debug.Log("Sand");
+                gameEventsSO[4].Raise();
+            }
+            else if (collision.gameObject.CompareTag("Finish"))
+            {
+                Debug.Log("Finish");
+                gameEventsSO[1].Raise();
+            }
+            else if (collision.gameObject.CompareTag("Out"))
+            {
+                Debug.Log("Out");
+                gameEventsSO[7].Raise();
+            }
+            else if (collision.gameObject.CompareTag("Land"))
+            {
+                Debug.Log("Land");
+                gameEventsSO[8].Raise();
+            }
+
+            //if (collision.gameObject.CompareTag("Wall"))
+            //{
+            //    Debug.Log("Wall Collision");
+            //    gameEventsSO[3].Raise();
+
+            //    Vector3 oppositeDirection = -collision.contacts[0].normal;
+            //    float rotationAngle = Vector3.SignedAngle(oppositeDirection, GetComponent<Rigidbody>().velocity, Vector3.up);
+            //    GetComponent<Rigidbody>().velocity = Vector3.Reflect(GetComponent<Rigidbody>().velocity, oppositeDirection); // bu kodlar Ball scriptini ichida bo'lishi kerak edi.
+            //}
 
         }
 
