@@ -16,21 +16,24 @@ namespace MiniGolf
         public Color YellowColor;
         public Color RedColor;
 
-
+        private TrailRenderer _trailRenderer;
         private Rigidbody _rigidBody;
         private float _initialFieldView;
         private Vector3 _previousClickPosition = new Vector3();
         private float _movementThreshold = 0.01f;
         private LineDrawer _colorfulLine;
 
+        public Vector3 InitialPosBeforeHit;
+
         private void Awake()
         {
+            _trailRenderer = GetComponent<TrailRenderer>();
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
             _rigidBody = GetComponent<Rigidbody>();
             _initialFieldView = MainCamera.fieldOfView;
             transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 0.5f, 0);
         }
-
+        
 
         void Update()
         {
@@ -66,12 +69,14 @@ namespace MiniGolf
                 {
                     // The hit.collider.gameObject is the GameObject that was clicked
                     GameObject clickedObject = hit.collider.gameObject;
-
+                    
 
                     if (clickedObject.name.Equals("Ball") && !IsBallMoving)
                     {
                         IsBallClicked = true;
                         _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
+                        InitialPosBeforeHit = gameObject.transform.position;// F++
+                        //Debug.Log("gameObject.transform.position = " + gameObject.transform.position);
                     }
                     else
                     {
@@ -168,6 +173,46 @@ namespace MiniGolf
             _rigidBody.drag = previousDrag;
             _rigidBody.AddForce(previousVel, ForceMode.Impulse);
             //_rigidBody.AddForce(-previousVel, ForceMode.Impulse);
+        }
+
+        public bool _IsResetBall = true;
+        public void ResetBall()
+        {
+            //StartCoroutine(ResetBallWithDelay());
+            if (_IsResetBall)
+            {
+                _IsResetBall = false;
+                StartCoroutine(ResetBallWithDelay());
+            }
+
+        }
+
+
+        IEnumerator ResetBallWithDelay()
+        {
+            float delaySeconds = 0.4f;
+            //yield return new WaitForSeconds(delaySeconds / 2);
+            //_rigidBody.isKinematic = true;
+            _trailRenderer.enabled = false;
+
+            _rigidBody.velocity = Vector3.zero;
+            _rigidBody.angularVelocity = Vector3.zero;
+
+            yield return new WaitForSeconds(delaySeconds);
+            transform.position = InitialPosBeforeHit;
+
+            _trailRenderer.enabled = true;
+            //_rigidBody.isKinematic = false;
+            _IsResetBall = true;
+
+            if (InitialPosBeforeHit != transform.position)
+            {
+                Debug.Log("Ishlamadi!");
+            }
+            else
+            {
+                Debug.Log(" == Ishladi! == " + transform.position);
+            }
         }
 
 
