@@ -35,7 +35,7 @@ namespace MiniGolf
                 //    gameEventsSO[4].Raise();
                 //    break;
                 case "Finish":
-                    Debug.Log("Finish Trigger");
+                    Debug.Log("Finish Trigger " + other.name);
                     gameEventsSO[1].Raise();
                     break;
                 case "Out":
@@ -90,7 +90,7 @@ namespace MiniGolf
             //}
             else if (collision.gameObject.CompareTag("Land"))
             {
-                //Debug.Log("Land");
+                Debug.Log("Land");
                 gameEventsSO[8].Raise();
             }
 

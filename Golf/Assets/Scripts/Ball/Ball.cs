@@ -216,6 +216,28 @@ namespace MiniGolf
         }
 
 
+        public void BallReachFinishFlag(GameObject finishObject)
+        {// Buyerda Ballning finishga yetib kelganda nima sodir bo'lishi yoziladi. 
+            
+            _rigidBody.isKinematic = true;
+            Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;
+            //finishObject.transform.GetChild(0).GetComponent<Collider>().enabled = false;
+
+            gameObject.transform.DOMove(finishPos, 0.25f)
+                .SetEase(Ease.InCirc)
+                .SetDelay(0.25f);
+
+            StartCoroutine(BallInHole());            
+            Debug.Log("BallReach FInish Flag");
+        }
+
+        IEnumerator BallInHole()
+        {
+            yield return new WaitForSeconds(0.3f);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+
+
     }
 
 }
