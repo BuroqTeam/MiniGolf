@@ -17,6 +17,7 @@ namespace MiniGolf
         public Color RedColor;
 
         private TrailRenderer _trailRenderer;
+        private MeshRenderer _meshRenderer;
         private Rigidbody _rigidBody;
         private float _initialFieldView;
         private Vector3 _previousClickPosition = new Vector3();
@@ -27,11 +28,15 @@ namespace MiniGolf
 
         private void Awake()
         {
+            _meshRenderer = GetComponent<MeshRenderer>();
             _trailRenderer = GetComponent<TrailRenderer>();
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
             _rigidBody = GetComponent<Rigidbody>();
             _initialFieldView = MainCamera.fieldOfView;
-            transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 0.5f, 0);
+
+            //Debug.Log("Ball position1 = " + transform.position);
+            transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
+            //Debug.Log("Ball position2 = " + transform.position + " " + GetComponent<Renderer>().name);
         }
         
 
@@ -168,57 +173,70 @@ namespace MiniGolf
 
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
-            //Debug.Log(" +  " + previousVel + " " + _rigidBody.angularVelocity);
             
             _rigidBody.drag = previousDrag;
             _rigidBody.AddForce(previousVel, ForceMode.Impulse);
             //_rigidBody.AddForce(-previousVel, ForceMode.Impulse);
         }
 
+
         public bool _IsResetBall = true;
+
         public void ResetBall()
         {
-            //StartCoroutine(ResetBallWithDelay());
-            if (_IsResetBall)
-            {
-                _IsResetBall = false;
-                StartCoroutine(ResetBallWithDelay());
-            }
-
+            StartCoroutine(ResetBallWithDelay());
+            //if (_IsResetBall)
+            //{
+            //    _IsResetBall = false;
+            //    StartCoroutine(ResetBallWithDelay());
+            //}
         }
 
 
         IEnumerator ResetBallWithDelay()
         {
-            float delaySeconds = 0.4f;
-            //yield return new WaitForSeconds(delaySeconds / 2);
+            float delaySeconds = 1f;
+            //yield return new WaitForSeconds(0.05f);
             //_rigidBody.isKinematic = true;
-            _trailRenderer.enabled = false;
-
+            //_trailRenderer.enabled = false;
+            //IsBallClicked = true;
+            //_meshRenderer.enabled = false;
+            SwitchBallComponents(false);
             _rigidBody.velocity = Vector3.zero;
             _rigidBody.angularVelocity = Vector3.zero;
-
-            yield return new WaitForSeconds(delaySeconds);
-            transform.position = InitialPosBeforeHit;
-
-            _trailRenderer.enabled = true;
+            
+            gameObject.transform.DOMove(InitialPosBeforeHit, delaySeconds)
+                .SetEase(Ease.Linear);
+            yield return new WaitForSeconds(delaySeconds + 0.1f);
+            SwitchBallComponents(true);
+            //_meshRenderer.enabled = true;
+            //_trailRenderer.enabled = true;
             //_rigidBody.isKinematic = false;
+            //IsBallClicked = false;
+
             _IsResetBall = true;
 
-            if (InitialPosBeforeHit != transform.position)
-            {
+            if (InitialPosBeforeHit != transform.position)            {
                 Debug.Log("Ishlamadi!");
             }
-            else
-            {
+            else            {
                 Debug.Log(" == Ishladi! == " + transform.position);
             }
         }
 
 
-        public void BallReachFinishFlag(GameObject finishObject)
-        {// Buyerda Ballning finishga yetib kelganda nima sodir bo'lishi yoziladi. 
+        void SwitchBallComponents(bool _isTrue)
+        {
+            _rigidBody.isKinematic = !_isTrue;
+            _trailRenderer.enabled = _isTrue;
             
+            _meshRenderer.enabled = _isTrue;
+            IsBallClicked = !_isTrue;
+        }
+
+
+        public void BallReachFinishFlag(GameObject finishObject) // Buyerda Ballning finishga yetib kelganda nima sodir bo'lishi yoziladi.
+        {             
             _rigidBody.isKinematic = true;
             Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;
             //finishObject.transform.GetChild(0).GetComponent<Collider>().enabled = false;
@@ -231,14 +249,14 @@ namespace MiniGolf
             Debug.Log("BallReach FInish Flag");
         }
 
+
         IEnumerator BallInHole()
         {
             yield return new WaitForSeconds(0.3f);
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            _meshRenderer.enabled = false;
         }
 
 
     }
-
 }
 
