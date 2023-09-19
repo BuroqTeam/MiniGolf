@@ -38,10 +38,10 @@ namespace MiniGolf
                     Debug.Log("Finish Trigger " + other.name);
                     gameEventsSO[1].Raise();
                     break;
-                case "Out":
-                    Debug.Log("Out Trigger");
-                    gameEventsSO[7].Raise();
-                    break;
+                //case "Out":
+                //    Debug.Log("Out Trigger");
+                //    gameEventsSO[7].Raise();
+                //    break;
                 //case "Land":
                 //    Debug.Log("Land Trigger");
                 //    gameEventsSO[8].Raise();
@@ -83,32 +83,21 @@ namespace MiniGolf
             //    //Debug.Log("Finish");
             //    gameEventsSO[1].Raise();
             //}
-            //else if (collision.gameObject.CompareTag("Out"))
-            //{
-            //    //Debug.Log("Out");
-            //    gameEventsSO[7].Raise();
-            //}
+            else if (collision.gameObject.CompareTag("Out"))
+            {
+                Debug.Log("Out");
+                gameEventsSO[7].Raise();
+            }
             else if (collision.gameObject.CompareTag("Land"))
             {
                 Debug.Log("Land");
                 gameEventsSO[8].Raise();
             }
 
-            //if (collision.gameObject.CompareTag("Wall"))
-            //{
-            //    Debug.Log("Wall Collision");
-            //    gameEventsSO[3].Raise();
-
-            //    Vector3 oppositeDirection = -collision.contacts[0].normal;
-            //    float rotationAngle = Vector3.SignedAngle(oppositeDirection, GetComponent<Rigidbody>().velocity, Vector3.up);
-            //    GetComponent<Rigidbody>().velocity = Vector3.Reflect(GetComponent<Rigidbody>().velocity, oppositeDirection); // bu kodlar Ball scriptini ichida bo'lishi kerak edi.
-            //}
-
         }
 
 
 
     }
-
 
 }
