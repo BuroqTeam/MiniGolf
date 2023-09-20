@@ -23,6 +23,8 @@ namespace MiniGolf
         private Vector3 _previousClickPosition = new Vector3();
         private float _movementThreshold = 0.01f;
         private LineDrawer _colorfulLine;
+        [SerializeField]
+        private int _coinScore;
 
         public Vector3 InitialPosBeforeHit;
 
@@ -254,6 +256,11 @@ namespace MiniGolf
         {
             yield return new WaitForSeconds(0.3f);
             _meshRenderer.enabled = false;
+        }
+
+        public void IncrementCoinScore()
+        {
+            _coinScore++;
         }
 
 

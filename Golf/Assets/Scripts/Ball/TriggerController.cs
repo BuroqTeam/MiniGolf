@@ -14,9 +14,9 @@ namespace MiniGolf
         {
             switch (other.tag)
             {
-                case "Coin":
-                    Debug.Log("Coin Trigger");
+                case "Coin":                    
                     gameEventsSO[0].Raise();
+                    other.gameObject.SetActive(false);
                     break;
                 //case "Wall":
                 //    Debug.Log("Wall Trigger");
