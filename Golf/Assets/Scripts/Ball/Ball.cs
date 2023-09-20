@@ -30,14 +30,15 @@ namespace MiniGolf
 
         private void Awake()
         {
+            transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
+
             _meshRenderer = GetComponent<MeshRenderer>();
             _trailRenderer = GetComponent<TrailRenderer>();
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
             _rigidBody = GetComponent<Rigidbody>();
             _initialFieldView = MainCamera.fieldOfView;
 
-            //Debug.Log("Ball position1 = " + transform.position);
-            transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
+            //Debug.Log("Ball position1 = " + transform.position);            
             //Debug.Log("Ball position2 = " + transform.position + " " + GetComponent<Renderer>().name);
         }
         
@@ -128,13 +129,15 @@ namespace MiniGolf
             {
                 if (IsBallClicked && !IsBallMoving)
                 {
-                    MainCamera.DOFieldOfView(_initialFieldView, 0.25f);
+                    //MainCamera.DOFieldOfView(_initialFieldView, 0.25f);
                     IsBallClicked = false;
+                    _isTrue = true;
                 }
             }
-            SetBallMove();
+            
+            SetBallMove();            
         }
-
+        
 
         void SetBallMove()
         {
@@ -156,6 +159,25 @@ namespace MiniGolf
                 // The GameObject is not moving
 
                 IsBallMoving = false;
+                StartCoroutine(ChangeCameraFields());
+            }
+        }
+
+
+        bool _isTrue = false;
+        IEnumerator ChangeCameraFields()
+        {
+            if (_isTrue)
+            {
+                //Debug.Log(666);
+                yield return new WaitForSeconds(0/*.35f*/);
+                if (!IsBallMoving && !IsBallClicked)
+                {
+                    //Debug.Log(222);
+                    MainCamera.DOFieldOfView(_initialFieldView, 0.25f)
+                        .SetEase(Ease.Linear);
+                    _isTrue = false;
+                }
             }
         }
 
