@@ -15,7 +15,7 @@ namespace MiniGolf
         public Color GreenColor;
         public Color YellowColor;
         public Color RedColor;
-
+        
         private TrailRenderer _trailRenderer;
         private MeshRenderer _meshRenderer;
         private Rigidbody _rigidBody;
@@ -27,7 +27,8 @@ namespace MiniGolf
         private int _coinScore;
 
         public Vector3 InitialPosBeforeHit;
-
+        public Quaternion InitialRotation;
+        
         private void Awake()
         {
             transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
@@ -37,7 +38,7 @@ namespace MiniGolf
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
             _rigidBody = GetComponent<Rigidbody>();
             _initialFieldView = MainCamera.fieldOfView;
-
+            
             //Debug.Log("Ball position1 = " + transform.position);            
             //Debug.Log("Ball position2 = " + transform.position + " " + GetComponent<Renderer>().name);
         }
@@ -83,7 +84,8 @@ namespace MiniGolf
                     {
                         IsBallClicked = true;
                         _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
-                        InitialPosBeforeHit = gameObject.transform.position;// F++
+                        InitialPosBeforeHit = transform.position;// F++
+                        InitialRotation = gameObject.transform.rotation;
                         //Debug.Log("gameObject.transform.position = " + gameObject.transform.position);
                     }
                     else
@@ -220,40 +222,45 @@ namespace MiniGolf
         IEnumerator ResetBallWithDelay()
         {
             float delaySeconds = 1f;
-            //yield return new WaitForSeconds(0.05f);
-            //_rigidBody.isKinematic = true;
-            //_trailRenderer.enabled = false;
-            //IsBallClicked = true;
+
             //_meshRenderer.enabled = false;
+            //_trailRenderer.enabled = false;
+            //_rigidBody.isKinematic = true;
+            //IsBallClicked = true;
+            Debug.Log(" _rigidBody.velocity = " + _rigidBody.velocity + " _rigidBody.angularVelocity = " + _rigidBody.angularVelocity);
             SwitchBallComponents(false);
-            _rigidBody.velocity = Vector3.zero;
-            _rigidBody.angularVelocity = Vector3.zero;
+            //_rigidBody.velocity = Vector3.zero;
+            //_rigidBody.angularVelocity = Vector3.zero;
+
+            gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y * 1.05f, InitialPosBeforeHit.z), delaySeconds);
+                //.SetEase(Ease.Linear);
+            gameObject.transform.DORotateQuaternion(InitialRotation, delaySeconds / 2);
+
+            yield return new WaitForSeconds(delaySeconds + 0.2f);
+            //SwitchBallComponents(true);
+            //Debug.Log(transform.position + "   InitialPosBeforeHit = " + InitialPosBeforeHit);
             
-            gameObject.transform.DOMove(InitialPosBeforeHit, delaySeconds)
-                .SetEase(Ease.Linear);
-            yield return new WaitForSeconds(delaySeconds + 0.1f);
-            SwitchBallComponents(true);
-            //_meshRenderer.enabled = true;
-            //_trailRenderer.enabled = true;
-            //_rigidBody.isKinematic = false;
-            //IsBallClicked = false;
+            //_IsResetBall = true;
 
-            _IsResetBall = true;
-
-            if (InitialPosBeforeHit != transform.position)            {
-                Debug.Log("Ishlamadi!");
+            if ((InitialPosBeforeHit.x != transform.position.x) && (InitialPosBeforeHit.z != transform.position.z))            {
+                Debug.Log("Ishlamadi! = " + transform.position + " distance  = " + Vector3.Distance(InitialPosBeforeHit, transform.position));                
+                gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y, InitialPosBeforeHit.z), 0.15f);
+                yield return new WaitForSeconds(0.1f);
+                SwitchBallComponents(true);
             }
             else            {
                 Debug.Log(" == Ishladi! == " + transform.position);
+                SwitchBallComponents(true);
             }
         }
 
 
         void SwitchBallComponents(bool _isTrue)
-        {
+        {            
             _rigidBody.isKinematic = !_isTrue;
+            //_rigidBody.
             _trailRenderer.enabled = _isTrue;
-            
+            //gameObject.GetComponent<Collider>().enabled = _isTrue;
             _meshRenderer.enabled = _isTrue;
             IsBallClicked = !_isTrue;
         }
@@ -283,6 +290,14 @@ namespace MiniGolf
         public void IncrementCoinScore()
         {
             _coinScore++;
+        }
+
+
+        public void RestartPos()
+        {
+            Debug.Log(gameObject.transform.position);
+            gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y, InitialPosBeforeHit.z), 0.15f);
+            Debug.Log(gameObject.transform.position);
         }
 
 

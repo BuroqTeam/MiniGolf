@@ -8,7 +8,7 @@ namespace MiniGolf
     {
 
         public GameEvent[] gameEventsSO;
-
+        //public float MinusX, PlusX, MinusY, PlusY;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -53,16 +53,16 @@ namespace MiniGolf
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Coin"))
-            {
-                //Debug.Log("Coin");
-                gameEventsSO[0].Raise();
-            }
-            else if (collision.gameObject.CompareTag("Wall"))
+            if (collision.gameObject.CompareTag("Wall"))
             {
                 //Debug.Log("Wall");
                 gameEventsSO[3].Raise();
             }
+            //else if(collision.gameObject.CompareTag("Coin"))
+            //{
+            //    //Debug.Log("Coin");
+            //    gameEventsSO[0].Raise();
+            //}
             else if (collision.gameObject.CompareTag("Water"))
             {
                 //Debug.Log("Water");
@@ -90,9 +90,13 @@ namespace MiniGolf
             }
             else if (collision.gameObject.CompareTag("Land"))
             {
-                Debug.Log("Land");
+                //Debug.Log("Land");
                 gameEventsSO[8].Raise();
             }
+            //else if ((gameObject.transform.position.x > PlusX) || (gameObject.transform.position.x < MinusX) || ())
+            //{
+
+            //}
 
         }
 
