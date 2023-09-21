@@ -8,14 +8,20 @@ namespace MiniGolf
     {
 
         public GameEvent[] gameEventsSO;
-        //public float MinusX, PlusX, MinusY, PlusY;
+        
 
+        bool _IsFinishTrue = true;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Finish"))
             {
                 Debug.Log("Finish Trigger " + other.name);
-                gameEventsSO[1].Raise();
+                if (_IsFinishTrue)
+                {
+                    gameEventsSO[1].Raise();
+                    _IsFinishTrue = false;
+                }
+                
             }          
         }
 
