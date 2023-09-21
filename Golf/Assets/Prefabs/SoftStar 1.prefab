@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23000013503467608}
   - component: {fileID: 114000013971332034}
   - component: {fileID: 1628260352525985234}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SoftStar 1
   m_TagString: Coin
   m_Icon: {fileID: 0}
@@ -128,5 +128,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.3472724, y: 0.44943988, z: 2.2323897}
+  m_Size: {x: 2.3472724, y: 0.7, z: 2.2323897}
   m_Center: {x: -0.00000023841858, y: -0.00041776904, z: 0.11784127}

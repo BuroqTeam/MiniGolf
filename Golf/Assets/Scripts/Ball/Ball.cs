@@ -31,8 +31,8 @@ namespace MiniGolf
         
         private void Awake()
         {
-            transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
-
+            //transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
+            Debug.Log(GetComponent<Renderer>().bounds.size.y);
             _meshRenderer = GetComponent<MeshRenderer>();
             _trailRenderer = GetComponent<TrailRenderer>();
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
@@ -227,30 +227,31 @@ namespace MiniGolf
             //_trailRenderer.enabled = false;
             //_rigidBody.isKinematic = true;
             //IsBallClicked = true;
-            Debug.Log(" _rigidBody.velocity = " + _rigidBody.velocity + " _rigidBody.angularVelocity = " + _rigidBody.angularVelocity);
+            //Debug.Log(" _rigidBody.velocity = " + _rigidBody.velocity + " _rigidBody.angularVelocity = " + _rigidBody.angularVelocity);
             SwitchBallComponents(false);
             //_rigidBody.velocity = Vector3.zero;
             //_rigidBody.angularVelocity = Vector3.zero;
 
-            gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y * 1.05f, InitialPosBeforeHit.z), delaySeconds);
+            //gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y * 1.05f, InitialPosBeforeHit.z), delaySeconds);
+            transform.DOMove(InitialPosBeforeHit, 1);
+
                 //.SetEase(Ease.Linear);
-            gameObject.transform.DORotateQuaternion(InitialRotation, delaySeconds / 2);
+            //gameObject.transform.DORotateQuaternion(InitialRotation, delaySeconds / 2);
 
             yield return new WaitForSeconds(delaySeconds + 0.2f);
-            //SwitchBallComponents(true);
-            //Debug.Log(transform.position + "   InitialPosBeforeHit = " + InitialPosBeforeHit);
-            
+            SwitchBallComponents(true);
+            //Debug.Log(transform.position + "   InitialPosBeforeHit = " + InitialPosBeforeHit);            
             //_IsResetBall = true;
 
             if ((InitialPosBeforeHit.x != transform.position.x) && (InitialPosBeforeHit.z != transform.position.z))            {
                 Debug.Log("Ishlamadi! = " + transform.position + " distance  = " + Vector3.Distance(InitialPosBeforeHit, transform.position));                
-                gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y, InitialPosBeforeHit.z), 0.15f);
+                //gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y, InitialPosBeforeHit.z), 0.15f);
                 yield return new WaitForSeconds(0.1f);
-                SwitchBallComponents(true);
+                //SwitchBallComponents(true);
             }
             else            {
                 Debug.Log(" == Ishladi! == " + transform.position);
-                SwitchBallComponents(true);
+                //SwitchBallComponents(true);
             }
         }
 

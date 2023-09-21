@@ -14,7 +14,8 @@ namespace MiniGolf
         {
             switch (other.tag)
             {
-                case "Coin":                    
+                case "Coin":
+                    Debug.Log("Coin");
                     gameEventsSO[0].Raise();
                     other.gameObject.SetActive(false);
                     break;
@@ -37,6 +38,7 @@ namespace MiniGolf
                 case "Finish":
                     Debug.Log("Finish Trigger " + other.name);
                     gameEventsSO[1].Raise();
+                    //gameObject.GetComponent<TriggerController>().enabled = false;
                     break;
                 //case "Out":
                 //    Debug.Log("Out Trigger");
