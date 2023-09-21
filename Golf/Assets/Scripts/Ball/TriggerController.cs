@@ -12,43 +12,11 @@ namespace MiniGolf
 
         private void OnTriggerEnter(Collider other)
         {
-            switch (other.tag)
+            if (other.CompareTag("Finish"))
             {
-                case "Coin":
-                    Debug.Log("Coin");
-                    gameEventsSO[0].Raise();
-                    other.gameObject.SetActive(false);
-                    break;
-                //case "Wall":
-                //    Debug.Log("Wall Trigger");
-                //    gameEventsSO[3].Raise();
-                //    break;
-                //case "Water":
-                //    Debug.Log("Water Trigger");
-                //    gameEventsSO[5].Raise();
-                //    break;
-                //case "Object":
-                //    Debug.Log("Object Trigger");
-                //    gameEventsSO[6].Raise();
-                //    break;
-                //case "Sand":
-                //    Debug.Log("Sand Trigger");
-                //    gameEventsSO[4].Raise();
-                //    break;
-                case "Finish":
-                    Debug.Log("Finish Trigger " + other.name);
-                    gameEventsSO[1].Raise();
-                    //gameObject.GetComponent<TriggerController>().enabled = false;
-                    break;
-                //case "Out":
-                //    Debug.Log("Out Trigger");
-                //    gameEventsSO[7].Raise();
-                //    break;
-                //case "Land":
-                //    Debug.Log("Land Trigger");
-                //    gameEventsSO[8].Raise();
-                //    break;
-            }
+                Debug.Log("Finish Trigger " + other.name);
+                gameEventsSO[1].Raise();
+            }          
         }
 
 
@@ -101,6 +69,8 @@ namespace MiniGolf
             //}
 
         }
+
+
 
 
 

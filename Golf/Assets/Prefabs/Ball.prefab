@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 1038966849617037885}
   - component: {fileID: 3381022447256256564}
   - component: {fileID: 880126730845582942}
+  - component: {fileID: 7030968488814216739}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
@@ -567,8 +568,6 @@ MonoBehaviour:
   RedColor: {r: 1, g: 0, b: 0, a: 1}
   _coinScore: 0
   InitialPosBeforeHit: {x: 0, y: 0, z: 0}
-  InitialRotation: {x: 0, y: 0, z: 0, w: 0}
-  _IsResetBall: 1
 --- !u!114 &3381022447256256564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,6 +611,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.027713947
   m_Center: {x: -9.313226e-10, y: 0, z: 0}
+--- !u!114 &7030968488814216739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496061100725234115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b57bc08025ef24a9e1ce713f3a0498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinSO: {fileID: 11400000, guid: ab7ecc2d72793e947a562898863d3033, type: 2}
 --- !u!1 &7504819725943659865
 GameObject:
   m_ObjectHideFlags: 0
