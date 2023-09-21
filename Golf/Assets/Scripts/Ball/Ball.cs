@@ -81,7 +81,7 @@ namespace MiniGolf
                     {
                         IsBallClicked = true;
                         _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
-                        InitialPosBeforeHit = transform.position;// F++
+                        InitialPosBeforeHit = transform.position;  // F++
                         //Debug.Log("gameObject.transform.position = " + gameObject.transform.position);
                     }
                     else
@@ -210,30 +210,21 @@ namespace MiniGolf
 
         IEnumerator ResetBallWithDelay()
         {
-            float delaySeconds = 1f;
+           
             
             SwitchBallComponents(false);
-            //_rigidBody.velocity = Vector3.zero;
-            //_rigidBody.angularVelocity = Vector3.zero;
 
-            //gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y * 1.05f, InitialPosBeforeHit.z), delaySeconds);
-            transform.DOMove(InitialPosBeforeHit, 1);
-                //.SetEase(Ease.Linear);
-            yield return new WaitForSeconds(delaySeconds + 0.2f);
+            transform.position = InitialPosBeforeHit;
+
+            yield return new WaitForSeconds(0.2f);
             SwitchBallComponents(true);
-            //Debug.Log(transform.position + "   InitialPosBeforeHit = " + InitialPosBeforeHit);            
             
-
-            if ((InitialPosBeforeHit.x != transform.position.x) && (InitialPosBeforeHit.z != transform.position.z))            {
-                Debug.Log("Ishlamadi! = " + transform.position + " distance  = " + Vector3.Distance(InitialPosBeforeHit, transform.position));                
-                //gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y, InitialPosBeforeHit.z), 0.15f);
-                yield return new WaitForSeconds(0.1f);
-                //SwitchBallComponents(true);
+            if (InitialPosBeforeHit != transform.position)
+            {
+                Debug.Log("Ishlamadi");
             }
-            else            {
-                Debug.Log(" == Ishladi! == " + transform.position);
-                //SwitchBallComponents(true);
-            }
+           
+          
         }
 
 
@@ -249,9 +240,10 @@ namespace MiniGolf
             IsBallClicked = !_isTrue;
         }
 
-
+                
         public void BallReachFinishFlag(GameObject finishObject) // Buyerda Ballning finishga yetib kelganda nima sodir bo'lishi yoziladi.
-        {             
+        {  
+            
             _rigidBody.isKinematic = true;
             Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;
             //finishObject.transform.GetChild(0).GetComponent<Collider>().enabled = false;
