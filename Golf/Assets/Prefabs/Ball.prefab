@@ -318,7 +318,8 @@ GameObject:
   - component: {fileID: 1995447341052968639}
   - component: {fileID: 1038966849617037885}
   - component: {fileID: 3381022447256256564}
-  m_Layer: 0
+  - component: {fileID: 880126730845582942}
+  m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +565,10 @@ MonoBehaviour:
   GreenColor: {r: 0, g: 1, b: 0, a: 1}
   YellowColor: {r: 1, g: 1, b: 0, a: 1}
   RedColor: {r: 1, g: 0, b: 0, a: 1}
+  _coinScore: 0
   InitialPosBeforeHit: {x: 0, y: 0, z: 0}
+  InitialRotation: {x: 0, y: 0, z: 0, w: 0}
+  _IsResetBall: 1
 --- !u!114 &3381022447256256564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,6 +591,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f344f0fbe855d9747805f4733a82047e, type: 2}
   - {fileID: 11400000, guid: 5f89336ce87fe8548adf909488022c4f, type: 2}
   - {fileID: 11400000, guid: e56ebd8e0f0c8c141aa31b7664c6a16f, type: 2}
+--- !u!135 &880126730845582942
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496061100725234115}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.027713947
+  m_Center: {x: -9.313226e-10, y: 0, z: 0}
 --- !u!1 &7504819725943659865
 GameObject:
   m_ObjectHideFlags: 0
