@@ -27,20 +27,17 @@ namespace MiniGolf
         private int _coinScore;
 
         public Vector3 InitialPosBeforeHit;
-        public Quaternion InitialRotation;
+        
         
         private void Awake()
         {
             //transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
-            Debug.Log(GetComponent<Renderer>().bounds.size.y);
+            
             _meshRenderer = GetComponent<MeshRenderer>();
             _trailRenderer = GetComponent<TrailRenderer>();
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
             _rigidBody = GetComponent<Rigidbody>();
-            _initialFieldView = MainCamera.fieldOfView;
-            
-            //Debug.Log("Ball position1 = " + transform.position);            
-            //Debug.Log("Ball position2 = " + transform.position + " " + GetComponent<Renderer>().name);
+            _initialFieldView = MainCamera.fieldOfView;            
         }
         
 
@@ -85,7 +82,6 @@ namespace MiniGolf
                         IsBallClicked = true;
                         _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
                         InitialPosBeforeHit = transform.position;// F++
-                        InitialRotation = gameObject.transform.rotation;
                         //Debug.Log("gameObject.transform.position = " + gameObject.transform.position);
                     }
                     else
@@ -205,43 +201,28 @@ namespace MiniGolf
             //_rigidBody.AddForce(-previousVel, ForceMode.Impulse);
         }
 
-
-        public bool _IsResetBall = true;
-
+        
         public void ResetBall()
         {
-            StartCoroutine(ResetBallWithDelay());
-            //if (_IsResetBall)
-            //{
-            //    _IsResetBall = false;
-            //    StartCoroutine(ResetBallWithDelay());
-            //}
+            StartCoroutine(ResetBallWithDelay());            
         }
 
 
         IEnumerator ResetBallWithDelay()
         {
             float delaySeconds = 1f;
-
-            //_meshRenderer.enabled = false;
-            //_trailRenderer.enabled = false;
-            //_rigidBody.isKinematic = true;
-            //IsBallClicked = true;
-            //Debug.Log(" _rigidBody.velocity = " + _rigidBody.velocity + " _rigidBody.angularVelocity = " + _rigidBody.angularVelocity);
+            
             SwitchBallComponents(false);
             //_rigidBody.velocity = Vector3.zero;
             //_rigidBody.angularVelocity = Vector3.zero;
 
             //gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y * 1.05f, InitialPosBeforeHit.z), delaySeconds);
             transform.DOMove(InitialPosBeforeHit, 1);
-
                 //.SetEase(Ease.Linear);
-            //gameObject.transform.DORotateQuaternion(InitialRotation, delaySeconds / 2);
-
             yield return new WaitForSeconds(delaySeconds + 0.2f);
             SwitchBallComponents(true);
             //Debug.Log(transform.position + "   InitialPosBeforeHit = " + InitialPosBeforeHit);            
-            //_IsResetBall = true;
+            
 
             if ((InitialPosBeforeHit.x != transform.position.x) && (InitialPosBeforeHit.z != transform.position.z))            {
                 Debug.Log("Ishlamadi! = " + transform.position + " distance  = " + Vector3.Distance(InitialPosBeforeHit, transform.position));                
@@ -257,11 +238,13 @@ namespace MiniGolf
 
 
         void SwitchBallComponents(bool _isTrue)
-        {            
+        {
+            Collider[] colliders = GetComponents<Collider>();
+            foreach (Collider coll in colliders)
+                coll.enabled = _isTrue;
+
             _rigidBody.isKinematic = !_isTrue;
-            //_rigidBody.
             _trailRenderer.enabled = _isTrue;
-            //gameObject.GetComponent<Collider>().enabled = _isTrue;
             _meshRenderer.enabled = _isTrue;
             IsBallClicked = !_isTrue;
         }
@@ -297,7 +280,7 @@ namespace MiniGolf
         public void RestartPos()
         {
             Debug.Log(gameObject.transform.position);
-            gameObject.transform.DOMove(new Vector3(InitialPosBeforeHit.x, InitialPosBeforeHit.y, InitialPosBeforeHit.z), 0.15f);
+            gameObject.transform.DOMove(InitialPosBeforeHit, 0.15f);
             Debug.Log(gameObject.transform.position);
         }
 
