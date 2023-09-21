@@ -18,6 +18,8 @@ namespace MiniGolf
         private Vector3 limit = Vector3.zero;
         private float maxDistance = 0.39f;
         private int _addingForce;
+        private bool _IsAddForce = false;
+        private Vector3 _direction;
 
         void Start()
         {
@@ -86,21 +88,31 @@ namespace MiniGolf
                     Vector3 endPoint = _lineRenderer.GetPosition(1);
 
                     // Calculate the direction vector.
-                    Vector3 direction = startPoint - endPoint;
+                    _direction = startPoint - endPoint;
 
                     float lineLength = Vector3.Distance(startPoint, endPoint);
                     _addingForce = (int)(lineLength / maxDistance * 1000);
                     //Debug.Log(_addingForce);
 
                     // Normalize the direction vector if you want a unit vector.
-                    direction.Normalize();
+                    _direction.Normalize();
                     _ball.BallHitSO.Raise();
-                    _ball.gameObject.GetComponent<Rigidbody>().AddForce(direction * _addingForce); // _addingForce ning o'rni 1000 turgan edi. 
+                    _IsAddForce = true;
+                    
                 }
 
             }
 
 
+        }
+
+        private void FixedUpdate()
+        {
+            if (_IsAddForce)
+            {
+                _ball.gameObject.GetComponent<Rigidbody>().AddForce(_direction * _addingForce ); // _addingForce ning o'rni 1000 turgan edi. 
+                _IsAddForce = false;
+            }
         }
 
 
