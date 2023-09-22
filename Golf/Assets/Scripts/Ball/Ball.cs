@@ -27,7 +27,7 @@ namespace MiniGolf
         private int _coinScore;
 
         public Vector3 InitialPosBeforeHit;
-        
+        [HideInInspector] public bool _IsBallOut;
         
         private void Awake()
         {
@@ -43,6 +43,7 @@ namespace MiniGolf
 
         void Update()
         {
+            
             // Check for touch input
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
@@ -128,12 +129,14 @@ namespace MiniGolf
                 if (IsBallClicked && !IsBallMoving)
                 {
                     //MainCamera.DOFieldOfView(_initialFieldView, 0.25f);
-                    IsBallClicked = false;
                     _isTrue = true;
+                    IsBallClicked = false;
+                    
                 }
             }
             
-            SetBallMove();            
+            SetBallMove();
+            
         }
         
 
@@ -163,18 +166,25 @@ namespace MiniGolf
 
 
         bool _isTrue = false;
-        IEnumerator ChangeCameraFields()
-        {
+        //int i = 1;
+        
+        IEnumerator ChangeCameraFields() // Kamera Fieldini o'zgartirib beruvchi metod.
+        {            
+
+            yield return new WaitForSeconds(0.35f);
             if (_isTrue)
             {
-                //Debug.Log(666);
-                yield return new WaitForSeconds(0/*.35f*/);
-                if (!IsBallMoving && !IsBallClicked)
+                yield return new WaitForSeconds(0.2f /*0.35f*/);
+                if ((!IsBallMoving && !IsBallClicked) && _isTrue /*&& !_IsBallOut*/)
                 {
-                    //Debug.Log(222);
-                    MainCamera.DOFieldOfView(_initialFieldView, 0.25f)
-                        .SetEase(Ease.Linear);
                     _isTrue = false;
+                    if (_IsBallOut)
+                        yield return new WaitForSeconds(1.2f);
+
+                    //Debug.Log(222 + "  i = " + i);
+                    //i++;
+                    MainCamera.DOFieldOfView(_initialFieldView, 0.35f)
+                        .SetEase(Ease.Linear);
                 }
             }
         }
@@ -182,7 +192,6 @@ namespace MiniGolf
 
         public void AddForceOpposite()
         {
-            //_rigidBody.AddForce(-_rigidBody.velocity, ForceMode.Impulse);
             StartCoroutine(SampleRoutine());
         }
 
@@ -195,7 +204,7 @@ namespace MiniGolf
 
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
-            
+
             _rigidBody.drag = previousDrag;
             _rigidBody.AddForce(previousVel, ForceMode.Impulse);
             //_rigidBody.AddForce(-previousVel, ForceMode.Impulse);
@@ -204,26 +213,25 @@ namespace MiniGolf
         
         public void ResetBall()
         {
+            _IsBallOut = true;
             StartCoroutine(ResetBallWithDelay());            
         }
 
 
         IEnumerator ResetBallWithDelay()
-        {
-           
+        {           
             
             SwitchBallComponents(false);
 
             transform.position = InitialPosBeforeHit;
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
             SwitchBallComponents(true);
             
             if (InitialPosBeforeHit != transform.position)
             {
                 Debug.Log("Ishlamadi");
-            }
-           
+            }           
           
         }
 
@@ -237,17 +245,23 @@ namespace MiniGolf
             _rigidBody.isKinematic = !_isTrue;
             _trailRenderer.enabled = _isTrue;
             _meshRenderer.enabled = _isTrue;
-            IsBallClicked = !_isTrue;
+            //IsBallClicked = !_isTrue;
         }
 
                 
         public void BallReachFinishFlag(GameObject finishObject) // Buyerda Ballning finishga yetib kelganda nima sodir bo'lishi yoziladi.
-        {  
-            
+        {            
             _rigidBody.isKinematic = true;
             Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;
             //finishObject.transform.GetChild(0).GetComponent<Collider>().enabled = false;
 
+            float distance = Vector3.Distance(finishPos, gameObject.transform.position);
+            if (distance > 0.1f)
+            {
+                //Debug.Log(distance);
+                transform.position = (finishPos + gameObject.transform.position) / 2;
+            }
+            
             gameObject.transform.DOMove(finishPos, 0.25f)
                 .SetEase(Ease.InCirc)
                 .SetDelay(0.25f);
