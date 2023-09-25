@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-
 namespace MiniGolf
 {
     /// <summary>
@@ -54,7 +52,7 @@ namespace MiniGolf
                         currentMousePosition.y = GolfBall.transform.position.y;
 
                         float lengthLine = Vector3.Distance(currentMousePosition, _lineRenderer.GetPosition(0));
-
+                        //transform.position = currentMousePosition;
                         if (lengthLine >= 0.40f)
                         {
                             transform.position = FindPointOnLine(GolfBall.transform.position, currentMousePosition, 0.40f);
@@ -65,7 +63,6 @@ namespace MiniGolf
                         }
 
                         _spriteRenderer.enabled = true;
-                        //transform.position = currentMousePosition;//o'chiriladi
                         _spriteRenderer.color = _lineRenderer.material.color;
                     }
                 }

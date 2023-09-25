@@ -9,19 +9,19 @@ namespace MiniGolf
 
         public GameEvent[] gameEventsSO;
         
-
         bool _IsFinishTrue = true;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Finish"))
-            {
+            {                
                 Debug.Log("Finish Trigger " + other.name);
+                other.GetComponent<Collider>().enabled = false;
                 if (_IsFinishTrue)
                 {
                     gameEventsSO[1].Raise();
                     _IsFinishTrue = false;
-                }
-                
+                }                
             }          
         }
 
@@ -69,10 +69,6 @@ namespace MiniGolf
                 //Debug.Log("Land");
                 gameEventsSO[8].Raise();
             }
-            //else if ((gameObject.transform.position.x > PlusX) || (gameObject.transform.position.x < MinusX) || ())
-            //{
-
-            //}
 
         }
 

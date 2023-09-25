@@ -267,7 +267,7 @@ namespace MiniGolf
                 .SetDelay(0.25f);
 
             StartCoroutine(BallInHole());            
-            Debug.Log("BallReach FInish Flag");
+            //Debug.Log("BallReach FInish Flag");
         }
 
 
