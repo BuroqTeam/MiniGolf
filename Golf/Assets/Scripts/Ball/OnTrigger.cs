@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace MiniGolf
 {
     public class OnTrigger : MonoBehaviour
     {
         public GameEvent CoinSO;
-
 
         private Vector3 previousPosition;
 
