@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+
+    public List<string> Scenes = new List<string>();
+
     public void LoadSceneByName(string name)
     {
         SceneManager.LoadScene(name, LoadSceneMode.Single);
@@ -19,7 +22,16 @@ public class SceneLoader : MonoBehaviour
 
     public void EnableScene()
     {
-        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, 1);
+        
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        for (int i = 0; i < Scenes.Count-1; i++)
+        {
+            if (currentScene == Scenes[i])
+            {
+                PlayerPrefs.SetInt(Scenes[i+1], 1);
+            }
+        }
     
     }
 
