@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-using UnityEngine.UI;
 
 namespace MiniGolf
 {
@@ -18,8 +17,6 @@ namespace MiniGolf
         public Color RedColor;
         public TMP_Text DiamondScore;
         public TMP_Text HitScore;
-        public TMP_Text Distance;
-        public Image PowerBar;
 
 
         private TrailRenderer _trailRenderer;
@@ -51,8 +48,7 @@ namespace MiniGolf
 
         void Update()
         {
-            FindDistance();
-
+            
             // Check for touch input
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
@@ -113,18 +109,14 @@ namespace MiniGolf
                     if (distance < 9)
                     {
                         _colorfulLine.ChangeLineColor(GreenColor);
-                        UpdatePowerRadialBar(GreenColor, distance);
-                        
                     }
                     else if (distance < 17)
                     {
                         _colorfulLine.ChangeLineColor(YellowColor);
-                        UpdatePowerRadialBar(YellowColor, distance);
                     }
                     else if (distance < 23)
                     {
                         _colorfulLine.ChangeLineColor(RedColor);
-                        UpdatePowerRadialBar(RedColor, distance);
                     }
 
                     if (distance > 23)
@@ -144,7 +136,7 @@ namespace MiniGolf
                     //MainCamera.DOFieldOfView(_initialFieldView, 0.25f);
                     _isTrue = true;
                     IsBallClicked = false;
-                    UpdatePowerRadialBar(Color.white, 0);
+                    
                 }
             }
             
@@ -300,30 +292,6 @@ namespace MiniGolf
         {
             _hitScore++;
             HitScore.text = _hitScore.ToString();
-        }
-
-        public void FindDistance()
-        {
-            float distance = Vector3.Distance(InitialPosBeforeHit, transform.position);
-            distance = distance * 10;
-            distance = (int)distance;
-            Distance.text = distance.ToString() + "m";
-        }
-
-        void UpdatePowerRadialBar(Color color, float distance)
-        {
-            PowerBar.color = color;
-            var val = ((int)distance * 10 )/ 22;
-            if (val.Equals(0))
-            {
-                PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
-            }
-            else
-            {
-                PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = val.ToString();
-            }
-            
-            PowerBar.fillAmount = distance / 22;
         }
 
 
