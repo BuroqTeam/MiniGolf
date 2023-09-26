@@ -112,6 +112,7 @@ namespace MiniGolf
             {
                 _ball.gameObject.GetComponent<Rigidbody>().AddForce(_direction * _addingForce ); // _addingForce ning o'rni 1000 turgan edi. 
                 _IsAddForce = false;
+                _ball.IncrementHitScore();
             }
         }
 

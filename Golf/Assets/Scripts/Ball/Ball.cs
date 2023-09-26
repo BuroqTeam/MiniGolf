@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using TMPro;
 
 namespace MiniGolf
 {
@@ -15,7 +15,10 @@ namespace MiniGolf
         public Color GreenColor;
         public Color YellowColor;
         public Color RedColor;
-        
+        public TMP_Text DiamondScore;
+        public TMP_Text HitScore;
+
+
         private TrailRenderer _trailRenderer;
         private MeshRenderer _meshRenderer;
         private Rigidbody _rigidBody;
@@ -24,7 +27,9 @@ namespace MiniGolf
         private float _movementThreshold = 0.01f;
         private LineDrawer _colorfulLine;
         [SerializeField]
-        private int _coinScore;
+        private int _diamondScore;
+        [SerializeField]
+        private int _hitScore;
 
         public Vector3 InitialPosBeforeHit;
         [HideInInspector] public bool _IsBallOut;
@@ -279,7 +284,14 @@ namespace MiniGolf
 
         public void IncrementCoinScore()
         {
-            _coinScore++;
+            _diamondScore++;
+            DiamondScore.text = _diamondScore.ToString();
+        }
+
+        public void IncrementHitScore()
+        {
+            _hitScore++;
+            HitScore.text = _hitScore.ToString();
         }
 
 
