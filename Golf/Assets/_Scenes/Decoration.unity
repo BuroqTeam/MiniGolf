@@ -52117,7 +52117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278586224}
   m_Layer: 0
-  m_Name: Free_Forest (1)
+  m_Name: Free_Forest 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70219,7 +70219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659277545}
   m_Layer: 0
-  m_Name: Free_Forest
+  m_Name: Free_Forest 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
