@@ -24,12 +24,15 @@ public class SceneLoader : MonoBehaviour
     {
         
 
-        string currentScene = SceneManager.GetActiveScene().name;
+        Scene scene = SceneManager.GetActiveScene();
         for (int i = 0; i < Scenes.Count-1; i++)
         {
-            if (currentScene == Scenes[i])
+            
+            if (scene.name == Scenes[i])
             {
-                PlayerPrefs.SetInt(Scenes[i+1], 1);
+                string key = Scenes[i + 1];
+                Debug.Log(key);
+                PlayerPrefs.SetInt(key, 1);
             }
         }
     

@@ -29,7 +29,7 @@ public class LevelButton : MonoBehaviour
     {
         _button = GetComponent<Button>();
         _button.onClick.AddListener(TaskOnClick);
-        EnableLevel();
+        //EnableLevel();
 
     }
 
@@ -43,6 +43,7 @@ public class LevelButton : MonoBehaviour
 
     public void EnableLevel()
     {
+        Debug.Log(PlayerPrefs.GetInt(SceneToLoad));
         if (PlayerPrefs.GetInt(SceneToLoad).Equals(1))
         {
             transform.GetChild(2).GetComponent<Image>().enabled = false;
