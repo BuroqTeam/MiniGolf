@@ -566,8 +566,14 @@ MonoBehaviour:
   GreenColor: {r: 0, g: 1, b: 0, a: 1}
   YellowColor: {r: 1, g: 1, b: 0, a: 1}
   RedColor: {r: 1, g: 0, b: 0, a: 1}
-  _coinScore: 0
+  DiamondScore: {fileID: 0}
+  HitScore: {fileID: 0}
+  Distance: {fileID: 0}
+  PowerBar: {fileID: 0}
+  _diamondScore: 0
+  _hitScore: 0
   InitialPosBeforeHit: {x: 0, y: 0, z: 0}
+  _IsBallOut: 0
 --- !u!114 &3381022447256256564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +673,7 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7504819725943659865}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
