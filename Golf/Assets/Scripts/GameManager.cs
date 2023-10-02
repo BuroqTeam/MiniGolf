@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ApiServer;
 
 namespace MiniGolf
 {
@@ -47,6 +48,18 @@ namespace MiniGolf
             OnGameStateChanged?.Invoke(newState);
         }
 
+
+        public void WriteUserScoreToServer()
+        {
+            WriteScore();
+        }
+
+
+        async void WriteScore()
+        {
+            ResultInfo data = new ResultInfo();
+            ResponseResultInfo responce = await HttpService.SaveResultInfo(data);
+        }
 
 
     }
