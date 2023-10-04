@@ -33,13 +33,15 @@ namespace MiniGolf
         private int _diamondScore;
         [SerializeField]
         private int _hitScore;
+        bool _isTrue = false;
 
         public Vector3 InitialPosBeforeHit;
         [HideInInspector] public bool _IsBallOut;
         
+
+
         private void Awake()
         {
-            //transform.position = new Vector3(0, GetComponent<Renderer>().bounds.size.y * 1, 0);
             
             _meshRenderer = GetComponent<MeshRenderer>();
             _trailRenderer = GetComponent<TrailRenderer>();
@@ -177,10 +179,8 @@ namespace MiniGolf
                 StartCoroutine(ChangeCameraFields());
             }
         }
-
-
-        bool _isTrue = false;
-        //int i = 1;
+                
+        
         
         IEnumerator ChangeCameraFields() // Kamera Fieldini o'zgartirib beruvchi metod.
         {            
@@ -194,9 +194,7 @@ namespace MiniGolf
                     _isTrue = false;
                     if (_IsBallOut)
                         yield return new WaitForSeconds(1.2f);
-
-                    //Debug.Log(222 + "  i = " + i);
-                    //i++;
+                                        
                     MainCamera.DOFieldOfView(_initialFieldView, 0.35f)
                         .SetEase(Ease.Linear);
                 }
@@ -225,7 +223,7 @@ namespace MiniGolf
         }
 
         
-        public void ResetBall()
+        public void ResetBall()  // Out eventida chaqirilgan
         {
             _IsBallOut = true;
             StartCoroutine(ResetBallWithDelay());            
@@ -267,7 +265,7 @@ namespace MiniGolf
         {            
             _rigidBody.isKinematic = true;
             Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;
-            //finishObject.transform.GetChild(0).GetComponent<Collider>().enabled = false;
+            
 
             float distance = Vector3.Distance(finishPos, gameObject.transform.position);
             if (distance > 0.1f)
@@ -280,8 +278,7 @@ namespace MiniGolf
                 .SetEase(Ease.InCirc)
                 .SetDelay(0.25f);
 
-            StartCoroutine(BallInHole());            
-            //Debug.Log("BallReach FInish Flag");
+            StartCoroutine(BallInHole());
         }
 
 
@@ -327,15 +324,7 @@ namespace MiniGolf
             PowerBar.fillAmount = distance / 22;
         }
 
-
-        public void RestartPos()
-        {
-            Debug.Log(gameObject.transform.position);
-            gameObject.transform.DOMove(InitialPosBeforeHit, 0.15f);
-            Debug.Log(gameObject.transform.position);
-        }
-
-
+                
     }
 }
 
