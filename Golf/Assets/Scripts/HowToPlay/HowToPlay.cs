@@ -43,13 +43,22 @@ namespace MiniGolf
         {
             _isObjectActive = true;
             StartCoroutine(BallAnimation());
-            Debug.Log("OnEnable");
+            //Debug.Log("OnEnable");
         }
 
         private void OnDisable()
         {
             _isObjectActive = false;
-            Debug.Log("OnDisable");
+            //Debug.Log("OnDisable");
+
+            _isRotating = true;
+            circleGap.SetActive(true);
+            rectMask2D.padding = maskPadding;
+            circleImage.color = greenColor;
+            lineImage.color = greenColor;
+
+            handCursor.SetActive(false);
+            circleForHand.SetActive(false);
         }
 
         void Update()
@@ -67,34 +76,38 @@ namespace MiniGolf
             _isRotating = false;
             circleGap.SetActive(false);
 
-            handCursor.transform.position = new Vector3(ballPos.x + 65, ballPos.y - 65, ballPos.z);
-            circleForHand.transform.position = new Vector3(ballPos.x, ballPos.y, ballPos.z);
+            handCursor.transform.position = new Vector3(ballPos.x + 25, ballPos.y - 45, ballPos.z);
+            circleForHand.transform.position = new Vector3(ballPos.x, ballPos.y - 25, ballPos.z);
 
             handCursor.SetActive(true);
-            circleForHand.SetActive(true);
+            //circleForHand.SetActive(true);
             yield return new WaitForSeconds(0.1f);
 
-            handCursor.GetComponent<RectTransform>().DOAnchorPosY(-255, 1.12f);
-            circleForHand.GetComponent<RectTransform>().DOAnchorPosY(-215, 1.12f);
-            yield return new WaitForSeconds(.05f);
+            handCursor.GetComponent<RectTransform>().DOAnchorPosY(-255, 1.15f);
+            circleForHand.GetComponent<RectTransform>().DOAnchorPosY(-215, 1.15f);
+            yield return new WaitForSeconds(.02f);
+            circleForHand.SetActive(true);
 
             while (rectMask2D.padding.y > 0)
             {
                 rectMask2D.padding = new Vector4(0, rectMask2D.padding.y - 10, 0, 0);
-                yield return new WaitForSeconds(0.03f);
+                
 
                 if (rectMask2D.padding.y < 60)
                 {
+                    yield return new WaitForSeconds(.06f);
                     lineImage.color = redColor;
                     circleImage.color = redColor;
                 }
                 else if (rectMask2D.padding.y < 120)
                 {
+                    yield return new WaitForSeconds(0.05f);
                     lineImage.color = yellowColor;
                     circleImage.color = yellowColor;
                 }
                 else if (rectMask2D.padding.y > 120)
                 {
+                    yield return new WaitForSeconds(0.03f);
                     lineImage.color = greenColor;
                     circleImage.color = greenColor;
                 }
@@ -107,7 +120,7 @@ namespace MiniGolf
             }
 
             yield return new WaitForSeconds(2.0f);
-            
+
             _isRotating = true;
             circleGap.SetActive(true);
             rectMask2D.padding = maskPadding;
@@ -119,7 +132,6 @@ namespace MiniGolf
 
             StartCoroutine(BallAnimation());
         }
-
 
         
     }
