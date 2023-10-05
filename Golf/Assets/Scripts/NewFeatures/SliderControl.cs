@@ -19,33 +19,36 @@ namespace MiniGolf
 
         
         [HideInInspector] public bool _IsActive = false;
-        int addingNum = 1;
+        float addingNum = 1;
+        int percentNumber;
 
         private void Update()
         {
             if (_IsActive)
             {
+                Debug.Log("ishladi uuuu");
                 SliderChange();
             }
         }
-                
+        
 
         private void SliderChange()
         {
             if (CurrentSlider.value == 0)
             {
                 Debug.Log(1);
-                addingNum = 2;
+                addingNum = 1.5f;
             }
             else if (CurrentSlider.value == 1)
             {
-                addingNum = -2;
+                addingNum = -1.5f;
                 Debug.Log(-1);
             }
 
             CurrentSlider.value += (float)addingNum / 100;
             float localValue = CurrentSlider.value;
-            sliderText.text = ((int)(maxSliderAmount * localValue)).ToString() + "%";
+            percentNumber = (int)(maxSliderAmount * localValue);
+            sliderText.text = percentNumber.ToString();
 
             if (localValue <= 0.42f)
             {

@@ -3365,7 +3365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 100%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9fabe0c8e6790a24d9aa9261ab21d54b, type: 2}
   m_sharedMaterial: {fileID: 8687118984262259554, guid: 9fabe0c8e6790a24d9aa9261ab21d54b, type: 2}
@@ -26262,6 +26262,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3805318389859771188, guid: 24457fdf8e66c3c49b7599931e0fdcb2, type: 3}
   m_PrefabInstance: {fileID: 1860178875}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &719861322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 998558192139336617, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
+  m_PrefabInstance: {fileID: 1891010617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80b33ce227b27b4abbeba0289361f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &722261138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35481,6 +35492,7 @@ GameObject:
   - component: {fileID: 942139840}
   - component: {fileID: 942139839}
   - component: {fileID: 942139838}
+  - component: {fileID: 942139841}
   m_Layer: 5
   m_Name: HitButton
   m_TagString: Untagged
@@ -35547,7 +35559,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 942139839}
   m_OnClick:
     m_PersistentCalls:
@@ -35564,8 +35576,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 371867174}
-        m_TargetAssemblyTypeName: MiniGolf.SliderControl, Assembly-CSharp
+      - m_Target: {fileID: 942139841}
+        m_TargetAssemblyTypeName: MiniGolf.HitButton, Assembly-CSharp
         m_MethodName: ClickHitButton
         m_Mode: 1
         m_Arguments:
@@ -35614,6 +35626,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942139836}
   m_CullTransparentMesh: 1
+--- !u!114 &942139841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942139836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d203cfd41f8f3d4b865b74e2b4cb059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 371867173}
+  _sliderControl: {fileID: 371867174}
+  _frontArrow: {fileID: 719861322}
 --- !u!4 &944386118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8890356699427785745, guid: d5b8de414112a004a82d0437b5f7a780, type: 3}
@@ -65880,6 +65907,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 998558192139336617, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
+      propertyPath: _slider
+      value: 
+      objectReference: {fileID: 371867173}
+    - target: {fileID: 998558192139336617, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
+      propertyPath: _hitButton
+      value: 
+      objectReference: {fileID: 942139838}
+    - target: {fileID: 998558192139336617, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
+      propertyPath: CurrentCamera
+      value: 
+      objectReference: {fileID: 1702221368}
     - target: {fileID: 1038966849617037885, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
       propertyPath: Distance
       value: 
