@@ -92,13 +92,12 @@ namespace MiniGolf
 
                     float lineLength = Vector3.Distance(startPoint, endPoint);
                     _addingForce = (int)(lineLength / maxDistance * 800); // 1000
-                    //Debug.Log(_addingForce);
-
+                    
                     // Normalize the direction vector if you want a unit vector.
                     _direction.Normalize();
                     _ball.BallHitSO.Raise();
                     _IsAddForce = true;
-                    
+                    //Debug.Log(_addingForce + "  " + _direction);
                 }
 
             }

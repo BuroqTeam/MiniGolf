@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ApiServer;
+using ApiTest;
 
 namespace MiniGolf
 {
@@ -50,16 +50,13 @@ namespace MiniGolf
 
 
         public void WriteUserScoreToServer()
-        {
-            WriteScore();
-        }
-
-
-        async void WriteScore()
-        {
+        {            
             ResultInfo data = new ResultInfo();
-            ResponseResultInfo responce = await HttpService.SaveResultInfo(data);
+            ResponseResultInfo responce = HttpService.SaveResultInfo(data);
         }
+
+
+        
 
 
     }
