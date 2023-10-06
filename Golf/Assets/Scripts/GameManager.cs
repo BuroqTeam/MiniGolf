@@ -14,6 +14,7 @@ namespace MiniGolf
 
         public static event Action<GameState> OnGameStateChanged;
 
+        private ResultInfo _data;
 
         private void Awake()
         {
@@ -23,6 +24,7 @@ namespace MiniGolf
         private void Start()
         {
             UpdateGameState(GameState.EntryAnimation);
+            _data = new ResultInfo();
         }
 
 
@@ -48,11 +50,30 @@ namespace MiniGolf
             OnGameStateChanged?.Invoke(newState);
         }
 
+        public void UpdateResultInfo(string level, string numberOfHits, string coin)
+        {
+            _data.roundNo = "1";
+            _data.memberId = "1";
+            _data.gameId = "1";
+            _data.eventSq = "1";
+
+            _data.holeNo = level;
+            _data.hole = numberOfHits;
+            _data.star = coin;
+            WriteUserScoreToServer();
+        }
+
+        public void GetUserID(string userID)
+        {
+            _data.memberId = userID;
+        }
+
+
 
         public void WriteUserScoreToServer()
-        {            
-            ResultInfo data = new ResultInfo();
-            ResponseResultInfo responce = HttpService.SaveResultInfo(data);
+        {                                
+            ResponseResultInfo responce = HttpService.SaveResultInfo(_data);
+            Debug.Log(responce.result);
         }
 
 

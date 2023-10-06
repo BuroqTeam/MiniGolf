@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace MiniGolf
 {
@@ -39,10 +40,8 @@ namespace MiniGolf
         [HideInInspector] public bool _IsBallOut;
         
 
-
         private void Awake()
-        {
-            
+        {            
             _meshRenderer = GetComponent<MeshRenderer>();
             _trailRenderer = GetComponent<TrailRenderer>();
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
@@ -112,26 +111,26 @@ namespace MiniGolf
 
                     // shu yerga arrow color change yoziladi
 
-                    if (distance < 9)
-                    {
-                        _colorfulLine.ChangeLineColor(GreenColor);
-                        UpdatePowerRadialBar(GreenColor, distance);
-                    }
-                    else if (distance < 17)
-                    {
-                        _colorfulLine.ChangeLineColor(YellowColor);
-                        UpdatePowerRadialBar(YellowColor, distance);
-                    }
-                    else if (distance < 23)
-                    {
-                        _colorfulLine.ChangeLineColor(RedColor);
-                        UpdatePowerRadialBar(RedColor, distance);
-                    }
+                    //if (distance < 9)
+                    //{
+                    //    _colorfulLine.ChangeLineColor(GreenColor);
+                    //    UpdatePowerRadialBar(GreenColor, distance);
+                    //}
+                    //else if (distance < 17)
+                    //{
+                    //    _colorfulLine.ChangeLineColor(YellowColor);
+                    //    UpdatePowerRadialBar(YellowColor, distance);
+                    //}
+                    //else if (distance < 23)
+                    //{
+                    //    _colorfulLine.ChangeLineColor(RedColor);
+                    //    UpdatePowerRadialBar(RedColor, distance);
+                    //}
 
-                    if (distance > 23)
-                    {
-                        distance = 23;
-                    }
+                    //if (distance > 23)
+                    //{
+                    //    distance = 23;
+                    //}
 
                     MainCamera.fieldOfView = Mathf.MoveTowards(MainCamera.fieldOfView, _initialFieldView + distance, 20 * Time.deltaTime);
 
@@ -151,8 +150,7 @@ namespace MiniGolf
                 }
             }
             
-            SetBallMove();
-            
+            SetBallMove();            
         }
         
 
@@ -180,11 +178,9 @@ namespace MiniGolf
             }
         }
                 
-        
-        
+                
         IEnumerator ChangeCameraFields() // Kamera Fieldini o'zgartirib beruvchi metod.
-        {            
-
+        { 
             yield return new WaitForSeconds(0.35f);
             if (_isTrue)
             {
@@ -286,6 +282,11 @@ namespace MiniGolf
         {
             yield return new WaitForSeconds(0.3f);
             _meshRenderer.enabled = false;
+            Scene m_Scene = SceneManager.GetActiveScene();
+
+            GameManager.Instance.UpdateResultInfo(m_Scene.name[m_Scene.name.Length - 1].ToString(), HitScore.text, DiamondScore.text);
+            Debug.Log(m_Scene.name[m_Scene.name.Length - 1].ToString());
+
         }
 
         public void IncrementCoinScore()

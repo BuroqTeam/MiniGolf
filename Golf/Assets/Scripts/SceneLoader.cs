@@ -22,8 +22,6 @@ public class SceneLoader : MonoBehaviour
 
     public void EnableScene()
     {
-        
-
         Scene scene = SceneManager.GetActiveScene();
         for (int i = 0; i < Scenes.Count-1; i++)
         {
@@ -31,12 +29,13 @@ public class SceneLoader : MonoBehaviour
             if (scene.name == Scenes[i])
             {
                 string key = Scenes[i + 1];
-                Debug.Log(key);
+                //Debug.Log(key);
                 PlayerPrefs.SetInt(key, 1);
             }
         }
     
     }
+
 
     public void BackToMenu()
     {
@@ -50,9 +49,6 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
 
     }
-
-
-
 
 
 
