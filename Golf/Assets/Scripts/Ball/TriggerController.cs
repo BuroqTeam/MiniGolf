@@ -15,7 +15,7 @@ namespace MiniGolf
         {
             if (other.CompareTag("Finish"))
             {                
-                Debug.Log("Finish Trigger " + other.name);
+                //Debug.Log("Finish Trigger " + other.name);
                 other.GetComponent<Collider>().enabled = false;
                 if (_IsFinishTrue)
                 {

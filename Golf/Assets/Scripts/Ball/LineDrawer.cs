@@ -99,11 +99,10 @@ namespace MiniGolf
                     _IsAddForce = true;
                     //Debug.Log(_addingForce + "  " + _direction);
                 }
-
             }
 
-
         }
+
 
         private void FixedUpdate()
         {
