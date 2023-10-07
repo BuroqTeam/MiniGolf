@@ -517,6 +517,7 @@ MonoBehaviour:
   sliderImage: {fileID: 6143374300433377869}
   sliderText: {fileID: 2355946970027857928}
   _IsActive: 0
+  _speed: 2
 --- !u!1 &5809055519483600919
 GameObject:
   m_ObjectHideFlags: 0
