@@ -61,7 +61,7 @@ namespace MiniGolf
             //}
             else if (collision.gameObject.CompareTag("Out"))
             {
-                Debug.Log("Out");
+                //Debug.Log("Out");
                 gameEventsSO[7].Raise();
             }
             else if (collision.gameObject.CompareTag("Land"))
