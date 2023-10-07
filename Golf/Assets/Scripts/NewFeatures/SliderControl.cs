@@ -21,7 +21,7 @@ namespace MiniGolf
         Color greenColor = new (0.25f, 1, 0.27f);
         
         [HideInInspector] public bool _IsActive = false;
-        float addingNum = 1;
+        [SerializeField] private float _speed;
         int percentNumber;
 
         
@@ -40,15 +40,15 @@ namespace MiniGolf
             if (CurrentSlider.value <= 0)
             {
                 //Debug.Log(addingNum + " + + ");
-                addingNum = Mathf.Abs(addingNum);
+                _speed = Mathf.Abs(_speed);
             }
             else if (CurrentSlider.value >= 1)
             {
                 //Debug.Log(addingNum + " - - ");
-                addingNum = (-1) * addingNum;                
+                _speed = (-1) * _speed;                
             }
 
-            CurrentSlider.value += (float)addingNum / 100;
+            CurrentSlider.value += (float)_speed / 100;
             //CurrentSlider.value = Mathf.Lerp(0, 1, Time.deltaTime * 1f);
             float localValue = CurrentSlider.value;
             percentNumber = (int)(maxSliderAmount * localValue);

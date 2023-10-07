@@ -9393,10 +9393,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 547057872}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1709861792}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: BackToMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11516,11 +11516,6 @@ PrefabInstance:
 --- !u!224 &547057871 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1665030099333971875, guid: 47624191628991048878161c93882a1a, type: 3}
-  m_PrefabInstance: {fileID: 547057870}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &547057872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4226868648998926218, guid: 47624191628991048878161c93882a1a, type: 3}
   m_PrefabInstance: {fileID: 547057870}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &557963435
@@ -43043,7 +43038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: How to play
+  m_text: Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9fabe0c8e6790a24d9aa9261ab21d54b, type: 2}
   m_sharedMaterial: {fileID: 8687118984262259554, guid: 9fabe0c8e6790a24d9aa9261ab21d54b, type: 2}
