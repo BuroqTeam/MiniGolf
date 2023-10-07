@@ -23,14 +23,13 @@ namespace MiniGolf
         private Vector3 startPoint;
         private Vector3 _direction;
         private readonly float _distance = 0.4f;
+
+        /// <summary>
+        /// MouseButtonDown bo'lgandagina MouseButtonUp ishlashini taminlab beradi. 
+        /// </summary>
+        bool _isUp = false;
+
         
-
-        void Start()
-        {
-
-        }
-
-
         void Update()
         {
             if (!_ball.IsBallMoving)
@@ -41,6 +40,8 @@ namespace MiniGolf
                     _lineRenderer.enabled = true;
                     startPoint = transform.position;
                     _lineRenderer.SetPosition(0, startPoint);
+                    _isUp = true;
+                    //Debug.Log("Begin");
                 }
 
                 if (Input.GetMouseButton(0))
@@ -53,20 +54,21 @@ namespace MiniGolf
                     _direction = (startPoint - cameraPoint).normalized;
 
                     Vector3 endPoint = startPoint + _direction * _distance;
-                    _lineRenderer.SetPosition(1, endPoint);                                       
+                    _lineRenderer.SetPosition(1, endPoint);
                 }
 
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0) && _isUp)
                 {
                     Vector3 startPoint = _lineRenderer.GetPosition(0);
                     Vector3 endPoint = _lineRenderer.GetPosition(1);
 
-                    _direction = endPoint - startPoint;                    
+                    _direction = endPoint - startPoint;
                     _direction.Normalize();
-                    //Debug.Log("FrontArrow _hitButton.interactable = " + _hitButton._isInteractable);
-                    _hitButton.HitButtonInteractable(true);
                     
+                    _hitButton.HitButtonInteractable(true);
                     _ball.InitialPosBeforeHit = _ball.gameObject.transform.position;
+                    _isUp = false;
+                    //Debug.Log("Finish");
                 }
             }
         }
@@ -110,7 +112,6 @@ namespace MiniGolf
         //    Vector3 endPoint = _lineRenderer.GetPosition(0) + offset;
         //    _lineRenderer.SetPosition(1, endPoint);
         //}
-
 
     }
 }
