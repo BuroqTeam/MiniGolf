@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotation: {x: 0, y: 0, z: 60}
   _camera: {fileID: 1182071006}
-  _ball: {fileID: 347850315}
+  _ball: {fileID: 0}
 --- !u!212 &98889626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4304,27 +4304,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903058273634951509, guid: f1fc5bb90ac285e4486771552d63bcb8, type: 3}
   m_PrefabInstance: {fileID: 347772839}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &347850315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7496061100725234115, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-  m_PrefabInstance: {fileID: 1614329326}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &347850316 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1770813918954691206, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-  m_PrefabInstance: {fileID: 1614329326}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &347850317 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1038966849617037885, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-  m_PrefabInstance: {fileID: 1614329326}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347850315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5635021f1d645444eb1147ca2cf81234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &353941799
 GameObject:
   m_ObjectHideFlags: 0
@@ -9186,7 +9165,7 @@ MonoBehaviour:
   MainCamera: {fileID: 1182071006}
   startPoint: {x: 0, y: 0, z: 0}
   endPoint: {x: 0, y: 0, z: 0}
-  MainBall: {fileID: 347850315}
+  MainBall: {fileID: 0}
   CircleObj: {fileID: 1357229746}
 --- !u!120 &515119554
 LineRenderer:
@@ -26358,7 +26337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712177643ed1d1b4f8ea45bc8b35b1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ball: {fileID: 347850316}
+  Ball: {fileID: 0}
 --- !u!81 &1182071005
 AudioListener:
   m_ObjectHideFlags: 0
@@ -26447,7 +26426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1182071006}
-  BallObj: {fileID: 347850317}
+  BallObj: {fileID: 0}
 --- !u!114 &1182071009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28888,7 +28867,7 @@ MonoBehaviour:
   MainCamera: {fileID: 1182071006}
   startPoint: {x: 0, y: 0, z: 0}
   endPoint: {x: 0, y: 0, z: 0}
-  MainBall: {fileID: 347850315}
+  MainBall: {fileID: 0}
   CircleObj: {fileID: 1357229746}
 --- !u!1001 &1357751374
 PrefabInstance:
@@ -32223,43 +32202,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3899520030807063256, guid: 299e7a1cb6456cf4fa6079cf5978df9b, type: 3}
   m_PrefabInstance: {fileID: 1607807431}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1614329326
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 415824934702233978, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1038966849617037885, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-      propertyPath: MainCamera
-      value: 
-      objectReference: {fileID: 1182071006}
-    - target: {fileID: 1770813918954691206, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770813918954691206, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770813918954691206, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7496061100725234115, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
-      propertyPath: m_Name
-      value: Ball
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bbb5f2c737593fc48abad4e6c5f58a48, type: 3}
 --- !u!1 &1615007118
 GameObject:
   m_ObjectHideFlags: 0
@@ -42410,7 +42352,7 @@ MonoBehaviour:
   MainCamera: {fileID: 1182071006}
   startPoint: {x: 0, y: 0, z: 0}
   endPoint: {x: 0, y: 0, z: 0}
-  MainBall: {fileID: 347850315}
+  MainBall: {fileID: 0}
 --- !u!1001 &1897926280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46333,7 +46275,6 @@ SceneRoots:
   - {fileID: 1052306280}
   - {fileID: 1413698671}
   - {fileID: 1667952658}
-  - {fileID: 1614329326}
   - {fileID: 1182071007}
   - {fileID: 864332974}
   - {fileID: 1824665422}

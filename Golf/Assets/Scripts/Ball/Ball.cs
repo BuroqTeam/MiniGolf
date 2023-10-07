@@ -260,8 +260,7 @@ namespace MiniGolf
         public void BallReachFinishFlag(GameObject finishObject) // Buyerda Ballning finishga yetib kelganda nima sodir bo'lishi yoziladi.
         {            
             _rigidBody.isKinematic = true;
-            Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;
-            
+            Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;            
 
             float distance = Vector3.Distance(finishPos, gameObject.transform.position);
             if (distance > 0.1f)
@@ -280,7 +279,7 @@ namespace MiniGolf
 
         IEnumerator BallInHole()
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
             _meshRenderer.enabled = false;
             Scene m_Scene = SceneManager.GetActiveScene();
 
