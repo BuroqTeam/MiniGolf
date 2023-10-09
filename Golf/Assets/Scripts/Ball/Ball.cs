@@ -304,7 +304,7 @@ namespace MiniGolf
         {
             float distance = Vector3.Distance(InitialPosBeforeHit, transform.position);
             distance = distance * 10;
-            distance = (int)distance;
+            distance = (int)distance / 2; // add divsion 2
             Distance.text = distance.ToString() + "m";
         }
 

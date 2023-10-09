@@ -70,14 +70,12 @@ namespace MiniGolf
 
 
 
-        public void WriteUserScoreToServer()
-        {                                
-            ResponseResultInfo responce = HttpService.SaveResultInfo(_data);
+        public async void WriteUserScoreToServer()
+        {
+            //Debug.Log("Working");
+            ResponseResultInfo responce = await HttpService.SaveResultInfo(_data);
             Debug.Log(responce.result);
-        }
-
-
-        
+        }      
 
 
     }
