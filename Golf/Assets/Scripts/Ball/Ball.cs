@@ -10,6 +10,7 @@ namespace MiniGolf
 {
     public class Ball : MonoBehaviour
     {
+        public int LevelNumber;     // 1, 2, 3
         public GameEvent BallHitSO;
         public Camera MainCamera;
         public bool IsBallClicked;
@@ -272,7 +273,9 @@ namespace MiniGolf
             gameObject.transform.DOMove(finishPos, 0.25f)
                 .SetEase(Ease.InCirc)
                 .SetDelay(0.25f);
-
+            
+            PlayerPrefs.SetInt("Level" + LevelNumber.ToString(), 1);
+            Debug.Log("Level" + PlayerPrefs.GetInt("Level" + LevelNumber.ToString()));
             StartCoroutine(BallInHole());
         }
 
@@ -283,9 +286,10 @@ namespace MiniGolf
             _meshRenderer.enabled = false;
             Scene m_Scene = SceneManager.GetActiveScene();
 
-            GameManager.Instance.UpdateResultInfo(m_Scene.name[m_Scene.name.Length - 1].ToString(), HitScore.text, DiamondScore.text);
-            Debug.Log(m_Scene.name[m_Scene.name.Length - 1].ToString());
-
+            char chr = m_Scene.name[m_Scene.name.Length - 1];
+            GameManager.Instance.UpdateResultInfo(chr.ToString(), HitScore.text, DiamondScore.text);
+            //GameManager.Instance.UpdateResultInfo(m_Scene.name[m_Scene.name.Length - 1].ToString(), HitScore.text, DiamondScore.text);
+            //Debug.Log(chr.ToString());
         }
 
         public void IncrementCoinScore()

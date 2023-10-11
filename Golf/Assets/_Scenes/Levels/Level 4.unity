@@ -24439,6 +24439,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1702221368}
     - target: {fileID: 1038966849617037885, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
+      propertyPath: LevelNumber
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038966849617037885, guid: 87a58d08863a7f34c8e5aafc23574465, type: 3}
       propertyPath: DiamondScore
       value: 
       objectReference: {fileID: 509179598}

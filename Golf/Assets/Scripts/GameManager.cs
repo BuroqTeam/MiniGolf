@@ -52,27 +52,29 @@ namespace MiniGolf
 
         public void UpdateResultInfo(string level, string numberOfHits, string coin)
         {
-            _data.roundNo = "1";
-            _data.memberId = "1";
-            _data.gameId = "1";
-            _data.eventSq = "1";
+            //_data.roundNo = "1";
+            //_data.memberId = "1";
+            //_data.gameId = "1";
+            //_data.eventSq = "1";
 
-            _data.holeNo = level;
+            _data.holeNo = level.ToString();
             _data.hole = numberOfHits;
             _data.star = coin;
             WriteUserScoreToServer();
         }
 
-        public void GetUserID(string userID)
+        public void GetUserID(string eventSq, string roundNo, string userID, string gameId)
         {
+            _data.eventSq = eventSq;//F+
+            _data.roundNo = roundNo;// F++
             _data.memberId = userID;
+            _data.gameId = gameId; //F++
         }
 
 
 
         public async void WriteUserScoreToServer()
         {
-            //Debug.Log("Working");
             ResponseResultInfo responce = await HttpService.SaveResultInfo(_data);
             Debug.Log(responce.result);
         }      

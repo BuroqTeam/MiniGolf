@@ -23,21 +23,7 @@ namespace ApiTest
             MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
-        //public static ResponseResultInfo SaveResultInfo(ResultInfo data)
-        //{
-        //    ResponseResultInfo response = new ResponseResultInfo();
-        //    try
-        //    {
-        //        string strUrl = $"{SERVER_URL}eventSq={data.eventSq}&roundNo={data.roundNo}&memberId={data.memberId}&gameId={data.gameId}&holeNo={data.holeNo}&hole={data.hole}&star={data.star}";
-        //        response.result = RequestGetMethod(strUrl);
-        //    }
-        //    catch (JsonReaderException) { return CreateResponseObj<ResponseResultInfo>(); }
-        //    catch (HttpRequestException) { return CreateResponseObj<ResponseResultInfo>(); }
-
-        //    return response;
-        //}
-
-
+        
         public async static Task<ResponseResultInfo> SaveResultInfo(ResultInfo data)
         {
             ResponseResultInfo response = new ResponseResultInfo();
@@ -62,21 +48,7 @@ namespace ApiTest
             return response.Content;
         }
 
-
-        ///// <summary>
-        ///// Get data from server.
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <returns></returns>
-        //private static string RequestGetMethod(string url)
-        //{
-        //    var client = new RestClient(url); 
-        //    var request = new RestRequest(url, Method.Get);
-        //    RestResponse response = client.ExecuteAsync(request);//Execute(request);
-
-        //    return response.Content;
-        //}
-
+                
         private static T CreateResponseObj<T>() where T : IResponse, new()
         {
             T t = new T();
