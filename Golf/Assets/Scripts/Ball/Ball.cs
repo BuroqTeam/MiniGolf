@@ -77,7 +77,7 @@ namespace MiniGolf
 
             // Check for mouse click
             if (Input.GetMouseButtonDown(0))
-            {
+            {   
                 // Cast a ray from the camera to the mouse position
                 Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -275,7 +275,7 @@ namespace MiniGolf
                 .SetDelay(0.25f);
             
             PlayerPrefs.SetInt("Level" + LevelNumber.ToString(), 1);
-            Debug.Log("Level" + PlayerPrefs.GetInt("Level" + LevelNumber.ToString()));
+            //Debug.Log("Level" + PlayerPrefs.GetInt("Level" + LevelNumber.ToString()));
             StartCoroutine(BallInHole());
         }
 
