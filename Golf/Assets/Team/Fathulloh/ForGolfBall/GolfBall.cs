@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GolfBall_Smooth
+namespace GolfBall_Smooth //F++
 {
     public class GolfBall : MonoBehaviour
     {
+        public Camera MainCamera;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Collider _spheraCollider;
 
         private bool isMoving = false;
         public float forceMultiplier = 10.0f;
+
+        public GameEvent BallHitSO;
+
 
         void Start()
         {
@@ -22,7 +26,7 @@ namespace GolfBall_Smooth
         {
             if (Input.GetMouseButtonDown(0) && !isMoving)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit))
@@ -37,6 +41,8 @@ namespace GolfBall_Smooth
 
                         // Set the flag to indicate that the ball is moving
                         isMoving = true;
+
+                        BallHitSO.Raise();
                     }
                 }
             }
