@@ -25,9 +25,9 @@ namespace GolfBall_Smooth //F++
         
         private void LateUpdate()
         {
-            //Way1();
+            Way1();
 
-            Way2();
+            //Way2();
         }
 
 
