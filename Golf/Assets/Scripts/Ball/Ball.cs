@@ -47,7 +47,7 @@ namespace MiniGolf
             _trailRenderer = GetComponent<TrailRenderer>();
             _colorfulLine = transform.GetChild(0).gameObject.GetComponent<LineDrawer>();//F++
             _rigidBody = GetComponent<Rigidbody>();
-            _initialFieldView = MainCamera.fieldOfView;            
+            _initialFieldView = MainCamera.fieldOfView;
         }
         
 
@@ -134,7 +134,6 @@ namespace MiniGolf
                     //}
 
                     MainCamera.fieldOfView = Mathf.MoveTowards(MainCamera.fieldOfView, _initialFieldView + distance, 20 * Time.deltaTime);
-
                 }
             }
 
