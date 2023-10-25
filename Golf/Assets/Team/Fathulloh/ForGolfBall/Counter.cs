@@ -8,16 +8,11 @@ namespace GolfBall_Smooth
         public TMP_Text CurrentText;
         [SerializeField] private int currentScore;
 
-        void Start()
-        {
-
-        }
-
+        
         public void IncrementUIScore()
         {
             currentScore++;
             CurrentText.text = currentScore.ToString();
-            Debug.Log("currentScore = " + currentScore);
         }
 
     }

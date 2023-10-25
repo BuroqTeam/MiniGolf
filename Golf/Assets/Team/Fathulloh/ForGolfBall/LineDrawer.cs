@@ -18,13 +18,13 @@ namespace GolfBall_Smooth
         public Color RedColor;
 
         private bool _IsAddForce;
-
         private bool _isDrawingLine;
-        private Vector3 _startPoint;
-        private Vector3 _endPoint;
+        [SerializeField] private Vector3 _startPoint;
+        public Vector3 _endPoint;
 
         private Vector3 _direction;
-        private float _maxLength = 0.4f;
+        private float _maxLength = 0.34f;
+
         public float _distance;
 
 
@@ -37,7 +37,7 @@ namespace GolfBall_Smooth
         {
             if (!_golfBall.IsBallMoving /*&& _golfBall.IsBallClicked*/)
             {
-                if (Input.GetMouseButtonDown(0)) // 
+                if (Input.GetMouseButtonDown(0))
                 {
                     Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
@@ -66,17 +66,17 @@ namespace GolfBall_Smooth
                         _distance = Vector3.Distance(_startPoint, currentMousePosition);
                         if (_maxLength < _distance)
                         {
-                            _endPoint = FindPointOnLine(_lineRenderer.GetPosition(0), currentMousePosition, 0.40f/* - 0.013f*/);
-                            //Debug.Log("Uzun = " + _distance);
+                            _endPoint = FindPointOnLine(_lineRenderer.GetPosition(0), currentMousePosition, _maxLength/* - 0.013f*/);                            
                         }
                         else if (_maxLength > _distance)
                         {
                             _endPoint = currentMousePosition;
-                            //Debug.Log("Kalta = " + _distance);
                         }
                         _lineRenderer.enabled = true;
                         _lineRenderer.SetPosition(1, _endPoint);
+                        _distance = Vector3.Distance(_startPoint, _endPoint);
 
+                        //_distance = Vector3.Distance(_startPoint, _endPoint);
                         //_endPoint = currentMousePosition;
                         //_lineRenderer.SetPosition(1, currentMousePosition);
                         //_distance = Vector3.Distance(_startPoint, _endPoint);
@@ -92,40 +92,41 @@ namespace GolfBall_Smooth
                     _lineRenderer.positionCount = 0;
                     _IsAddForce = true;
 
+                    _golfBall.BallHitSO.Raise();
                     UpdatePowerRadialBar(Color.white, 0);
                     CallAddForce();
                     //Debug.Log("ButtonUp");
                 }
             }
 
-        }        
+        }
 
-
+        
         void RadialBarDrawer()  // RadialBar ni yangilaydi
         {
-            float distance = Vector3.Distance(_startPoint, _endPoint);
-            distance = distance * 100;
+            float mydistance = Vector3.Distance(_startPoint, _endPoint);
+            mydistance *= 100;
 
-            if (distance < 12)
+            if (mydistance < 16)
             {
                 ChangeLineColor(GreenColor);
-                UpdatePowerRadialBar(GreenColor, distance);
+                UpdatePowerRadialBar(GreenColor, mydistance);
             }
-            else if (distance < 18)
+            else if (mydistance < 25)
             {
                 ChangeLineColor(YellowColor);
-                UpdatePowerRadialBar(YellowColor, distance);
+                UpdatePowerRadialBar(YellowColor, mydistance);
             }
-            else if (distance < 23)
+            else if (mydistance <= 34)
             {
                 ChangeLineColor(RedColor);
-                UpdatePowerRadialBar(RedColor, distance);
+                UpdatePowerRadialBar(RedColor, mydistance);
             }
 
-            //if (distance > 23)
-            //{
-            //    distance = 23;
-            //}
+            if (mydistance > ((int)(_maxLength * 100)))
+            {
+                mydistance = (int)(_maxLength * 100);
+            }
         }
 
 
@@ -137,25 +138,22 @@ namespace GolfBall_Smooth
         }
 
 
-        void UpdatePowerRadialBar(Color color, float distance)
+        void UpdatePowerRadialBar(Color color, float distance2)
         {
             PowerBar.color = color;
-            var val = ((int)distance * 10) / 22;
+            float percentageOfBar = (distance2 / _maxLength) / 100;
+            PowerBar.fillAmount = percentageOfBar;
 
-            if (val.Equals(0))
+            if (percentageOfBar.Equals(0))
             {
                 PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
             }
             else
             {
-                PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = val.ToString();
+                PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = Mathf.CeilToInt(10 * percentageOfBar).ToString();
             }
-
-            Debug.Log(" " + Vector3.Distance(_startPoint, _endPoint));
-            //Debug.Log("distance = " + distance);
-            PowerBar.fillAmount = distance / 22;
         }
-
+        
 
         void CallAddForce() // Balldagi RigidBodyga AddForce ni beradi. 
         {

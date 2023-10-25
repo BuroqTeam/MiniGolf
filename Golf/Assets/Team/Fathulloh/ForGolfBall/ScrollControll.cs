@@ -10,7 +10,8 @@ namespace GolfBall_Smooth
         public Camera MainCamera;
         [SerializeField] private GolfBall _golfBall;
         private float _initialFieldView;
-
+        [HideInInspector] public float MinFielOfView = 60;
+        [HideInInspector] public float MaxFieldOfView = 85;
 
         void Start()
         {
@@ -32,6 +33,7 @@ namespace GolfBall_Smooth
                         {
                             _initialFieldView -= 7.66f;
                             MainCamera.DOFieldOfView(_initialFieldView, 0.7f);
+                            Debug.Log("Decrease.");
                         }                        
                     }
                     else if (scrollDelta.y < 0) // Scroll down
@@ -40,42 +42,13 @@ namespace GolfBall_Smooth
                         {
                             _initialFieldView += 7.66f;
                             MainCamera.DOFieldOfView(_initialFieldView, 0.7f);
+                            Debug.Log("Increase.");
                         }
                     }
                 }
             }
         }
 
-        void someMethod()
-        {
-            //Vector2 scrollDelta = Input.mouseScrollDelta;
-            //if (!BallObj.IsBallClicked)
-            //{
-            //    // Check if there was any scroll input
-            //    if (scrollDelta != Vector2.zero)
-            //    {
-            //        // Scroll up
-            //        if (scrollDelta.y > 0)
-            //        {
-            //            if (_initialFieldView >= 67.66f)
-            //            {
-            //                _initialFieldView -= 7.66f;
-            //                MainCamera.DOFieldOfView(_initialFieldView, 0.7f);
-            //            }
-            //        }
-            //        // Scroll down
-            //        else if (scrollDelta.y < 0)
-            //        {
-            //            if (_initialFieldView <= 75.34f)
-            //            {
-            //                _initialFieldView += 7.66f;
-            //                MainCamera.DOFieldOfView(_initialFieldView, 0.7f);
-            //            }
-            //        }
-            //    }
-            //}
-        }
-
-
+        
     }
 }
