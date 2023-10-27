@@ -24,7 +24,7 @@ namespace GolfBall_Smooth //F++
         [HideInInspector] public string EqualName;
         public bool IsBallClicked = false;
         public bool IsBallMoving = false;
-        private bool IsBallOut;
+        /*[HideInInspector]*/ public bool IsBallOut;
         
         public TMP_Text DistanceTMP;
         private float forceMultiplier = 50.0f; // 500 drag 0.5f, mass 0.5f
@@ -98,13 +98,18 @@ namespace GolfBall_Smooth //F++
             {
                 if (IsBallClicked && !IsBallMoving)
                 {
-                    Debug.Log("MainCamera.fieldOfView = " + MainCamera.fieldOfView);
+                    //Debug.Log("MainCamera.fieldOfView = " + MainCamera.fieldOfView);
                     //Debug.Log("Input.GetMouseButton(0)");
                     IsBallClicked = false;                    
                 }
             }
 
             SetBallMove();
+
+            //if (transform.position.z <= -1)
+            //{
+            //    SetBallMove(); // ResetBallPos()
+            //}
         }
 
         public Vector3 velocity;
@@ -141,6 +146,11 @@ namespace GolfBall_Smooth //F++
             }
             
         }
+
+        //public void Sink()
+        //{
+        //    // Ball is being sinked
+        //}
 
         
         void FindDistance()

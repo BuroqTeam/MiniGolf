@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MiniGolf.CameraController" Collapsed="true">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACABCAQAIAAAAAAAAAAAAQAQAEAAAAAAAMA=</HashCode>
+      <FileName>Assets\Scripts\Camera\CameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.Circle" Collapsed="true">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAAAAAQAAAAAAAACAAAAAAAAAAAACAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Camera\Circle.cs</FileName>
+  </Class>
+  <Class Name="MiniGolf.ScrollController" Collapsed="true">
+    <Position X="1.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAABQAAAAAAAAAAAAAAAAAAABAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Camera\ScrollController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.Ball" Collapsed="true">
+    <Position X="1.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAQIkCiAAIAEHAGMGAAABAgEAAAkCAFRABAABIAAIGA=</HashCode>
+      <FileName>Assets\Scripts\Ball\Ball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.LineAnim" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEACAAkAAAAAAAAAAACEQABAAAABAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ball\LineAnim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.LineDrawer" Collapsed="true">
+    <Position X="3.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAQAEAiAAAAAAAAAAAAAACEEABEAAABEIQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ball\LineDrawer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.MouseCircle" Collapsed="true">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAkACAAAAAAAAAAAAAAAAAABAAAABAAUAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ball\MouseCircle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.OnTrigger" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ball\OnTrigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.TriggerController" Collapsed="true">
+    <Position X="3.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAIQAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\Ball\TriggerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniGolf.GameManager" Collapsed="true">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABKAAAAAAAAEAAAAAAEAAAQAAQAAABAAIBEE=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="1.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="MiniGolf.GameState">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAACAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAEIAg=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
