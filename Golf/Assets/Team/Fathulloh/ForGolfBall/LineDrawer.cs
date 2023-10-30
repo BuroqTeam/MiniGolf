@@ -16,14 +16,14 @@ namespace GolfBall_Smooth
         public Color GreenColor;
         public Color YellowColor;
         public Color RedColor;
-
+        [HideInInspector] public Color CurrentColor;
         private bool _IsAddForce;
         private bool _isDrawingLine;
-        [SerializeField] private Vector3 _startPoint;
+        /*[SerializeField] private*/public Vector3 _startPoint;
         public Vector3 _endPoint;
 
         private Vector3 _direction;
-        private float _maxLength = 0.34f;
+        [HideInInspector] public float _maxLength = 0.34f;
 
         public float _distance;
 
@@ -134,6 +134,7 @@ namespace GolfBall_Smooth
         {
             Material newMat = (_lineRenderer.material);
             newMat.color = newColor;
+            CurrentColor = newColor;
             _lineRenderer.material = newMat;
         }
 

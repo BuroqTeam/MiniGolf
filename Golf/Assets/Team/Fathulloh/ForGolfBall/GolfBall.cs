@@ -84,10 +84,12 @@ namespace GolfBall_Smooth //F++
                     if (MainCamera.fieldOfView < MainCamera.GetComponent<ScrollControll>().MaxFieldOfView) // Ball bosib line chizilganda cameraning uzoqlashishi 
                     {
                         MainCamera.fieldOfView = Mathf.MoveTowards(MainCamera.fieldOfView, _initialFieldView + distance, 20 * Time.deltaTime);
+                        //Debug.Log("1");
                     }
                     else if (_initialFieldView + distance < MainCamera.fieldOfView)// Ball bosib line chizilganda cameraning yaqinlashishi
                     {
                         MainCamera.fieldOfView = Mathf.MoveTowards(MainCamera.fieldOfView, _initialFieldView + distance, 20 * Time.deltaTime);
+                        //Debug.Log("2");
                     }
 
                     //MainCamera.fieldOfView = Mathf.MoveTowards(MainCamera.fieldOfView, _initialFieldView + distance, 20 * Time.deltaTime);
@@ -147,12 +149,16 @@ namespace GolfBall_Smooth //F++
             
         }
 
-        //public void Sink()
-        //{
-        //    // Ball is being sinked
-        //}
 
-        
+        /// <summary>
+        /// Cho'kishning kodi yoziladi buyerga.
+        /// </summary>
+        public void Sink()
+        {
+            // Ball is being sinked
+        }
+
+
         void FindDistance()
         {
             float distance = Vector3.Distance(InitialPosBeforeHit, transform.position);
