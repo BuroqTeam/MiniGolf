@@ -14,7 +14,8 @@ namespace GolfBall_Smooth
         public static GameManager Instance;
         public GameState State;
 
-        public GolfBall BallMove;
+        //public GolfBall BallMove;
+        public BallMovement BallMove;
 
         public static event Action<GameState> OnGameStateChanged;
         private ResultInfo _data;        

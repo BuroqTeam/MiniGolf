@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace GolfBall_Smooth //F++
+namespace GolfBall_Smooth
 {
     /// <summary>
-    /// Ushbu script GolfBall ga qo'shiladi.
+    /// Golfning harakatiga javobgar script
     /// </summary>
-    public class GolfBall : MonoBehaviour
+    public class BallMovement : MonoBehaviour
     {
-        public enum TypeOfHits {WithLine, WithButton}
+        public enum TypeOfHits { WithLine, WithButton }
         public TypeOfHits CurrentHit;
 
         public Camera MainCamera;
@@ -24,35 +23,28 @@ namespace GolfBall_Smooth //F++
 
         [HideInInspector] public string EqualName;
         public bool IsBallClicked = false;
-        public bool IsBallMoving = false;
-        /*[HideInInspector]*/ public bool IsBallOut;
+        public bool IsBallMoving = false;        
+        public bool IsBallOut;
         
-        public TMP_Text DistanceTMP; // F--
-        private float forceMultiplier = 50.0f; // 500 drag 0.5f, mass 0.5f
-        private float minimalSpeed = 0.12f;
-        private float sizeEachCell = 0.25f;
-        
+        //private float forceMultiplier = 50.0f; // 500 drag 0.5f, mass 0.5f
+        //private float minimalSpeed = 0.12f;
+        //private float sizeEachCell = 0.25f;
+
         private float _initialFieldView;
         private Vector3 _previousClickPosition = new Vector3();
         public Vector3 InitialPosBeforeHit;  // kasr qismi uzun bo'lsa -3.154 shaklida ko'rinib qolayabdi lekin oxirida e-10 bor. 
 
-        private float _initialDrag;
+        
 
         private void Awake()
         {
             EqualName = gameObject.name;
             _initialFieldView = MainCamera.fieldOfView;
-            _initialDrag = _rigidBody.drag;
         }
 
 
         void Update()
         {
-            if (InitialPosBeforeHit != Vector3.zero)
-            {
-                //FindDistance();
-            }            
-
             if (Input.GetMouseButtonDown(0))// Check for mouse click
             {   // Cast a ray from the camera to the mouse position
                 Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
@@ -104,50 +96,15 @@ namespace GolfBall_Smooth //F++
                 {
                     //Debug.Log("MainCamera.fieldOfView = " + MainCamera.fieldOfView);
                     Debug.Log("Input.GetMouseButtonUp(0)");
-                    IsBallClicked = false;   
+                    IsBallClicked = false;
                 }
-            }
-
-            //ChangeBallPhysics();
+            }            
 
             //if (transform.position.z <= -1)
             //{
             //    SetBallMove(); // ResetBallPos()
             //}
-        }
-
-        //public Vector3 velocity;
-        //public float speed = 0;
-        //public float maxSpeed;
-
-        //void ChangeBallPhysics()
-        //{   
-        //    velocity = _rigidBody.velocity;   // Get the velocity of the GameObject            
-        //    speed = velocity.magnitude;       // Calculate the speed by taking the magnitude of the velocity
-
-        //    if (maxSpeed == 0 || maxSpeed < speed)
-        //    {
-        //        maxSpeed = speed;
-        //    }
-
-        //    if (minimalSpeed < speed)
-        //    {
-        //        IsBallMoving = true;
-        //        //stopping = "Yurish";
-        //    }
-        //    else if (minimalSpeed > speed && speed != 0)
-        //    {
-        //        _rigidBody.drag += 0.5f;
-        //        //Debug.Log(_rigidBody.drag);
-        //        //StartCoroutine(SampleRoutine());
-        //    }
-        //    else if (speed == 0)
-        //    {
-        //        IsBallMoving = false;
-        //        _rigidBody.drag = _initialDrag;
-        //        //stopping = "To'xtash";
-        //    }            
-        //}
+        }         
 
 
         /// <summary>
@@ -156,40 +113,19 @@ namespace GolfBall_Smooth //F++
         public void Sink()
         {
             // Ball is being sinked
-        }
+        }        
 
 
-        void FindDistance() // Ball yurgach qancha masofa bosganini ko'rsatib beruvchi metod.
-        {
-            float distance = Mathf.CeilToInt(Vector3.Distance(InitialPosBeforeHit, transform.position) / sizeEachCell);
-            DistanceTMP.text = distance.ToString() + "m";
-        }
-
-        
         public void AddForceToBall(Vector3 forceDirection, float currentLength, float maxLength)
         {
             float percentage = currentLength / maxLength;
-            _rigidBody.AddForce(forceDirection * forceMultiplier * percentage/*, ForceMode.Impulse*/);
+            _rigidBody.AddForce(forceDirection * BallData.ForceMultiplier * percentage/*, ForceMode.Impulse*/);
             //Vector3 velocity = _rigidBody.velocity;
-            float speed = _rigidBody.velocity.magnitude;
+            //float speed = _rigidBody.velocity.magnitude;
             //Debug.Log("speed = " + speed);
         }
 
         
-        //IEnumerator SampleRoutine()
-        //{
-        //    float previousDrag = _rigidBody.drag;
-        //    Vector3 previousVel = _rigidBody.velocity;
-        //    _rigidBody.drag = 5000;
-
-        //    yield return new WaitForFixedUpdate();
-        //    yield return new WaitForFixedUpdate();
-
-        //    _rigidBody.drag = previousDrag;
-        //    _rigidBody.AddForce(previousVel, ForceMode.Impulse);
-        //}
-
-
         /// <summary>
         /// Ballni boshlang'ich pozitsiyaga qaytaruvchi kod. 
         /// </summary>
@@ -225,7 +161,5 @@ namespace GolfBall_Smooth //F++
             //_trailRenderer.enabled = _isTrue;
             _meshRenderer.enabled = _isTrue;
         }
-
-
     }
 }

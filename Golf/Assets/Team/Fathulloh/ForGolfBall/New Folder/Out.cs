@@ -15,7 +15,7 @@ namespace GolfBall_Smooth
             OutSO.Raise();
             // Instantiate(OutParticle);
             Debug.Log("Out Collistion Action");
-            GameManager.Instance.BallMove.Sink();
+            //GameManager.Instance.BallMove.Sink();
         }
     }
 }
