@@ -17,6 +17,7 @@ namespace GolfBall_Smooth
         private Vector3 _previousPosition;
         //private Vector3 _offset;
         private float _initialFieldOfView;
+        private Vector3 _standartDistance = new Vector3(0, 0.15f, -0.85f);
 
         private readonly float _fieldDurration = 0.5f;
         public Vector3 _lastPos;
@@ -44,13 +45,13 @@ namespace GolfBall_Smooth
             if (Input.GetMouseButtonDown(0))
             {
                 _previousPosition = _mainCamera.ScreenToViewportPoint(Input.mousePosition);
-                Debug.Log(" _previousPosition = " + _previousPosition + " gameObject.transform.position = " + gameObject.transform.position);
+                //Debug.Log(" _previousPosition = " + _previousPosition + " gameObject.transform.position = " + gameObject.transform.position);
                 _lastPos = gameObject.transform.position;
             }
 
             if (Input.GetMouseButton(0))
             {
-                if (!_ballMove.IsBallClicked && (!_ballMove.IsBallOut))
+                if (!_ballMove.IsBallClicked && (!_ballMove.IsBallOut) && (_isCameraCanMove))
                 {
                     Vector3 direction = _previousPosition - _mainCamera.ScreenToViewportPoint(Input.mousePosition);
 
@@ -77,6 +78,7 @@ namespace GolfBall_Smooth
 
 
         bool _IsSimpleCameraMove = true;
+        bool _isCameraCanMove = true;    // Cameraning fieldi o'zgarayotgan vaqtda Camera rotationini o'zgartirmaslikni taminlaydi. 
         bool _isFinish = false;
         bool _isReturning = true;
 
@@ -93,7 +95,7 @@ namespace GolfBall_Smooth
             else if (_ballMove.IsBallMoving || (_mainCamera.fieldOfView == _initialFieldOfView))
             {
                 transform.position = BallTransform.position;
-                transform.Translate(new Vector3(0, 0.15f, -0.85f));
+                transform.Translate(_standartDistance);
                 _isFinish = true;
                 //Debug.Log(1);
             }
@@ -101,13 +103,13 @@ namespace GolfBall_Smooth
             {
                 _mainCamera.DOFieldOfView(_initialFieldOfView, _fieldDurration);
                 _isFinish = false;
+                _isCameraCanMove = false;
+                StartCoroutine(LetCameraMove());
                 //Debug.Log(2);
             }
             else
                 _isFinish= false;
 
-            //transform.position = BallTransform.position;
-            //transform.Translate(new Vector3(0, 0.15f, -0.85f));
 
             //if (_golfBall._IsBallOut && _IsSimpleCameraMove)
             //{
@@ -119,8 +121,12 @@ namespace GolfBall_Smooth
             //{
             //    transform.position = _golfBall.position;
             //    transform.Translate(new Vector3(0, 0.15f, -0.85f));
-            //}            
+            //}
+
+            //transform.position = BallTransform.position;
+            //transform.Translate(new Vector3(0, 0.15f, -0.85f));
         }
+
 
         IEnumerator ReturnInitialPos() // Ball tashqariga chiqib ketganda camerani avvalgi pozitsiyasiga qaytaradigan metod.
         {
@@ -137,20 +143,10 @@ namespace GolfBall_Smooth
         }
 
 
-        private float timer = 0.0f;
-        private float waitTime = 3.0f;
-
-        void LetCameraMove()
+        IEnumerator LetCameraMove()
         {
-            timer += Time.deltaTime;
-            if (timer >= waitTime)
-            {
-                Debug.Log("Waited for 3 seconds.");
-                transform.position = BallTransform.position;
-                transform.Translate(new Vector3(0, 0.15f, -0.85f));
-                _isFinish = true;
-            }
-            
+            yield return new WaitForSeconds(_fieldDurration);
+            _isCameraCanMove = true;
         }
 
     }

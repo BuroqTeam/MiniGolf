@@ -2452,6 +2452,7 @@ MonoBehaviour:
   _rigidBody: {fileID: 40887658}
   _spheraCollider: {fileID: 40887654}
   _meshRenderer: {fileID: 40887655}
+  _trailRenderer: {fileID: 40887663}
   EqualName: 
   IsBallClicked: 0
   IsBallMoving: 0
