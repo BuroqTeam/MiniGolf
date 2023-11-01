@@ -27,14 +27,14 @@ namespace GolfBall_Smooth
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
             ChangeBallPhysics();
         }
 
 
         /// <summary>
-        /// Agar ballning tezligi belgilangan eng kichik qiymatdan pastga tushib ketsa tezroq sekinlashishi va to'xtashi uchun "drag ning qiymati oshiriladi.
+        /// Agar ballning tezligi belgilangan eng kichik qiymatdan pastga tushib ketsa tezroq sekinlashishi va to'xtashi uchun "drag" ning qiymati oshiriladi.
         /// </summary>
         public void ChangeBallPhysics()
         {
@@ -54,7 +54,7 @@ namespace GolfBall_Smooth
             else if (BallData.MinimalSpeed > speed && speed != 0)
             {
                 _rigidbody.drag += 0.5f;
-                Debug.Log(_rigidbody.drag);
+                //Debug.Log(_rigidbody.drag);
             }
             else if (speed == 0)
             {

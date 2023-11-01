@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace GolfBall_Smooth
@@ -20,6 +18,7 @@ namespace GolfBall_Smooth
         [SerializeField] private Rigidbody _rigidBody;
         [SerializeField] private Collider _spheraCollider;
         [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private TrailRenderer _trailRenderer;
 
         [HideInInspector] public string EqualName;
         public bool IsBallClicked = false;
@@ -35,7 +34,6 @@ namespace GolfBall_Smooth
         public Vector3 InitialPosBeforeHit;  // kasr qismi uzun bo'lsa -3.154 shaklida ko'rinib qolayabdi lekin oxirida e-10 bor. 
 
         
-
         private void Awake()
         {
             EqualName = gameObject.name;
@@ -95,7 +93,7 @@ namespace GolfBall_Smooth
                 if (IsBallClicked && !IsBallMoving)
                 {
                     //Debug.Log("MainCamera.fieldOfView = " + MainCamera.fieldOfView);
-                    Debug.Log("Input.GetMouseButtonUp(0)");
+                    //Debug.Log("Input.GetMouseButtonUp(0)");
                     IsBallClicked = false;
                 }
             }            
@@ -119,10 +117,7 @@ namespace GolfBall_Smooth
         public void AddForceToBall(Vector3 forceDirection, float currentLength, float maxLength)
         {
             float percentage = currentLength / maxLength;
-            _rigidBody.AddForce(forceDirection * BallData.ForceMultiplier * percentage/*, ForceMode.Impulse*/);
-            //Vector3 velocity = _rigidBody.velocity;
-            //float speed = _rigidBody.velocity.magnitude;
-            //Debug.Log("speed = " + speed);
+            _rigidBody.AddForce(forceDirection * BallData.ForceMultiplier * percentage/*, ForceMode.Impulse*/);            
         }
 
         
@@ -158,7 +153,7 @@ namespace GolfBall_Smooth
                 coll.enabled = _isTrue;
 
             _rigidBody.isKinematic = !_isTrue;
-            //_trailRenderer.enabled = _isTrue;
+            _trailRenderer.enabled = _isTrue;
             _meshRenderer.enabled = _isTrue;
         }
     }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Ball Data
   m_EditorClassIdentifier: 
   ForceMultiplier: 50
-  MinimalSpeed: 0.12
+  MinimalSpeed: 0.18
   SizeEachCell: 0.25
