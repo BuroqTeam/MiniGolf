@@ -9,9 +9,10 @@ namespace GolfBall_Smooth
     public class LineDrawer : MonoBehaviour
     {
         [SerializeField] private LineRenderer _lineRenderer;
-        [SerializeField] private GolfBall _golfBall;
+        //[SerializeField] private GolfBall _golfBall;
+        [SerializeField] private BallMovement _ballMove;
         [SerializeField] private Camera MainCamera;
-        [SerializeField] private Image PowerBar;
+        [SerializeField] private Image PowerBar; // F--
 
         public Color GreenColor;
         public Color YellowColor;
@@ -23,9 +24,8 @@ namespace GolfBall_Smooth
         public Vector3 _endPoint;
 
         private Vector3 _direction;
-        [HideInInspector] public float _maxLength = 0.34f;
-
-        public float _distance;
+        private float _distance;
+        [HideInInspector] public float _maxLength = 0.34f;               
 
 
         void Update()
@@ -33,16 +33,17 @@ namespace GolfBall_Smooth
             MainMethod();
         }
 
+
         void MainMethod()
         {
-            if (!_golfBall.IsBallMoving /*&& _golfBall.IsBallClicked*/)
+            if (!_ballMove.IsBallMoving /*&& _golfBall.IsBallClicked*/)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
                     Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
 
-                    if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.name.Equals(_golfBall.EqualName))
+                    if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.name.Equals(_ballMove.EqualName))
                     {
                         _isDrawingLine = true;
                         _startPoint = transform.position;
@@ -76,12 +77,7 @@ namespace GolfBall_Smooth
                         _lineRenderer.SetPosition(1, _endPoint);
                         _distance = Vector3.Distance(_startPoint, _endPoint);
 
-                        //_distance = Vector3.Distance(_startPoint, _endPoint);
-                        //_endPoint = currentMousePosition;
-                        //_lineRenderer.SetPosition(1, currentMousePosition);
-                        //_distance = Vector3.Distance(_startPoint, _endPoint);
-
-                        RadialBarDrawer();
+                        CheckColor();
                     }
                 }
 
@@ -92,17 +88,17 @@ namespace GolfBall_Smooth
                     _lineRenderer.positionCount = 0;
                     _IsAddForce = true;
 
-                    _golfBall.BallHitSO.Raise();
-                    UpdatePowerRadialBar(Color.white, 0);
+                    _ballMove.BallHitSO.Raise();
+                    //UpdatePowerRadialBar(Color.white, 0);
                     CallAddForce();
-                    //Debug.Log("ButtonUp");
+                    Debug.Log("ButtonUp");
                 }
             }
 
         }
 
         
-        void RadialBarDrawer()  // RadialBar ni yangilaydi
+        void CheckColor()  // Check line length and choose color.
         {
             float mydistance = Vector3.Distance(_startPoint, _endPoint);
             mydistance *= 100;
@@ -110,17 +106,17 @@ namespace GolfBall_Smooth
             if (mydistance < 16)
             {
                 ChangeLineColor(GreenColor);
-                UpdatePowerRadialBar(GreenColor, mydistance);
+                //UpdatePowerRadialBar(GreenColor, mydistance);
             }
             else if (mydistance < 25)
             {
                 ChangeLineColor(YellowColor);
-                UpdatePowerRadialBar(YellowColor, mydistance);
+                //UpdatePowerRadialBar(YellowColor, mydistance);
             }
             else if (mydistance <= 34)
             {
                 ChangeLineColor(RedColor);
-                UpdatePowerRadialBar(RedColor, mydistance);
+                //UpdatePowerRadialBar(RedColor, mydistance);
             }
 
             if (mydistance > ((int)(_maxLength * 100)))
@@ -136,24 +132,7 @@ namespace GolfBall_Smooth
             newMat.color = newColor;
             CurrentColor = newColor;
             _lineRenderer.material = newMat;
-        }
-
-
-        void UpdatePowerRadialBar(Color color, float distance2)
-        {
-            PowerBar.color = color;
-            float percentageOfBar = (distance2 / _maxLength) / 100;
-            PowerBar.fillAmount = percentageOfBar;
-
-            if (percentageOfBar.Equals(0))
-            {
-                PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
-            }
-            else
-            {
-                PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = Mathf.CeilToInt(10 * percentageOfBar).ToString();
-            }
-        }
+        }        
         
 
         void CallAddForce() // Balldagi RigidBodyga AddForce ni beradi. 
@@ -165,7 +144,7 @@ namespace GolfBall_Smooth
                 _direction = _startPoint - _endPoint;
                 _direction.Normalize();
 
-                _golfBall.AddForceToBall(_direction, _distance, _maxLength);
+                _ballMove.AddForceToBall(_direction, _distance, _maxLength);
             }
         }
 
@@ -188,6 +167,23 @@ namespace GolfBall_Smooth
 
             return new Vector3(newX, newY, newZ);
         }
+
+
+        //void UpdatePowerRadialBar(Color color, float distance2)
+        //{
+        //    PowerBar.color = color;
+        //    float percentageOfBar = (distance2 / _maxLength) / 100;
+        //    PowerBar.fillAmount = percentageOfBar;
+
+        //    if (percentageOfBar.Equals(0))
+        //    {
+        //        PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+        //    }
+        //    else
+        //    {
+        //        PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = Mathf.CeilToInt(10 * percentageOfBar).ToString();
+        //    }
+        //}
 
     }
 }

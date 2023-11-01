@@ -6,45 +6,60 @@ using UnityEngine.UI;
 
 namespace GolfBall_Smooth
 {
+    /// <summary>
+    /// Golf Ball ning qanday kuch bilan urilayotganini ko'rsatuvchi Bar obyektidagi script. LineRenderer 
+    /// </summary>
     public class RadialBar : MonoBehaviour
     {
-        //public Image PowerBar;
-        //[SerializeField] private LineDrawer _lineDrawer;
-
-        //float _maxLength;
-
-
-        //void Awake()
-        //{
-        //    _maxLength = _lineDrawer._maxLength;
-        //}
-
-        
-        //void Update()
-        //{
-        //    UpdatePowerRadialBar(_lineDrawer.CurrentColor, Vector3.Distance(_lineDrawer._endPoint, _lineDrawer._startPoint));
-        //}       
+        [SerializeField] private Image _powerBar;
+        [SerializeField] private LineDrawer _lineDrawer;
+        //[SerializeField] private GolfBall _golfBall;
+        [SerializeField] private BallMovement _ballMove;
+        float _maxLength;
 
 
-        //void UpdatePowerRadialBar(Color color, float distance2)
-        //{
-        //    PowerBar.color = color;
-        //    float percentageOfBar = (distance2 / _maxLength) / 100;
-        //    PowerBar.fillAmount = percentageOfBar;
-
-        //    if (percentageOfBar.Equals(0))
-        //    {
-        //        PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
-        //    }
-        //    else
-        //    {
-        //        PowerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = Mathf.CeilToInt(10 * percentageOfBar).ToString();
-        //    }
-        //}
+        void Awake()
+        {
+            _maxLength = _lineDrawer._maxLength;
+        }
 
 
+        void Update()
+        {
+            UpdatePowerRadialBar();
+        }
 
 
+        void UpdatePowerRadialBar()
+        {
+            ChangeRadialColor(_lineDrawer.CurrentColor);
+            ChangeRadialText(Vector3.Distance(_lineDrawer._endPoint, _lineDrawer._startPoint));
+           
+        }
+
+
+        void ChangeRadialColor(Color newColor)
+        {
+            _powerBar.color = newColor;
+        }
+
+
+        void ChangeRadialText(float distance)
+        {
+            distance *= 100;
+            float percentageOfBar = (distance / _maxLength) / 100;
+            _powerBar.fillAmount = percentageOfBar;
+
+            if (percentageOfBar.Equals(0) || !_ballMove.IsBallClicked)
+            {
+                _powerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+                _powerBar.fillAmount = 0;
+            }
+            else
+            {
+                _powerBar.transform.GetChild(0).GetComponent<TMP_Text>().text = Mathf.RoundToInt(10 * percentageOfBar).ToString();
+            }
+        }
 
     }
 }

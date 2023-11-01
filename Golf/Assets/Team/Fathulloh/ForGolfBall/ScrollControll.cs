@@ -8,7 +8,8 @@ namespace GolfBall_Smooth
     public class ScrollControll : MonoBehaviour
     {
         public Camera MainCamera;
-        [SerializeField] private GolfBall _golfBall;
+        //[SerializeField] private GolfBall _golfBall;
+        [SerializeField] private BallMovement _ballMove;
         private float _initialFieldView;
         [HideInInspector] public float MinFielOfView = 60;
         [HideInInspector] public float MaxFieldOfView = 85;
@@ -23,7 +24,7 @@ namespace GolfBall_Smooth
         {
             Vector3 scrollDelta = Input.mouseScrollDelta;
 
-            if (!_golfBall.IsBallClicked)
+            if (!_ballMove.IsBallClicked)
             {
                 if (scrollDelta != Vector3.zero)
                 {
