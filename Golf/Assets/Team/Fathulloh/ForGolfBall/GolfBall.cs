@@ -9,7 +9,7 @@ namespace GolfBall_Smooth //F++
     /// <summary>
     /// Ushbu script GolfBall ga qo'shiladi.
     /// </summary>
-    public class GolfBall : MonoBehaviour
+    public class GolfBall : MonoBehaviour // I don't use this
     {
         public enum TypeOfHits {WithLine, WithButton}
         public TypeOfHits CurrentHit;

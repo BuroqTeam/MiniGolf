@@ -8,13 +8,26 @@ using UnityEngine;
 public class BallTrigger : MonoBehaviour
 {
     public GameEvent EventSO;
-
-
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Ball"))
+        if (collision.gameObject.CompareTag("Ball"))
         {
             EventSO.Raise();
+            Debug.Log("Ball ishladi");
         }
+        else
+            Debug.Log("Ishlamadi.");
     }
+
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Ball"))
+    //    {
+    //        EventSO.Raise();
+    //        Debug.Log("Ball ishladi");
+    //    }
+    //}
+
 }

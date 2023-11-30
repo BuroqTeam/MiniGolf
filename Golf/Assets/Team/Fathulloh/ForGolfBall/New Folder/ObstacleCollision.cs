@@ -12,7 +12,11 @@ public class ObstacleCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var obstacle = other.GetComponent<Obstacle>();
-        obstacle.StopBall(1);
+        //obstacle.StopBall(1);
+        if (obstacle != null)
+        {
+            obstacle.StopBall(1);
+        }
         
     }
 }

@@ -2,11 +2,10 @@ using DG.Tweening;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
-//using static UnityEngine.GraphicsBuffer;
 
 namespace GolfBall_Smooth //F++
 {
-    public class CameraControll : MonoBehaviour
+    public class CameraControll : MonoBehaviour // I don't use this.
     {
         //[SerializeField] private GolfBall _golfBall;
         [SerializeField] private BallMovement _ballMove;
