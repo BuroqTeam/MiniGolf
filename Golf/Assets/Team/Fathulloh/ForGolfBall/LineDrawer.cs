@@ -88,7 +88,6 @@ namespace GolfBall_Smooth
                     _ballMove.BallHitSO.Raise();
                     //UpdatePowerRadialBar(Color.white, 0);
                     CallAddForce();
-                    Debug.Log("ButtonUp");
                 }
             }
 

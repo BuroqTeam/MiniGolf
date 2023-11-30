@@ -27,7 +27,7 @@ namespace GolfBall_Smooth
         }
 
 
-        private void FixedUpdate()
+        private void Update()
         {
             ChangeBallPhysics();
         }

@@ -11,6 +11,7 @@ TagManager:
   - Sand
   - Wall
   - Water
+  - Ball
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -156,5 +157,25 @@ namespace GolfBall_Smooth
             _trailRenderer.enabled = _isTrue;
             _meshRenderer.enabled = _isTrue;
         }
+
+
+        public void BallReachFinishFlag(GameObject finishObject)
+        {
+            _rigidBody.isKinematic = true;
+            Vector3 finishPos = finishObject.transform.GetChild(1).transform.position;
+            float distance = Vector3.Distance(finishPos, gameObject.transform.position);
+
+            if (distance > 0.1f)
+            {
+                transform.position = (finishPos + gameObject.transform.position) / 2;
+            }
+
+            gameObject.transform.DOMove(finishPos, 0.25f)
+                .SetEase(Ease.InCirc)
+                .SetDelay(0.25f);
+
+            //PlayerPrefs.SetInt("Level" + LevelNumber.ToString(), 1);
+        }
+
     }
 }

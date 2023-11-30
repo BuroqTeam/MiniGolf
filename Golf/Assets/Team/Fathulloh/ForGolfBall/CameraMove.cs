@@ -27,7 +27,7 @@ namespace GolfBall_Smooth
             _initialFieldOfView = _mainCamera.fieldOfView;
             SetCamerePosition();
             //_offset = transform.position - BallTransform.position;
-            //transform.GetChild(0).transform.position = Vector3.Lerp(transform.position, BallTransform.position, 0.8f);
+            transform.GetChild(0).transform.position = Vector3.Lerp(transform.position, BallTransform.position, 0.8f);
         }
 
 
