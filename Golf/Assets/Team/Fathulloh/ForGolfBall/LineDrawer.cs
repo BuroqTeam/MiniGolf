@@ -6,15 +6,15 @@ namespace GolfBall_Smooth
     public class LineDrawer : MonoBehaviour
     {
         [SerializeField] private LineRenderer _lineRenderer;
-        //[SerializeField] private GolfBall _golfBall;
         [SerializeField] private BallMovement _ballMove;
         [SerializeField] private Camera MainCamera;
-        [SerializeField] private Image PowerBar; // F--
-
+        //public GameObject UIBoard;
+        public BallDataSO BallData;
         public Color GreenColor;
         public Color YellowColor;
         public Color RedColor;
         [HideInInspector] public Color CurrentColor;
+
         private bool _IsAddForce;
         private bool _isDrawingLine;
         /*[SerializeField] private*/public Vector3 _startPoint;
@@ -22,7 +22,14 @@ namespace GolfBall_Smooth
 
         private Vector3 _direction;
         private float _distance;
-        [HideInInspector] public float _maxLength = 0.34f;               
+        private float _maxLength;
+        private float _minLength;
+
+        private void Start()
+        {
+            _maxLength = BallData.MaximalLengthOfLine;
+            _minLength = BallData.MinimalLengthOfLine;
+        }
 
 
         void Update()
@@ -33,8 +40,8 @@ namespace GolfBall_Smooth
 
         void MainMethod()
         {
-            if (!_ballMove.IsBallMoving /*&& _golfBall.IsBallClicked*/)
-            {
+            if (!_ballMove.IsBallMoving && !_ballMove.IsUIBoardActive /*_golfBall.IsBallClicked*/)
+            {                
                 if (Input.GetMouseButtonDown(0))
                 {
                     Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
@@ -85,9 +92,9 @@ namespace GolfBall_Smooth
                     _lineRenderer.positionCount = 0;
                     _IsAddForce = true;
 
-                    _ballMove.BallHitSO.Raise();
-                    //UpdatePowerRadialBar(Color.white, 0);
+                    _ballMove.BallHitSO.Raise();                    
                     CallAddForce();
+                    //UpdatePowerRadialBar(Color.white, 0);
                 }
             }
 

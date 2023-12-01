@@ -76,7 +76,7 @@ namespace MiniGolf
             _isRotating = false;
             circleGap.SetActive(false);
 
-            handCursor.transform.position = new Vector3(ballPos.x + 25, ballPos.y - 45, ballPos.z);
+            handCursor.transform.position = new Vector3(ballPos.x + 60, ballPos.y - 45, ballPos.z);
             circleForHand.transform.position = new Vector3(ballPos.x, ballPos.y - 25, ballPos.z);
 
             handCursor.SetActive(true);

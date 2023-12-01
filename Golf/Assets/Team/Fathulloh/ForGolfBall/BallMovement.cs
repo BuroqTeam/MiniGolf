@@ -20,12 +20,12 @@ namespace GolfBall_Smooth
         [SerializeField] private Collider _spheraCollider;
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private TrailRenderer _trailRenderer;
-
+        public GameObject UIBoard;
         [HideInInspector] public string EqualName;
         public bool IsBallClicked = false;
         public bool IsBallMoving = false;        
         public bool IsBallOut;
-        
+        public bool IsUIBoardActive;
         //private float forceMultiplier = 50.0f; // 500 drag 0.5f, mass 0.5f
         //private float minimalSpeed = 0.12f;
         //private float sizeEachCell = 0.25f;
@@ -44,18 +44,21 @@ namespace GolfBall_Smooth
 
         void Update()
         {
-            if (Input.GetMouseButtonDown(0))// Check for mouse click
+            IsUIBoardActive = UIBoard.activeSelf;
+
+            if (Input.GetMouseButtonDown(0) && !IsUIBoardActive)// Check for mouse click
             {   // Cast a ray from the camera to the mouse position
                 Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-
+                Debug.Log("BallMovement is working");
                 // Check if the ray hits a GameObject
                 if (Physics.Raycast(ray, out hit))
                 {   // The hit.collider.gameObject is the GameObject that was clicked
                     GameObject clickedObject = hit.collider.gameObject;
-
+                    
                     if (clickedObject.name.Equals(EqualName) && !IsBallMoving) // "GolfBall"
                     {
+                        
                         IsBallClicked = true;
                         _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
                         InitialPosBeforeHit = gameObject.transform.position;
@@ -64,7 +67,7 @@ namespace GolfBall_Smooth
                     {
                         IsBallClicked = false;
                     }
-                }
+                }                
             }
 
             if (Input.GetMouseButton(0))

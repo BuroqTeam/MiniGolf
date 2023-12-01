@@ -14,10 +14,10 @@ public class BallTrigger : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             EventSO.Raise();
-            Debug.Log("Ball ishladi");
+            //Debug.Log("Ball ishladi");
         }
-        else
-            Debug.Log("Ishlamadi.");
+        //else
+        //    Debug.Log("Ishlamadi.");
     }
 
 

@@ -5,7 +5,7 @@ namespace GolfBall_Smooth
     /// <summary>
     /// Camera ichidagi childga qo'shiladi va ball harakatsiz turganda rotate animatsiyasini ishlatuvchi script.
     /// </summary>
-    public class Circle : MonoBehaviour
+    public class CameraCircle : MonoBehaviour
     {
         [SerializeField] private Vector3 _rotation;
         [SerializeField] private Camera _camera;
@@ -25,12 +25,8 @@ namespace GolfBall_Smooth
         }
 
         
-        void Update()
-        {
-            //IsBallMoving= _ballMovement.IsBallMoving;
-            //IsBallClicked= _ballMovement.IsBallClicked;
-            //IsBallOut = _ballMovement.IsBallOut;
-
+        void LateUpdate()
+        {            
             transform.Rotate(_rotation * Time.deltaTime);
 
             if (!_ballMovement.IsBallMoving && !_ballMovement.IsBallClicked && !_ballMovement.IsBallOut)
@@ -38,7 +34,7 @@ namespace GolfBall_Smooth
                 _spriteRenderer.enabled = true;
                 //Debug.Log("Is work");
             }
-            else if(_ballMovement.IsBallOut || _ballMovement.IsBallMoving || _ballMovement.IsBallClicked)
+            else if (_ballMovement.IsBallOut || _ballMovement.IsBallMoving || _ballMovement.IsBallClicked)
             {
                 _spriteRenderer.enabled = false;
                 //Debug.Log("Is not work");

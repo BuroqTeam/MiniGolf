@@ -7,7 +7,6 @@ namespace GolfBall_Smooth //F++
 {
     public class CameraControll : MonoBehaviour // I don't use this.
     {
-        //[SerializeField] private GolfBall _golfBall;
         [SerializeField] private BallMovement _ballMove;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private LineDrawer _lineDrawer;
@@ -216,26 +215,6 @@ namespace GolfBall_Smooth //F++
                     Debug.Log("Ishladi = " + GolfBallTransform.position);
                 }
             }
-
-            //if (_golfBall.IsBallMoving)
-            //{
-            //    transform.position = Vector3.Lerp(transform.position, BallFollower.transform.position, 1 * Time.deltaTime);
-            //    IsNeedResetOffset = true;
-            //}
-            //else if (!_golfBall.IsBallMoving && IsNeedResetOffset && !_golfBall.IsBallOut)
-            //{
-            //    IsNeedResetOffset = false;
-            //    transform.DOMove(BallFollower.transform.position, durration);
-            //}
-            //else if (_golfBall.IsBallOut)
-            //{
-            //    if (transform.position != BallFollower.transform.position)
-            //    {
-            //        IsNeedResetOffset = false;
-            //        _golfBall.IsBallOut = false;
-            //        transform.DOMove(BallFollower.transform.position, durration);
-            //    }
-            //}
         }
         
 
@@ -258,7 +237,6 @@ namespace GolfBall_Smooth //F++
         }
 
 
-        // distanceCameraAndBall;
         float waitingDurration = 1f;
         float timer;
         private bool isFollowing;
@@ -284,46 +262,6 @@ namespace GolfBall_Smooth //F++
             }
 
         }
-
-
-        //void Way2()
-        //{
-        //    Vector3 desiredPosition = Ball.position + offset;
-        //    Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-
-        //    transform.position = new Vector3(smoothedPosition.x, /*smoothedPosition.y +*/ transform.position.y, smoothedPosition.z);
-        //    //transform.LookAt(Ball);
-        //}
-
-        //void MethodTest2()
-        //{
-        //    if (_golfBall.IsBallClicked && (_lineDrawer._endPoint != Vector3.zero))
-        //    {
-        //        lineVector = _lineDrawer._endPoint - Ball.position;
-        //        Vector3 newLine = new(0, 0, (Mathf.Abs(lineVector.x) + Mathf.Abs(lineVector.z)));
-        //        myNewOffset = standartOffset - newLine;
-
-        //        transform.position = Ball.position;
-        //        transform.Translate(myNewOffset);
-        //        distanceCameraAndBall = Vector3.Distance(Ball.position, transform.position);
-        //    }
-        //    else if (_golfBall.IsBallMoving && (myNewOffset != Vector3.zero))
-        //    {
-        //        Vector3 targetPosition = Ball.position + Ball.forward * (-distanceCameraAndBall) + myNewOffset;
-        //        transform.position = Vector3.Lerp(transform.position, targetPosition, 2 * Time.deltaTime);
-        //        //transform.LookAt(Ball);
-        //        Debug.Log("Moving");
-        //    }
-        //    else if (!_golfBall.IsBallClicked && !_golfBall.IsBallMoving)
-        //    {
-        //        SetCamera();
-        //    }
-        //    else if (myNewOffset == Vector3.zero)
-        //    {
-        //        SetCamera();
-        //        Debug.Log("Zero");
-        //    }
-        //}
 
 
     }

@@ -45,7 +45,7 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator SceneWaitToLoad()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
 
     }

@@ -13,14 +13,14 @@ namespace GolfBall_Smooth
     {
         [SerializeField] private Image _powerBar;
         [SerializeField] private LineDrawer _lineDrawer;
-        //[SerializeField] private GolfBall _golfBall;
+        [SerializeField] private BallDataSO _ballData;        
         [SerializeField] private BallMovement _ballMove;
         float _maxLength;
 
 
         void Awake()
         {
-            _maxLength = _lineDrawer._maxLength;
+            _maxLength = _ballData.MaximalLengthOfLine/*_lineDrawer._maxLength*/;
         }
 
 

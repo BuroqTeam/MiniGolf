@@ -7,7 +7,7 @@ namespace GolfBall_Smooth
     public class Out : Obstacle
     {
         public GameEvent OutSO;
-        public GameObject OutParticle; // outda hechqanday particle yo'q
+        //public GameObject OutParticle; // outda hechqanday particle yo'q
 
 
         public override void StopBall(float amount)

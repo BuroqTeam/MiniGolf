@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GolfBall_Smooth
@@ -9,25 +8,37 @@ namespace GolfBall_Smooth
         public GameEvent FinishSO;
         public GameObject FinishParticle;
 
-        bool _isActive = true;
+        private Transform _currentTransform;
+        private bool _isActive = true;
+        [SerializeField] private GameObject _parentOfParticle;
+
+        void Start()
+        {            
+            _currentTransform = gameObject.transform;
+            _parentOfParticle = new GameObject("Parent Of Particle");
+            _parentOfParticle.transform.position = _currentTransform.position;
+        }
+
 
         private void OnTriggerEnter(Collider other)
         {
             if (_isActive)
             {
-                FinishAction();
-
-            }           
+                StartCoroutine(FinishAction());
+            }
         }
 
 
-        void FinishAction()
+        IEnumerator FinishAction()
         {
             _isActive = false;
             //gameObject.GetComponent<Collider>().enabled = false;
-            Instantiate(FinishParticle);
-            FinishSO.Raise();
+            GameObject particleObj = Instantiate(FinishParticle, _parentOfParticle.transform);
+            particleObj.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            //_parentOfParticle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            yield return new WaitForSeconds(3f);
 
+            FinishSO.Raise();
             Debug.Log("Finish Action is work.");
         }
 
