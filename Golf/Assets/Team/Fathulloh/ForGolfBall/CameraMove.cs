@@ -121,7 +121,7 @@ namespace GolfBall_Smooth
             //gameObject.transform.GetChild(0).gameObject.SetActive(true);
             //_IsSimpleCameraMove = true;
             _isReturning = true;
-            Debug.Log("Return Initial Pos");
+            Debug.Log("Return Initial Pos camera");
         }
 
 

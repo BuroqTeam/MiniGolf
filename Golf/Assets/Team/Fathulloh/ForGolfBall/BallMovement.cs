@@ -50,15 +50,14 @@ namespace GolfBall_Smooth
             {   // Cast a ray from the camera to the mouse position
                 Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                Debug.Log("BallMovement is working");
+                
                 // Check if the ray hits a GameObject
                 if (Physics.Raycast(ray, out hit))
                 {   // The hit.collider.gameObject is the GameObject that was clicked
                     GameObject clickedObject = hit.collider.gameObject;
                     
                     if (clickedObject.name.Equals(EqualName) && !IsBallMoving) // "GolfBall"
-                    {
-                        
+                    {                        
                         IsBallClicked = true;
                         _previousClickPosition = MainCamera.ScreenToViewportPoint(Input.mousePosition);
                         InitialPosBeforeHit = gameObject.transform.position;
@@ -97,7 +96,7 @@ namespace GolfBall_Smooth
                 if (IsBallClicked && !IsBallMoving)
                 {
                     //Debug.Log("MainCamera.fieldOfView = " + MainCamera.fieldOfView);
-                    //Debug.Log("Input.GetMouseButtonUp(0)");
+                    
                     IsBallClicked = false;
                 }
             }            
@@ -177,7 +176,15 @@ namespace GolfBall_Smooth
                 .SetEase(Ease.InCirc)
                 .SetDelay(0.25f);
 
+            StartCoroutine(BallInvisible());
             //PlayerPrefs.SetInt("Level" + LevelNumber.ToString(), 1);
+        }
+
+
+        IEnumerator BallInvisible()
+        {
+            yield return new WaitForSeconds(0.5f);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
 
     }
