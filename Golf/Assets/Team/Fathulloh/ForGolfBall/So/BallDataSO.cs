@@ -17,5 +17,12 @@ public class BallDataSO : ScriptableObject
     /// Har bir kvadratning o'lchami. Bu UI da qancha masofa bosganini ko'rsatish uchun kerak.
     /// </summary>
     public float SizeEachCell;   // 0.25f
-
+    /// <summary>
+    /// Line ning eng kichik uzunligi. 
+    /// </summary>
+    public float MinimalLengthOfLine;  // 0.027 dan yuqori qiymat berilishi kerak.
+    /// <summary>
+    /// Linening eng yuqori uzunligi.
+    /// </summary>
+    public float MaximalLengthOfLine;  // 0.34
 }

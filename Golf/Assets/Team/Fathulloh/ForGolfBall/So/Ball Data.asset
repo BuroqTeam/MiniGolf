@@ -15,3 +15,5 @@ MonoBehaviour:
   ForceMultiplier: 50
   MinimalSpeed: 0.18
   SizeEachCell: 0.25
+  MinimalLengthOfLine: 0.029
+  MaximalLengthOfLine: 0.35

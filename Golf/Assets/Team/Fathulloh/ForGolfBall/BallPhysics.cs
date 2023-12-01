@@ -27,7 +27,7 @@ namespace GolfBall_Smooth
         }
 
 
-        private void Update()
+        private void FixedUpdate() 
         {
             ChangeBallPhysics();
         }
@@ -65,5 +65,14 @@ namespace GolfBall_Smooth
         }
 
         
+        public void FinishChangeBallPhysics()
+        {
+            _rigidbody.isKinematic = true;
+            //_rigidbody.drag = 25;
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+            //_rigidbody.isKinematic = false;
+        }
+
     }
 }

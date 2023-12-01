@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace GolfBall_Smooth
 {
-    public class BallFollower : MonoBehaviour
+    /// <summary>
+    /// This used to following ball gameObject and smooth moving camera. 
+    /// </summary>
+    public class BallFollower : MonoBehaviour // I don't use this.
     {
         [SerializeField] private GolfBall _golfBall;
         [SerializeField] private Camera _mainCamera;

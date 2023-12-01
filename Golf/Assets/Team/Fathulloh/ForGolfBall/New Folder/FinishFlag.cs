@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GolfBall_Smooth
 {
@@ -8,28 +8,47 @@ namespace GolfBall_Smooth
     {
         public GameEvent FinishSO;
         public GameObject FinishParticle;
-
-        bool _isActive = true;
-
+                
+        private bool _isActive = true;
+        public UnityEvent LoadSceneEvent;
+        
+        
         private void OnTriggerEnter(Collider other)
         {
             if (_isActive)
             {
-                FinishAction();
-
-            }           
+                StartCoroutine(FinishAction());
+                other.gameObject.GetComponent<BallPhysics>().FinishChangeBallPhysics();
+            }
         }
 
 
-        void FinishAction()
+        IEnumerator FinishAction()
         {
             _isActive = false;
-            //gameObject.GetComponent<Collider>().enabled = false;
-            Instantiate(FinishParticle);
+            FinishParticle.SetActive(true);
+            yield return new WaitForSeconds(0.05f);
             FinishSO.Raise();
-
+            
+            yield return new WaitForSeconds(1.6f);
+            LoadSceneEvent.Invoke();
             Debug.Log("Finish Action is work.");
         }
 
+
+        /*
+            //GameObject particleObj = Instantiate(FinishParticle, _parentOfParticle.transform);
+            //particleObj.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);            
+
+            ParticleSystem particleSystem = FinishParticle.GetComponent<ParticleSystem>();
+            var mainModule = particleSystem.main;
+            mainModule.startSize = 0.25f;
+
+            Instantiate(particleSystem, _parentOfParticle.transform);
+            yield return new WaitForSeconds(3f);
+
+            FinishSO.Raise();
+            Debug.Log("Finish Action is work.");
+        */
     }
 }
