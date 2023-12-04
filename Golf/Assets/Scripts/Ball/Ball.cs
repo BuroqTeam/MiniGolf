@@ -32,7 +32,7 @@ namespace MiniGolf
         private float _movementThreshold = 0.01f;
         private LineDrawer _colorfulLine;
         [SerializeField]
-        private int _diamondScore;
+        private int _diamondScore = 0;
         [SerializeField]
         private int _hitScore;
         bool _isTrue = false;
@@ -286,9 +286,8 @@ namespace MiniGolf
             Scene m_Scene = SceneManager.GetActiveScene();
 
             char chr = m_Scene.name[m_Scene.name.Length - 1];
-            GameManager.Instance.UpdateResultInfo(chr.ToString(), HitScore.text, DiamondScore.text);
-            //GameManager.Instance.UpdateResultInfo(m_Scene.name[m_Scene.name.Length - 1].ToString(), HitScore.text, DiamondScore.text);
-            //Debug.Log(chr.ToString());
+            GameManager.Instance.UpdateResultInfo(chr.ToString(), HitScore.text, _diamondScore.ToString());
+            Debug.Log( "chr = " + chr + " HitScore = " + HitScore.text + " DiamondScore = " + _diamondScore.ToString());            
         }
 
         public void IncrementCoinScore()

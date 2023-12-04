@@ -57,10 +57,10 @@ namespace MiniGolf
 
         public void UpdateResultInfo(string level, string numberOfHits, string coin)
         {
+            //_data.eventSq = "1";
             //_data.roundNo = "1";
             //_data.memberId = "1";
             //_data.gameId = "1";
-            //_data.eventSq = "1";
             _data.holeNo = level;
             _data.hole = numberOfHits;
             _data.star = coin;
@@ -106,6 +106,7 @@ namespace MiniGolf
         {
             ResponseResultInfo responce = await HttpService.SaveResultInfo(_data);            
             Debug.Log(responce.result);
+            //Debug.Log(_data.eventSq + " " + _data.roundNo + " " + _data.memberId + " " + _data.gameId + " " + _data.holeNo + " " + _data.hole + " " + _data.star);
         }
         
     }

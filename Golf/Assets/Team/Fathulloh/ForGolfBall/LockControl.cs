@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace GolfBall_Smooth
 {
-    public class LockManager : MonoBehaviour
+    public class LockControl : MonoBehaviour
     {
         public List<GameObject> LevelButtons;
 
@@ -27,7 +27,6 @@ namespace GolfBall_Smooth
                 {
                     LevelButtons[i].GetComponent<Button>().interactable = true;
                     LevelButtons[i].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
-                    Debug.Log(i);
                 }
             }
 
@@ -36,6 +35,5 @@ namespace GolfBall_Smooth
             //    PlayerPrefs.SetInt("Level" + (i).ToString(), 0);
             //}
         }
-
     }
 }
