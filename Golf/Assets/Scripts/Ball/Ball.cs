@@ -287,7 +287,7 @@ namespace MiniGolf
 
             char chr = m_Scene.name[m_Scene.name.Length - 1];
             GameManager.Instance.UpdateResultInfo(chr.ToString(), HitScore.text, _diamondScore.ToString());
-            Debug.Log( "chr = " + chr + " HitScore = " + HitScore.text + " DiamondScore = " + _diamondScore.ToString());            
+            //Debug.Log( "chr = " + chr + " HitScore = " + HitScore.text + " DiamondScore = " + _diamondScore.ToString());
         }
 
         public void IncrementCoinScore()
