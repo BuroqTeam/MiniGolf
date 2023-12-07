@@ -10,6 +10,7 @@ namespace MiniGolf
 {
     public class Ball : MonoBehaviour
     {
+       
         public int LevelNumber;     // 1, 2, 3
         public GameEvent BallHitSO;
         public Camera MainCamera;
