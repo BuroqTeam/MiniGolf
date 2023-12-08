@@ -9,6 +9,7 @@ namespace MiniGolf
 {
     public class GameManager : MonoBehaviour
     {
+        public TMP_Text ErrorException;
         public static GameManager Instance;
         public GameState State;
 
@@ -16,14 +17,20 @@ namespace MiniGolf
 
         private ResultInfo _data;
 
-        //public TMP_Text ServerText1;
-        //public TMP_Text ServerText2;
-        //public TMP_Text ServerText3;
-        //public TMP_Text ServerText4;
-
+        
         private void Awake()
         {
             Instance = this;
+
+            //ResultInfo info = new ResultInfo();
+            //info.eventSq = "11";
+            //info.roundNo = "11";
+            //info.memberId = "11";
+            //info.gameId = "11";
+            //info.holeNo = "1";
+            //info.hole = "1";
+            //info.star = "1";
+            //StartCoroutine(HttpService.NewSaveResultInfo(info));
         }
 
         private void Start()
@@ -31,7 +38,7 @@ namespace MiniGolf
             UpdateGameState(GameState.EntryAnimation);
             _data = new ResultInfo();
         }
-
+         
 
         public void UpdateGameState(GameState newState)
         {
@@ -57,23 +64,19 @@ namespace MiniGolf
 
         public void UpdateResultInfo(string level, string numberOfHits, string coin)
         {
+            //_data.eventSq = "1";
             //_data.roundNo = "1";
             //_data.memberId = "1";
             //_data.gameId = "1";
-            //_data.eventSq = "1";
             _data.holeNo = level;
             _data.hole = numberOfHits;
             _data.star = coin;
+            
+            
             WriteUserScoreToServer();
         }
 
-        //public void GetUserID(string eventSq)
-        //{
-        //    _data.eventSq = eventSq;  
-        //    string str = eventSq;
-        //    ServerText.text = " = " + str + " = ";           
-        //}
-
+        
         public void GetEventSq(string eventSq)
         {
             _data.eventSq = eventSq;
@@ -102,11 +105,37 @@ namespace MiniGolf
             //ServerText4.text = " = " + str + " = ";
         }
 
-        public async void WriteUserScoreToServer()
+        public void WriteUserScoreToServer()
         {
-            ResponseResultInfo responce = await HttpService.SaveResultInfo(_data);            
-            Debug.Log(responce.result);
+
+            try
+            {                
+                StartCoroutine(HttpService.NewSaveResultInfo(_data));
+                //ResponseResultInfo responce = await HttpService.SaveResultInfo(_data);
+
+                //ErrorException.text = responce.result;
+                //Debug.Log(responce.result);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                ErrorException.text = e.Message;
+            }
+
+
+            //try
+            //{
+            //    StartCoroutine(HttpService.SaveResultInfo(_data));
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.LogException(e);
+            //    ErrorException.text = e.Message;
+            //}
+
+            //Debug.Log(_data.eventSq + " " + _data.roundNo + " " + _data.memberId + " " + _data.gameId + " " + _data.holeNo + " " + _data.hole + " " + _data.star);
         }
+             
         
     }
 

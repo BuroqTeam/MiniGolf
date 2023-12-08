@@ -15,7 +15,7 @@ public class LockManager : MonoBehaviour
 
 
     void ButtonChange()
-    {        
+    {
         for (int i = 1; i < LevelButtons.Count; i++)
         {
             int lev = PlayerPrefs.GetInt("Level" + i);
@@ -25,6 +25,7 @@ public class LockManager : MonoBehaviour
             {
                 LevelButtons[i].GetComponent<Button>().interactable = true;
                 LevelButtons[i].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
+                //Debug.Log(i);
             }
         }
 
@@ -33,7 +34,5 @@ public class LockManager : MonoBehaviour
         //    PlayerPrefs.SetInt("Level" + (i).ToString(), 0);
         //}
     }
-
-
 
 }

@@ -1,17 +1,16 @@
-﻿ 
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
+using System.Collections;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ApiTest
 { 
-    public class HttpService
+    public class HttpService 
     {
         #region Url  
         public static string SERVER_URL = "https://api.unbizgolf.kr/event/mini/game/save?";  
@@ -30,13 +29,47 @@ namespace ApiTest
             try
             {
                 string strUrl = $"{SERVER_URL}eventSq={data.eventSq}&roundNo={data.roundNo}&memberId={data.memberId}&gameId={data.gameId}&holeNo={data.holeNo}&hole={data.hole}&star={data.star}";
-                response.result = await RequestGetMethod(strUrl);
+                //response.result = await RequestGetMethod(strUrl);
             }
             catch (JsonReaderException) { return CreateResponseObj<ResponseResultInfo>(); }
             catch (HttpRequestException) { return CreateResponseObj<ResponseResultInfo>(); }
+            //catch (Exception e)
+            //{                
+            //    response.result = "Error: " + e.Message;
+            //}
 
             return response;
         }
+
+        public static IEnumerator NewSaveResultInfo(ResultInfo data)
+        {
+            ResponseResultInfo response = new ResponseResultInfo();
+            string strUrl = $"{SERVER_URL}eventSq={data.eventSq}&roundNo={data.roundNo}&memberId={data.memberId}&gameId={data.gameId}&holeNo={data.holeNo}&hole={data.hole}&star={data.star}";
+
+            using (UnityWebRequest request = UnityWebRequest.Get(strUrl))
+            {
+                yield return request.SendWebRequest();
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError(request.error);
+                    response.result =0; // Set failure result
+                }
+                else
+                {
+
+                    //response = JsonConvert.DeserializeObject<ResponseResultInfo>(request.downloadHandler.text, settings);
+                    if (request.downloadHandler.text.IsUnityNull())
+                    {
+                        response.result = request.downloadHandler.text.Equals("1")? 1 : 0;
+                    } 
+                }
+            }
+
+         
+        }
+
+
 
 
         private static async Task<string> RequestGetMethod(string url)
@@ -54,9 +87,15 @@ namespace ApiTest
             T t = new T();
             //t.Check();
             return t;
-        }
-         
+        }         
+
     } 
+
+
+
+
+
+
 
     public interface IResponse
     {
@@ -68,7 +107,7 @@ namespace ApiTest
         /// <summary>
         /// 1 = success, otherwise failed
         /// </summary>
-        public string result { get; set; } = "0";
+        public int result { get; set; } = 0;
     }
 
     public class ResponseResultInfo : Response, IResponse

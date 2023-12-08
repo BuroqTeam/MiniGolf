@@ -11,7 +11,7 @@ namespace GolfBall_Smooth
     {
         public enum TypeOfHits { WithLine, WithButton }
         public TypeOfHits CurrentHit;
-
+        public int LevelNumber;
         public Camera MainCamera;
         public GameEvent BallHitSO;
         public BallDataSO BallData;
@@ -40,7 +40,7 @@ namespace GolfBall_Smooth
             EqualName = gameObject.name;
             _initialFieldView = MainCamera.fieldOfView;
         }
-
+               
 
         void Update()
         {
@@ -96,8 +96,8 @@ namespace GolfBall_Smooth
                 if (IsBallClicked && !IsBallMoving)
                 {
                     //Debug.Log("MainCamera.fieldOfView = " + MainCamera.fieldOfView);
-                    
-                    IsBallClicked = false;
+                    //IsBallClicked = false;
+                    StartCoroutine(IsForceAddedChangeValue());
                 }
             }            
 
@@ -105,7 +105,14 @@ namespace GolfBall_Smooth
             //{
             //    SetBallMove(); // ResetBallPos()
             //}
-        }         
+        }
+
+
+        IEnumerator IsForceAddedChangeValue()
+        {
+            yield return new WaitForSeconds(0.12f);
+            IsBallClicked = false;
+        }
 
 
         /// <summary>
@@ -114,16 +121,16 @@ namespace GolfBall_Smooth
         public void Sink()
         {
             // Ball is being sinked
-        }        
-
-
-        public void AddForceToBall(Vector3 forceDirection, float currentLength, float maxLength)
-        {
-            float percentage = currentLength / maxLength;
-            _rigidBody.AddForce(forceDirection * BallData.ForceMultiplier * percentage/*, ForceMode.Impulse*/);            
         }
 
         
+        public void AddForceToBall(Vector3 forceDirection, float currentLength, float maxLength)
+        {
+            float percentage = currentLength / maxLength;
+            _rigidBody.AddForce(forceDirection * BallData.ForceMultiplier * percentage/*, ForceMode.Impulse*/);
+        }
+
+               
         /// <summary>
         /// Ballni boshlang'ich pozitsiyaga qaytaruvchi kod. 
         /// </summary>
@@ -177,13 +184,13 @@ namespace GolfBall_Smooth
                 .SetDelay(0.25f);
 
             StartCoroutine(BallInvisible());
-            //PlayerPrefs.SetInt("Level" + LevelNumber.ToString(), 1);
+            PlayerPrefs.SetInt("Solid" + LevelNumber.ToString(), 1);
         }
 
 
         IEnumerator BallInvisible()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
             gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
 

@@ -25,7 +25,7 @@ namespace GolfBall_Smooth
         }
 
         
-        void LateUpdate()
+        void Update()
         {            
             transform.Rotate(_rotation * Time.deltaTime);
 
@@ -34,7 +34,7 @@ namespace GolfBall_Smooth
                 _spriteRenderer.enabled = true;
                 //Debug.Log("Is work");
             }
-            else if (_ballMovement.IsBallOut || _ballMovement.IsBallMoving || _ballMovement.IsBallClicked)
+            else /*if (_ballMovement.IsBallOut || _ballMovement.IsBallMoving || _ballMovement.IsBallClicked)*/
             {
                 _spriteRenderer.enabled = false;
                 //Debug.Log("Is not work");

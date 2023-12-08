@@ -32,4 +32,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Levels/Level 8.unity
     guid: 3af578fc017f09a4ea773741e0713f5a
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/SolidMenu.unity
+    guid: 57708998d08ffac4f8c8dc86028e468a
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 1.unity
+    guid: ebec86ce18391474fa9eb47ddd95c644
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 2.unity
+    guid: 6a967f5745262d64f9bd716fb8c28c08
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 3.unity
+    guid: 3881caf4443c3de44b40b01276b5f3e4
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 4.unity
+    guid: 9683accc716074549a635e07686c3c27
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 5.unity
+    guid: abb7b43df0b327a49b321d2ea878c3b3
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 6.unity
+    guid: 55c7e758ac6a2d04892d5ecd7351e90d
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 7.unity
+    guid: 61441f05705f802489a3137245491b08
+  - enabled: 0
+    path: Assets/Team/Fathulloh/ForGolfBall/Solid 8.unity
+    guid: 526e12641317dc545bfe83589dd42011
   m_configObjects: {}

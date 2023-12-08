@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 7133791348558288116}
   m_Layer: 0
   m_Name: Banner_KPGA
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
