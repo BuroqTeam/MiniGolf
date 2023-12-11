@@ -2343,19 +2343,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8165374281783109164, guid: c655f917266a4434ba8a559060e4fb80, type: 3}
   m_PrefabInstance: {fileID: 179202404}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &234395585307145203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3872556897395474190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86896b35108b80740bd3c7ebcb795368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  State: 0
 --- !u!4 &2792036958326831526
 Transform:
   m_ObjectHideFlags: 0
@@ -2380,7 +2367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2792036958326831526}
-  - component: {fileID: 234395585307145203}
+  - component: {fileID: 3872556897395474191}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2388,6 +2375,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3872556897395474191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3872556897395474190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8233ac7c5f9dc0046990cfbf3cfa36e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  State: 0
+  BallMove: {fileID: 0}
 --- !u!1001 &7629186528700053670
 PrefabInstance:
   m_ObjectHideFlags: 0

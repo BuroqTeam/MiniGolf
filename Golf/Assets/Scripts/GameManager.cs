@@ -22,21 +22,31 @@ namespace MiniGolf
         {
             Instance = this;
 
-            //ResultInfo info = new ResultInfo();
-            //info.eventSq = "11";
-            //info.roundNo = "11";
-            //info.memberId = "11";
-            //info.gameId = "11";
+            ResultInfo info = new ResultInfo();
+            info.eventSq = "1";
+            info.roundNo = "1";
+            info.memberId = "1";
+            info.gameId = "1";
             //info.holeNo = "1";
             //info.hole = "1";
             //info.star = "1";
             //StartCoroutine(HttpService.NewSaveResultInfo(info));
+
+            GameInfo response = new GameInfo();
+            StartCoroutine(HttpService.GetGameInfo(info, HandleGameInfoResponse));
+            int g = 0;
+        }
+
+        private void HandleGameInfoResponse(GameInfo response)
+        {
+            // Use the 'response' data here in your GameManager
+            Debug.Log($"Received GameInfo: {response}");
         }
 
         private void Start()
         {
             UpdateGameState(GameState.EntryAnimation);
-            _data = new ResultInfo();
+            
         }
          
 
@@ -68,10 +78,15 @@ namespace MiniGolf
             //_data.roundNo = "1";
             //_data.memberId = "1";
             //_data.gameId = "1";
+
+            _data.eventSq = PlayerPrefs.GetString("eventSq");
+            _data.roundNo = PlayerPrefs.GetString("roundNo");
+            _data.memberId = PlayerPrefs.GetString("memberId");
+            _data.gameId = PlayerPrefs.GetString("gameId");
+            
             _data.holeNo = level;
             _data.hole = numberOfHits;
-            _data.star = coin;
-            
+            _data.star = coin;            
             
             WriteUserScoreToServer();
         }
@@ -79,7 +94,10 @@ namespace MiniGolf
         
         public void GetEventSq(string eventSq)
         {
+            _data = new ResultInfo();
             _data.eventSq = eventSq;
+            //ErrorException.text = eventSq;
+            PlayerPrefs.SetString("eventSq", eventSq);
             //string str = eventSq;
             //ServerText1.text = " = " + str + " = ";
         }
@@ -87,6 +105,7 @@ namespace MiniGolf
         public void GetRoundNo(string roundNo)
         {
             _data.roundNo = roundNo;
+            PlayerPrefs.SetString("roundNo", roundNo);
             //string str = roundNo;
             //ServerText2.text = " = " + str + " = ";
         }
@@ -94,6 +113,7 @@ namespace MiniGolf
         public void GetMemberId(string memberId)
         {
             _data.memberId = memberId;
+            PlayerPrefs.SetString("memberId", memberId);
             //string str = memberId;
             //ServerText3.text = " = " + str + " = ";
         }
@@ -101,13 +121,21 @@ namespace MiniGolf
         public void GetGameId(string gameId)
         {
             _data.gameId = gameId;
+            PlayerPrefs.SetString("gameId", gameId);
             //string str = gameId;
             //ServerText4.text = " = " + str + " = ";
+
+            //_data.eventSq = "1";
+            //_data.roundNo = "1";
+            //_data.memberId = "1";
+            //_data.gameId = "1";
+
+            //HttpService.GetGameInfo
         }
 
         public void WriteUserScoreToServer()
         {
-
+            Debug.Log("WriteUserScoreToServer");
             try
             {                
                 StartCoroutine(HttpService.NewSaveResultInfo(_data));
@@ -119,7 +147,8 @@ namespace MiniGolf
             catch (Exception e)
             {
                 Debug.LogException(e);
-                ErrorException.text = e.Message;
+                //ErrorException.text = e.Message;
+                //ErrorException.text = HttpService.stringError;
             }
 
 
@@ -135,7 +164,17 @@ namespace MiniGolf
 
             //Debug.Log(_data.eventSq + " " + _data.roundNo + " " + _data.memberId + " " + _data.gameId + " " + _data.holeNo + " " + _data.hole + " " + _data.star);
         }
-             
+
+
+        public void WriteDataFromServer()
+        {
+            //_data.eventSq = "1";
+            //_data.roundNo = "1";
+            //_data.memberId = "1";
+            //_data.gameId = "1";
+            ErrorException.text = "eventSq=" + _data.eventSq + " roundNo=" + _data.roundNo + " memberId=" + _data.memberId + " gameId=" + _data.gameId;
+        }
+        
         
     }
 

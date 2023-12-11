@@ -9,9 +9,9 @@ namespace GolfBall_Smooth
     /// <summary>
     /// New game manager for gol ball smooth movement.
     /// </summary>
-    public class GameManager : MonoBehaviour
+    public class GManager : MonoBehaviour
     {
-        public static GameManager Instance;
+        public static GManager Instance;
         public GameState State;
 
         //public GolfBall BallMove;
@@ -22,7 +22,7 @@ namespace GolfBall_Smooth
 
         private void Awake()
         {
-            Instance = this;
+            //Instance = this;
         }
 
         private void Start()
@@ -55,10 +55,10 @@ namespace GolfBall_Smooth
 
         public void UpdateResultInfo(string level, string numberOfHits, string coin)
         {            
-            _data.holeNo = level;
-            _data.hole = numberOfHits;
-            _data.star = coin;
-            WriteUserScoreToServer();
+            //_data.holeNo = level;
+            //_data.hole = numberOfHits;
+            //_data.star = coin;
+            //WriteUserScoreToServer();
         }
 
         
@@ -90,11 +90,11 @@ namespace GolfBall_Smooth
             //ServerText4.text = " = " + str + " = ";
         }
 
-        public async void WriteUserScoreToServer()
-        {
-            ResponseResultInfo responce = await HttpService.SaveResultInfo(_data);
-            Debug.Log(responce.result);
-        }
+        //public async void WriteUserScoreToServer()
+        //{
+        //    //ResponseResultInfo responce = await HttpService.SaveResultInfo(_data);
+        //    //Debug.Log(responce.result);
+        //}
 
     }
 
