@@ -17,8 +17,8 @@ namespace ApiTest
         public delegate void GameInfoCallback(GameInfo response);
 
         #region Url  
-        public static string SERVER_URL = "https://api.unbizgolf.kr/event/mini/game/save?";
-        public static string GET_GAME_INFO = "https://api.unbizgolf.kr/event/mini/game/?";
+        public static string SERVER_URL = "https://api.kpga.co.kr/event/mini/game/save?";
+        public static string GET_GAME_INFO = "https://api.kpga.co.kr/event/mini/game/?";
         #endregion
          
         private static JsonSerializerSettings settings = new JsonSerializerSettings

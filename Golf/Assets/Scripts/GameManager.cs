@@ -8,47 +8,84 @@ using TMPro;
 namespace MiniGolf
 {
     public class GameManager : MonoBehaviour
-    {
+    {        
         public TMP_Text ErrorException;
+        public TMP_Text ButtonText;
         public static GameManager Instance;
         public GameState State;
 
         public static event Action<GameState> OnGameStateChanged;
 
         private ResultInfo _data;
+        [SerializeField] private LockManager _lockManager;
 
-        
         private void Awake()
         {
             Instance = this;
-
-            ResultInfo info = new ResultInfo();
-            info.eventSq = "1";
-            info.roundNo = "1";
-            info.memberId = "1";
-            info.gameId = "1";
+            //Debug.Log(PlayerPrefs.GetString("eventSq") + " " + PlayerPrefs.GetString("roundNo") + " " + PlayerPrefs.GetString("memberId") + " " + PlayerPrefs.GetString("gameId"));
+            
+            //ResultInfo info = new ResultInfo();
+            //info.eventSq = PlayerPrefs.GetString("eventSq") /*"3"*/;
+            //info.roundNo = PlayerPrefs.GetString("roundNo") /*"3"*/;
+            //info.memberId = PlayerPrefs.GetString("memberId") /*"3"*/;
+            //info.gameId = PlayerPrefs.GetString("gameId") /*"3"*/;
             //info.holeNo = "1";
             //info.hole = "1";
             //info.star = "1";
-            //StartCoroutine(HttpService.NewSaveResultInfo(info));
 
-            GameInfo response = new GameInfo();
-            StartCoroutine(HttpService.GetGameInfo(info, HandleGameInfoResponse));
-            int g = 0;
+            //if (ErrorException != null)
+            //{
+            //    string str = ErrorException.text;
+            //    ErrorException.text = str + "Awake";
+            //}
+            //else
+            //    Debug.Log("Null");
+
+            //GameInfo response = new GameInfo();
+            //StartCoroutine(HttpService.GetGameInfo(info, HandleGameInfoResponse));            
         }
 
         private void HandleGameInfoResponse(GameInfo response)
         {
             // Use the 'response' data here in your GameManager
-            Debug.Log($"Received GameInfo: {response}");
+            //Debug.Log($"Received GameInfo: {response}");
+
+            if (_lockManager != null) 
+            {
+                //Debug.Log(response.holeNo);
+                _lockManager.ActivateButtons(response.holeNo);
+                //ButtonText.text = response.holeNo.ToString();
+            }
+            
         }
+
 
         private void Start()
         {
-            UpdateGameState(GameState.EntryAnimation);
+            //if (ErrorException != null)
+            //{
+            //    string str = ErrorException.text;
+            //    ErrorException.text = str + "Start";
+            //}
+
+            _data = new ResultInfo();
+            _data.eventSq = PlayerPrefs.GetString("eventSq");
+            _data.roundNo = PlayerPrefs.GetString("roundNo");
+            _data.memberId = PlayerPrefs.GetString("memberId");
+            _data.gameId = PlayerPrefs.GetString("gameId");
+
+            //_data.eventSq = "4";
+            //_data.roundNo = "4";
+            //_data.memberId = "4";
+            //_data.gameId = "4";
+
+            GameInfo response = new GameInfo();
+            StartCoroutine(HttpService.GetGameInfo(_data, HandleGameInfoResponse));
+
             
+            UpdateGameState(GameState.EntryAnimation);            
         }
-         
+        
 
         public void UpdateGameState(GameState newState)
         {
@@ -78,11 +115,11 @@ namespace MiniGolf
             //_data.roundNo = "1";
             //_data.memberId = "1";
             //_data.gameId = "1";
-
-            _data.eventSq = PlayerPrefs.GetString("eventSq");
-            _data.roundNo = PlayerPrefs.GetString("roundNo");
-            _data.memberId = PlayerPrefs.GetString("memberId");
-            _data.gameId = PlayerPrefs.GetString("gameId");
+            
+            //_data.eventSq = PlayerPrefs.GetString("eventSq");
+            //_data.roundNo = PlayerPrefs.GetString("roundNo");
+            //_data.memberId = PlayerPrefs.GetString("memberId");
+            //_data.gameId = PlayerPrefs.GetString("gameId");
             
             _data.holeNo = level;
             _data.hole = numberOfHits;
@@ -96,7 +133,7 @@ namespace MiniGolf
         {
             _data = new ResultInfo();
             _data.eventSq = eventSq;
-            //ErrorException.text = eventSq;
+            
             PlayerPrefs.SetString("eventSq", eventSq);
             //string str = eventSq;
             //ServerText1.text = " = " + str + " = ";
@@ -123,14 +160,7 @@ namespace MiniGolf
             _data.gameId = gameId;
             PlayerPrefs.SetString("gameId", gameId);
             //string str = gameId;
-            //ServerText4.text = " = " + str + " = ";
-
-            //_data.eventSq = "1";
-            //_data.roundNo = "1";
-            //_data.memberId = "1";
-            //_data.gameId = "1";
-
-            //HttpService.GetGameInfo
+            //ServerText4.text = " = " + str + " = ";            
         }
 
         public void WriteUserScoreToServer()
@@ -161,8 +191,6 @@ namespace MiniGolf
             //    Debug.LogException(e);
             //    ErrorException.text = e.Message;
             //}
-
-            //Debug.Log(_data.eventSq + " " + _data.roundNo + " " + _data.memberId + " " + _data.gameId + " " + _data.holeNo + " " + _data.hole + " " + _data.star);
         }
 
 
