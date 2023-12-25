@@ -29,7 +29,7 @@ namespace GolfBall_Smooth //F++
         
         public TMP_Text DistanceTMP; // F--
         private float forceMultiplier = 50.0f; // 500 drag 0.5f, mass 0.5f
-        private float minimalSpeed = 0.12f;
+        //private float minimalSpeed = 0.12f;
         private float sizeEachCell = 0.25f;
         
         private float _initialFieldView;
