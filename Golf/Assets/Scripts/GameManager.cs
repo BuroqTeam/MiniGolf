@@ -62,12 +62,6 @@ namespace MiniGolf
 
         private void Start()
         {
-            //if (ErrorException != null)
-            //{
-            //    string str = ErrorException.text;
-            //    ErrorException.text = str + "Start";
-            //}
-
             _data = new ResultInfo();
             _data.eventSq = PlayerPrefs.GetString("eventSq");
             _data.roundNo = PlayerPrefs.GetString("roundNo");

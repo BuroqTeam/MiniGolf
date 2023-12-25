@@ -38,22 +38,7 @@ public class LockManager : MonoBehaviour
 
     public void ActivateButtons(int number)
     {
-        //for(int i = 0; i < LevelButtons.Count; i++)
-        //{
-        //    if (number == i)
-        //    {
-        //        LevelButtons[i].GetComponent<Button>().interactable = true;
-        //        LevelButtons[i].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
-        //    }
-        //    else if (number == LevelButtons.Count && number > i) 
-        //    {
-        //        LevelButtons[LevelButtons.Count - 1].GetComponent<Button>().interactable = true;
-        //        LevelButtons[LevelButtons.Count - 1].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
-        //    }
-        //    else if(number == LevelButtons.Count && )
-        //}
-
-        Debug.Log(number);
+        //Debug.Log(number);
         for (int i = 0; i < LevelButtons.Count; i++)
         {
             if (i == number)
@@ -63,12 +48,12 @@ public class LockManager : MonoBehaviour
                 //Debug.Log(i);
                 break;
             }
-            else if (i == LevelButtons.Count - 1 && number == LevelButtons.Count)
-            {
-                LevelButtons[LevelButtons.Count - 1].GetComponent<Button>().interactable = true;
-                LevelButtons[LevelButtons.Count - 1].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
-                //Debug.Log("Last");
-            }
+            //else if (i == LevelButtons.Count - 1 && number == LevelButtons.Count)
+            //{
+            //    LevelButtons[LevelButtons.Count - 1].GetComponent<Button>().interactable = true;
+            //    LevelButtons[LevelButtons.Count - 1].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
+            //    //Debug.Log("Last");
+            //}
             else if (number <= LevelButtons.Count)
             {
                 LevelButtons[i].GetComponent<Button>().interactable = false;
@@ -76,7 +61,23 @@ public class LockManager : MonoBehaviour
                 //Debug.Log("i = " + i);
             }
         }
-
     }
+
+
+
+    //for(int i = 0; i < LevelButtons.Count; i++)
+    //{
+    //    if (number == i)
+    //    {
+    //        LevelButtons[i].GetComponent<Button>().interactable = true;
+    //        LevelButtons[i].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
+    //    }
+    //    else if (number == LevelButtons.Count && number > i) 
+    //    {
+    //        LevelButtons[LevelButtons.Count - 1].GetComponent<Button>().interactable = true;
+    //        LevelButtons[LevelButtons.Count - 1].transform.GetChild(2).gameObject.GetComponent<Image>().enabled = false;
+    //    }
+    //    else if(number == LevelButtons.Count && )
+    //}
 
 }
