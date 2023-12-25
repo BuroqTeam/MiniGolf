@@ -8,7 +8,7 @@ namespace MiniGolf
 {
     public class CameraController : MonoBehaviour
     {
-
+        public GameObject UIBoard;
         public Transform Ball;
 
         private Vector3 _offset;
@@ -34,14 +34,16 @@ namespace MiniGolf
         void Update()
         {
             SetCamerePosition();
-
-            if (Input.GetMouseButtonDown(0))
+            
+            if (Input.GetMouseButtonDown(0) && !UIBoard.activeSelf)
             {
                 _previousPosition = _mainCamera.ScreenToViewportPoint(Input.mousePosition);
+                //Debug.Log("Camera Control " + UIBoard.activeSelf);
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !UIBoard.activeSelf)
             {
+                //Debug.Log("11 11 11");
                 if (!Ball.GetComponent<Ball>().IsBallClicked)
                 {
                     Vector3 direction = _previousPosition - _mainCamera.ScreenToViewportPoint(Input.mousePosition);

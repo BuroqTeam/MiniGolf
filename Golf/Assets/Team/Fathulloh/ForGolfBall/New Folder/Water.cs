@@ -15,7 +15,7 @@ namespace GolfBall_Smooth
             WaterSO.Raise();
             // Instantiate(WaterParticle);
             Debug.Log("Water Collistion Action");
-            GameManager.Instance.BallMove.Sink();
+            //GManager.Instance.BallMove.Sink();
         }
     }
 }

@@ -26,8 +26,8 @@ namespace GolfBall_Smooth
 
         public void WriteWayLength()
         {
-            Vector3 vec1 = GameManager.Instance.BallMove.InitialPosBeforeHit;
-            Vector3 vec2 = GameManager.Instance.BallMove.transform.position;
+            Vector3 vec1 = GManager.Instance.BallMove.InitialPosBeforeHit;
+            Vector3 vec2 = GManager.Instance.BallMove.transform.position;
 
             float walkingLength = Mathf.RoundToInt(Vector3.Distance(vec1, vec2) / BallDataSo.SizeEachCell);
             if (vec2.x ==0 && vec2.z == 0)

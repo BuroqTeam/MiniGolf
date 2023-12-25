@@ -57,11 +57,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/GolfStupid.loader.js";
+      var loaderUrl = buildUrl + "/Golf_20231207_19_45.loader.js";
       var config = {
-        dataUrl: buildUrl + "/GolfStupid.data.unityweb",
-        frameworkUrl: buildUrl + "/GolfStupid.framework.js.unityweb",
-        codeUrl: buildUrl + "/GolfStupid.wasm.unityweb",
+        dataUrl: buildUrl + "/Golf_20231207_19_45.data.unityweb",
+        frameworkUrl: buildUrl + "/Golf_20231207_19_45.framework.js.unityweb",
+        codeUrl: buildUrl + "/Golf_20231207_19_45.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Buroq",
         productName: "Mini Golf",
@@ -106,6 +106,25 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+
+                
+
+                const strUrl = window.location.href;
+                const url = new URL(strUrl);
+                const urlParams = url.searchParams; 
+
+                const eventSq = urlParams.get('eventSq');
+                const roundNo = urlParams.get('roundNo');
+                const memberId = urlParams.get('memberId');
+                const gameId = urlParams.get('gameId');   
+
+                unityInstance.SendMessage('GameManager', 'GetEventSq', eventSq);
+                unityInstance.SendMessage('GameManager', 'GetRoundNo', roundNo);
+                unityInstance.SendMessage('GameManager', 'GetMemberId', memberId);
+                unityInstance.SendMessage('GameManager', 'GetGameId', gameId);
+                window.alert(gameId);
+
+
                 loadingBar.style.display = "none";
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
