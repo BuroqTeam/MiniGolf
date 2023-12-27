@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab8bb285cedcd5b47a276b9a89a192ff, type: 3}
-  m_Name: EDataSecond
+  m_Name: FirstEnemyData
   m_EditorClassIdentifier: 
-  enemyName: Second
-  description: Second Enemy
-  enemyModel: {fileID: 776492571743812934, guid: d5172ed9e99b6cf49ab142b5badc8ce1, type: 3}
-  health: 50
-  speed: 3
-  detectRange: 12
-  damage: 3
+  enemyName: First
+  description: First Oclock
+  enemyModel: {fileID: 919132149155446097, guid: 5c0669bd66f517143b7f3a11cbd9c17e, type: 3}
+  health: 20
+  speed: 2
+  detectRange: 10
+  damage: 1

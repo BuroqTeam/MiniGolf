@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab8bb285cedcd5b47a276b9a89a192ff, type: 3}
-  m_Name: EDataSecond
+  m_Name: Flower
   m_EditorClassIdentifier: 
-  enemyName: Second
-  description: Second Enemy
-  enemyModel: {fileID: 776492571743812934, guid: d5172ed9e99b6cf49ab142b5badc8ce1, type: 3}
-  health: 50
-  speed: 3
-  detectRange: 12
-  damage: 3
+  enemyName: Flower
+  description: Purple flower.
+  enemyModel: {fileID: 2954823824624447290, guid: 194e9111af0c33840a49d573f2b26952, type: 3}
+  health: 100
+  speed: 0.5
+  detectRange: 30
+  damage: 1

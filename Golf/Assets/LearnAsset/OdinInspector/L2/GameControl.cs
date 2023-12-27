@@ -7,9 +7,9 @@ namespace Learn_OdinInspector
     public class GameControl : MonoBehaviour
     {   // url = https://www.youtube.com/watch?v=UXYCTHf6MKY&list=PL_HIoK0xBTK4XLJ7aaZ8uNZi7xiPy7VIu&index=23
 
-        [BoxGroup("Game State Info")] // Bir xil xususiyatli o'zgaruvchilarni bir boxga jamlaydi. 
-        [EnumToggleButtons]  // Enumdagi qiymatlarni yonma yon chiqarib beradi
-        [OnValueChanged("StateChange")]   // Qiymat o'zgarganda shu metodni chaqiradi.
+        [BoxGroup("Game State Info")] // BoxGroup yasash va bir nechta obyektni bitta box groupga jamlash uchun ishlatiladi. 
+        [EnumToggleButtons]  // Enumdagi qiymatlarni yonma yon toogle holatida chiqarib beradi
+        [OnValueChanged("StateChange")]   // Qiymat o'zgarganda shu metodni chaqiruvchi attribute.
         [ShowInInspector] // Static qiymatni Inspector panelida ko'rsatadi. 
         public static GameState gameState;
 

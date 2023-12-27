@@ -4,26 +4,26 @@ using UnityEngine;
 namespace Learn_OdinInspector
 {
     [CreateAssetMenu(fileName = "EnemyDataSO", menuName = "ScriptableObjects/EnemyDataSO", order = 20)]
-    [InlineEditor]
+    [InlineEditor] // Scriptable objectning variablelarini boshqa scriptda to'liq ko'rsatish.
     public class EnemyData : ScriptableObject
     {
         [BoxGroup("BasicInfo")]  // Variableni BasicInfo nomli qutiga joylaydi. 
         [LabelWidth(100)]        // Inspector panelida variablega qancha joy ajratilganini belgilaydi. 
         public string enemyName;
         [BoxGroup("BasicInfo")]
-        [TextArea]               // Text yozish uchun alohida joy ajratadi. 
+        [TextArea]               // Text yozish uchun alohida ko'proq joy ajratadi. 
         public string description;
 
         [HorizontalGroup("Game Data", 75)]
-        [PreviewField(75)]
-        [HideLabel]
+        [PreviewField(75)]  // Create Square with current size.
+        [HideLabel]  // ???
         public GameObject enemyModel;
 
 
         [VerticalGroup("Game Data/Stats")]
         [LabelWidth(100)]
         [Range(20, 100)]
-        [GUIColor(0.5f, 1f, 0.5f)]
+        [GUIColor(0.5f, 1f, 0.5f)] // Give color to Variable.
         public int health = 20;
 
         [VerticalGroup("Game Data/Stats")]

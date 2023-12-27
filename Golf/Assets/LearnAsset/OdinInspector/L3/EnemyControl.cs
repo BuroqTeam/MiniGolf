@@ -11,7 +11,7 @@ namespace Learn_OdinInspector
         private float wanderDistance = 3;
 
         [OnValueChanged("LoadEnemy")]
-        //[InlineEditor]
+        [InlineEditor]
         public EnemyData data;
 
         private void Start()

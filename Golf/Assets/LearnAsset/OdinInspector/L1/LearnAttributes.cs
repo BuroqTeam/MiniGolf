@@ -5,7 +5,7 @@ namespace Learn_OdinInspector
 {
     public class LearnAttributes : MonoBehaviour
     {
-        [ShowInInspector]  // Static bo'lgan variableni Inspector panelida ko'rsatadi.
+        [ShowInInspector]  // Show static variable on Inspector 
         public static int Hundred = 100;
         [ShowInInspector]
         public static LearnAttributes LAttributes;
@@ -21,24 +21,24 @@ namespace Learn_OdinInspector
 
         [HorizontalGroup("Buttons")]
         [Button(ButtonSizes.Large)]
-        public static void Function1()
+        public static void Function3()
         {
             Debug.Log("Hundred = " + (Hundred));
         }
 
 
-        [HorizontalGroup("Buttons")]
-        [Button(ButtonSizes.Large)]
-        public static void Function2()
+        [HorizontalGroup("Buttons")]  // Create button horizontal.
+        [Button(ButtonSizes.Large)]  // Choose button size. 
+        public static void Function4()
         {
             Debug.Log("Southand * 10 = " + (Hundred * 10));
         }
 
 
-        [Button]
+        [Button] // Create button
         public static void CustomMessage(string message)
         {
-            Debug.Log(message);
+            Debug.Log(message + 2);
         }
 
 
@@ -49,6 +49,7 @@ namespace Learn_OdinInspector
         [PropertyOrder(-10)]  // Metodning/Buttonning orderi
         private void OpenStaticClassWindow()
         {
+            // This code open Inspector panel of Odin Asset. 
             Sirenix.OdinInspector.Editor.StaticInspectorWindow.InspectType(typeof(LearnAttributes));
         }
 
