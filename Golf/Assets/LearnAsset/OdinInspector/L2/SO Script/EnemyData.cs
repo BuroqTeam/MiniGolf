@@ -10,6 +10,7 @@ namespace Learn_OdinInspector
         [BoxGroup("BasicInfo")]  // Variableni BasicInfo nomli qutiga joylaydi. 
         [LabelWidth(100)]        // Inspector panelida variablega qancha joy ajratilganini belgilaydi. 
         public string enemyName;
+
         [BoxGroup("BasicInfo")]
         [TextArea]               // Text yozish uchun alohida ko'proq joy ajratadi. 
         public string description;

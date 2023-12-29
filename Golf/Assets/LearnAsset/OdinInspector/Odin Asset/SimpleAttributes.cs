@@ -36,4 +36,18 @@ public class SimpleAttributes : MonoBehaviour
         Debug.Log("Function of Button");
     }
 
+
+
+
+    /*
+     //[Header("Vertital Group Title")]
+    //[HorizontalGroup("Color2", Title = "Vertital Group Title")]
+
+    //[VerticalGroup("Color2/Left")]
+    //public string Blue;
+    //[VerticalGroup("Color2/Left")]
+    //public string Yellow;
+    //[VerticalGroup("Color2/Left")]
+    //public string Red;
+     */
 }

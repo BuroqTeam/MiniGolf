@@ -30,14 +30,14 @@ namespace Learn_OdinInspector
 
         [HorizontalGroup("BoxBase", LabelWidth = 40)]
 
-        [BoxGroup("BoxBase/Column 1")]   // BoxBase is base group name, Column1 is column  name.
+        [BoxGroup("BoxBase/Box 1")]   // BoxBase is base group name, Column1 is column  name.
         public string e;
-        [BoxGroup("BoxBase/Column 1")]   // BoxBase is base group name, Column1 is column  name.
+        [BoxGroup("BoxBase/Box 1")]   // BoxBase is base group name, Column1 is column  name.
         public string f;
 
-        [BoxGroup("BoxBase/Column 2")]
+        [BoxGroup("BoxBase/Box 2")]
         public string g;
-        [BoxGroup("BoxBase/Column 2")]
+        [BoxGroup("BoxBase/Box 2")]
         public string h;
 
 

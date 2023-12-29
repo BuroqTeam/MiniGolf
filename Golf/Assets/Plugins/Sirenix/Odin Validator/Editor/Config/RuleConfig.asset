@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 1434321088, guid: afbf832bc46149f5a291e87cab63e46d, type: 3}
   m_Name: RuleConfig
   m_EditorClassIdentifier: 
-  projectRules: []
+  projectRules:
+  - Enabled: 1
+    EnabledOverridden: 1
+    Type: Sirenix.OdinValidator.Editor.Validators.NoEmptyStringsValidator, Sirenix.OdinValidator.Editor
+    Override: 
+  - Enabled: 1
+    EnabledOverridden: 1
+    Type: Sirenix.OdinValidator.Editor.Validators.ListNullElementValidator, Sirenix.OdinValidator.Editor
+    Override: 
+  - Enabled: 1
+    EnabledOverridden: 1
+    Type: LevelSceneValidatorRule, Assembly-CSharp
+    Override: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|LevelSceneValidatorRule,
+      Assembly-CSharp\",\r\n    \"requiredRootObjects\": {\r\n        \"$id\": 1,\r\n       
+      \"$type\": \"1|System.Collections.Generic.List`1[[System.String, mscorlib]],
+      mscorlib\",\r\n        \"$rlength\": 2,\r\n        \"$rcontent\": [\r\n           
+      \"Main Camera\",\r\n            \"Tree\"\r\n        ]\r\n    }\r\n}"
