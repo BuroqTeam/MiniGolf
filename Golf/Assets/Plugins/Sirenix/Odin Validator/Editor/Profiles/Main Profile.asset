@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Main Profile
   m_EditorClassIdentifier: 
   Include:
-  - Enabled: 1
+  - Enabled: 0
     Type: 2
     Asset:
       Path: 
@@ -61,7 +61,7 @@ MonoBehaviour:
       IncludeAssetDependencies: 0
     AssetBundle: 
     AddressableGroup: 
-  - Enabled: 1
+  - Enabled: 0
     Type: 2
     Asset:
       Path: 
@@ -73,16 +73,16 @@ MonoBehaviour:
       IncludeAssetDependencies: 1
     AssetBundle: 
     AddressableGroup: 
-  - Enabled: 0
-    Type: 0
+  - Enabled: 1
+    Type: 2
     Asset:
-      Path: Assets/LearnAsset/OdinValidator/SomeStrings.cs
+      Path: 
       Filter: 
     Object: {fileID: 0}
     Scene:
       Type: 0
-      Value: 
-      IncludeAssetDependencies: 0
+      Value: Assets/_Scenes/Levels
+      IncludeAssetDependencies: 1
     AssetBundle: 
     AddressableGroup: 
   Exclude: []

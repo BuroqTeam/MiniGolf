@@ -17,11 +17,11 @@ MonoBehaviour:
     EnabledOverridden: 1
     Type: Sirenix.OdinValidator.Editor.Validators.NoEmptyStringsValidator, Sirenix.OdinValidator.Editor
     Override: 
-  - Enabled: 1
+  - Enabled: 0
     EnabledOverridden: 1
     Type: Sirenix.OdinValidator.Editor.Validators.ListNullElementValidator, Sirenix.OdinValidator.Editor
     Override: 
-  - Enabled: 1
+  - Enabled: 0
     EnabledOverridden: 1
     Type: LevelSceneValidatorRule, Assembly-CSharp
     Override: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|LevelSceneValidatorRule,
@@ -29,3 +29,20 @@ MonoBehaviour:
       \"$type\": \"1|System.Collections.Generic.List`1[[System.String, mscorlib]],
       mscorlib\",\r\n        \"$rlength\": 2,\r\n        \"$rcontent\": [\r\n           
       \"Main Camera\",\r\n            \"Tree\"\r\n        ]\r\n    }\r\n}"
+  - Enabled: 0
+    EnabledOverridden: 1
+    Type: ItemDataRule, Assembly-CSharp
+    Override: 
+  - Enabled: 1
+    EnabledOverridden: 1
+    Type: GolfSceneValidatorRule, Assembly-CSharp
+    Override: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|GolfSceneValidatorRule,
+      Assembly-CSharp\",\r\n    \"requiredRootObjects\": {\r\n        \"$id\": 1,\r\n       
+      \"$type\": \"1|System.Collections.Generic.List`1[[System.String, mscorlib]],
+      mscorlib\",\r\n        \"$rlength\": 4,\r\n        \"$rcontent\": [\r\n           
+      \"Camera\",\r\n            \"Odin\",\r\n            \"Canvas\",\r\n           
+      \"Ball\"\r\n        ]\r\n    }\r\n}"
+  - Enabled: 0
+    EnabledOverridden: 1
+    Type: Sirenix.OdinValidator.Editor.Validators.DuplicateComponentsValidator, Sirenix.OdinValidator.Editor
+    Override: 

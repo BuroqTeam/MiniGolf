@@ -26,8 +26,8 @@ public class Spawner : MonoBehaviour, ISelfValidator
 
     public void Validate(SelfValidationResult result)
     {
-        if (!NavMesh.SamplePosition(this.transform.position, out NavMeshHit hit, 0.25f, NavMesh.AllAreas))        
-            result.AddError("Spawner is not on a nav mesh.");
+        //if (!NavMesh.SamplePosition(this.transform.position, out NavMeshHit hit, 0.25f, NavMesh.AllAreas))        
+        //    result.AddError("Spawner is not on a nav mesh.");
 
         if (spawnDelay <= 0f)              // spawnDelay 0 ga teng bo'lsa yoki 0 dan kichik bo'lsa Error chiqadi.  
             result.AddError("The spawn delay needs to be greater than zero.");

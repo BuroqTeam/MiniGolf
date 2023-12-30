@@ -5,14 +5,14 @@ using UnityEditor;
 
 [assembly: RegisterValidator(typeof(StatValidator))]
 /// <summary>
-/// Validator third video.
-/// Work
+/// Validator third video. I make this script for learning. 
+/// Work.
 /// </summary>
 public class StatValidator : ValueValidator<Stat>
 {
     protected override void Validate(ValidationResult result) // If StatType set none give warning and error messege
     {
-        if (this.Value.statType == StatType.none)        
+        if (this.Value.statType == StatType.none)
             result.AddError("Stat type has not been set.");
 
 

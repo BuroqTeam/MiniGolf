@@ -4,20 +4,20 @@ using UnityEngine;
 using UnityEditor;
 
 [assembly: RegisterValidator(typeof(NeedsComponentAttributeValidator))]
-/// <summary>
-/// Validator fourth video
-/// Work
-/// </summary>
-public class NeedsComponentAttributeValidator : AttributeValidator<NeedsComponentAttribute, GameObject> 
+
+public class NeedsComponentAttributeValidator : AttributeValidator<NeedsComponentAttribute, GameObject>
+
 {
     protected override void Validate(ValidationResult result)
     {
-        if (this.Value == null)
+
+        if (this.Value == null)        
             return;
 
+
         if (this.Value.GetComponent(this.Attribute.type) == null)
-            result.AddError($"This gameObject needs {this.Attribute.type} component.");
-        
+            result.AddError($"This gameObject needs {this.Attribute.type} component");
+
     }
 }
 

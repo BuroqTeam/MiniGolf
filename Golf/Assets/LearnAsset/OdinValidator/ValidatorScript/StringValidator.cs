@@ -13,23 +13,22 @@ public class StringValidator : ValueValidator<string>
     protected override void Validate(ValidationResult result)
     {
 
-        if (string.IsNullOrEmpty(this.Value))
-        {
-            return;
-        }
+        if (string.IsNullOrEmpty(this.Value))        
+            return;        
 
-        if (this.Value.Contains("Sirenix"))
-        {
-            result.AddWarning("Sirenix should be capitalized. ");
-        }
-
-
-        //var val = this.Value;
+        if (this.Value.Contains("Sirenix"))        
+            result.AddWarning("Sirenix should be capitalized.");
         
-        //if (val has something wrong with it)
-        //{
-        //    result.AddError("Something is wrong");
-        //}
+
+
+       
     }
+
+    //var val = this.Value;
+
+    //if (val has something wrong with it)
+    //{
+    //    result.AddError("Something is wrong");
+    //}
 }
 #endif
